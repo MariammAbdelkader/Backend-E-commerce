@@ -3,14 +3,15 @@ const express = require('express');
 const morgan = require("morgan");
 const cors = require ("cors");
 const cookieParser = require("cookie-parser");
+
+
+
+// entities must to be with db.resync() function to create the table
 const { PORT }= require("./config/index.js");
 const { db } =require("./database");
-
-const { router } = require('./routers/authentication.routers.js');
-
-// entities must to be with db.sync() function to create the table
-//const { User } = require('./entities/users.entities.js');
+const associations = require('./models/associations.js');
 const { ErrorMiddleware } = require('./middlewares/errors.middlewares.js');
+const { router } = require('./routes/authentication.routes.js');
 
 
 class App {
