@@ -41,6 +41,10 @@ const ShopOwner = db.define('ShopOwner', {
             key: 'shopId',
         },
     },
+    isAdmin: {
+        type: DataTypes.BOOLEAN, 
+        allowNull: false,
+    },
 });
 
 

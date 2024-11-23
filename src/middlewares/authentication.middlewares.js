@@ -1,10 +1,14 @@
 const jwt = require("jsonwebtoken");
 const { UnauthorizedError } = require("../exceptions/httpExceptions");
+
 const AuthMiddleware = (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (token) {
       const decoded = jwt.decode(token);
+
+  
+      // User Role
       if (decoded && decoded.userId) {
         const userId = decoded.userId;
         req.userId = userId;
@@ -20,5 +24,8 @@ const AuthMiddleware = (req, res, next) => {
     next(error);
   }
 };
+
+
+
 
 module.exports = { AuthMiddleware };

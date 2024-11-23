@@ -16,8 +16,8 @@ const creatHash = async (password) => {
     }
 }
 
-const createToken = (userId) => {
-    const jwtToken =  jwt.sign({ userId } , 'our secret key' ,{expiresIn : '24h'});
+const createToken = (userId,isAdmin) => {
+    const jwtToken =  jwt.sign({ userId, isAdmin } , 'our secret key' ,{expiresIn : '24h'});
     return jwtToken;
 }
 const signUpService = async (data) => {
@@ -33,9 +33,10 @@ const signUpService = async (data) => {
                 lastName: data.lastName,
                 email: data.email,
                 password: hashedPassword,
-                phoneNumber: data.phoneNumber
+                phoneNumber: data.phoneNumber,
+                isAdmin: data.isAdmin
             });
-            const token = createToken(userCreated.userId);
+            const token = createToken(userCreated.userId,userCreated.isAdmin);
             return { userCreated , token };
         }
     } catch (err) {
@@ -50,7 +51,7 @@ const loginService = async (email , password) => {
         if (emailExists) {
             const checkPassword = await bcrypt.compare(password , emailExists.password);   
             if (checkPassword) {
-                const token = createToken(emailExists.userId);
+                const token = createToken(emailExists.userId,emailExists.isAdmin);
 
                 return {token  ,message : "logged in succesfully",data : emailExists.dataValues };
             } else {
