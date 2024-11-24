@@ -29,7 +29,13 @@ const Product = db.define('Product', {
     quantity: {
         type:DataTypes.INTEGER,
         allowNull:false,
+    },
+    status: {
+        type: DataTypes.ENUM('in_stock', 'out_of_stock', 'discontinued'),
+        allowNull: false,
+        defaultValue: 'in_stock',
     }
+    
 });
 
 // Image Model

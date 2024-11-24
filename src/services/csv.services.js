@@ -1,6 +1,6 @@
 const fs = require("fs");
 const csv = require("fast-csv");
-const { Product } = require("../models/shop.models");
+const { Product } = require("../models/product.models");
 
 const uploadCsvService = async (path)=>{
 try {
