@@ -1,6 +1,6 @@
 name,price,description,category,subCategory,quantity
 Laptop,1200.5,High-performance laptop with 16GB RAM,Electronics,Computers,10
-Smartphone,800,Latest model with 5G support,Electronics,Mobiles,25
+Smartphone,800.0,Latest model with 5G support,Electronics,Mobiles,25
 Refrigerator,500.75,Energy-efficient with a large capacity,Appliances,Kitchen,5
-ahmed,150.99,Ergonomic design with lumbar support,Furniture,Office,20
+Desk Chair,150.99,Ergonomic design with lumbar support,Furniture,Office,20
 Coffee Maker,75.49,Brews coffee quickly and efficiently,Appliances,Kitchen,15

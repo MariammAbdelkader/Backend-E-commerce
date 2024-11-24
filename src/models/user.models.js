@@ -1,4 +1,3 @@
-
 const { DataTypes } = require('sequelize');
 const { db } = require('../database');
 
@@ -39,8 +38,15 @@ const User = db.define('User', {
         type: DataTypes.BOOLEAN, 
         allowNull: false,
     },
+    phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    address: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
 });
-
 
 
 module.exports = { User}
