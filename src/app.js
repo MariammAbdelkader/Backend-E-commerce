@@ -12,10 +12,13 @@ const { db } =require("./database");
 const associations = require('./models/associations.js');
 const { ErrorMiddleware } = require('./middlewares/errors.middlewares.js');
 const { router } = require('./routes/authentication.routes.js');
+const { csvRouter } = require('./routes/csv.routes.js');
+global.__basedir = __dirname;
 
 
 class App {
     
+  
     constructor() {
         this.app = express();
         this.port = PORT;
@@ -59,6 +62,7 @@ async connectToDatabase() {
   
   initializeRoutes() {
     this.app.use("", router);
+    this.app.use("/upload",csvRouter);
   }
 
   initializeErrorHandling() {
