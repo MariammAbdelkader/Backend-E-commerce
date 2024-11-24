@@ -1,26 +1,6 @@
 const {  DataTypes } = require('sequelize');
 const { db } = require('../database');
 
-const Shop = db.define('Shop', {
-    shopId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    metaData: {
-        type: DataTypes.JSON,
-        allowNull: true,
-    },
-    domain: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-});
-
 
 const Product = db.define('Product', {
     productId: {
@@ -40,14 +20,16 @@ const Product = db.define('Product', {
         type: DataTypes.TEXT,
         allowNull: true,
     },
-    shopId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'Shops',
-            key: 'shopId',
-        },
+    category: {
+        type: DataTypes.STRING
     },
+    subCategory: {
+        type: DataTypes.STRING
+    },
+    quantity: {
+        type:DataTypes.INTEGER,
+        allowNull:false,
+    }
 });
 
 // Image Model
@@ -61,10 +43,6 @@ const ProductImage = db.define('ProductImages', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    altText: {
-        type: DataTypes.STRING,
-        allowNull: true, // Optional image description
-    },
     productId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -77,4 +55,4 @@ const ProductImage = db.define('ProductImages', {
 
 
 
-module.exports={Shop,Product,ProductImage}
+module.exports={Product,ProductImage}

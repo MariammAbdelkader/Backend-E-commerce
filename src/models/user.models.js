@@ -2,8 +2,8 @@
 const { DataTypes } = require('sequelize');
 const { db } = require('../database');
 
-const ShopOwner = db.define('ShopOwner', {
-    ownerId: {
+const User = db.define('User', {
+    userId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -34,13 +34,7 @@ const ShopOwner = db.define('ShopOwner', {
             },
         },
     },
-    shopId: {  
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'Shops',
-            key: 'shopId',
-        },
-    },
+    
     isAdmin: {
         type: DataTypes.BOOLEAN, 
         allowNull: false,
@@ -49,4 +43,4 @@ const ShopOwner = db.define('ShopOwner', {
 
 
 
-module.exports = { ShopOwner}
+module.exports = { User}
