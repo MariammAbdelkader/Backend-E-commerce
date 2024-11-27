@@ -38,6 +38,7 @@ const Product = db.define('Product', {
     
 });
 
+
 // Image Model
 const ProductImage = db.define('ProductImages', {
     imageId: {
