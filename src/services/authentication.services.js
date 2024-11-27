@@ -1,7 +1,8 @@
 const { HASH_SALT_ROUNDS } = require("../config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-//const { User } = require("../entities/users.entities");
+const { User } = require("../models/user.models");
+
 
 
 
@@ -29,8 +30,7 @@ const signUpService = async (data) => {
          else {
             const hashedPassword = await creatHash(data.password);
             const userCreated = await User.create({
-                firstName: data.firstName,
-                lastName: data.lastName,
+                name:data.name,
                 email: data.email,
                 password: hashedPassword,
                 phoneNumber: data.phoneNumber,
