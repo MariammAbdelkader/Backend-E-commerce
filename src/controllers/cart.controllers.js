@@ -1,9 +1,10 @@
-const createCartService = require('../services/cart.services')
+const { createCartService } = require('../services/cart.services')
 
 const createCart = async (req , res) =>{
     try {
         const body = req.body
-        const response = createCartService(body)
+        const userId  = req.userId
+        const response = await createCartService(body,userId)
         res.status(200).json({message : "product added to the cart succesfully",response });
         
     } catch (err) {

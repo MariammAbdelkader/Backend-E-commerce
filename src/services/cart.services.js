@@ -1,9 +1,9 @@
 const { Cart, CartItem } = require("../models/cart.models");
 const { Product } = require("../models/product.models");
 
-const createCartService = async (body) => {
+const createCartService = async (body,userId) => {
     try {
-      const { productId, quantity, userId } = body;
+      const { productId, quantity } = body;
   
       if (!productId || !quantity) {
         throw new Error('Product ID and quantity are required');
@@ -34,6 +34,7 @@ const createCartService = async (body) => {
           cartId: cart.cartId,
           productId,
           quantity,
+          priceAtPurchase:product.price
         });
         return cart; 
       }
@@ -48,6 +49,7 @@ const createCartService = async (body) => {
         cartId: cart.cartId,
         productId,
         quantity,
+        priceAtPurchase:product.price
       });
   
       return cart;
@@ -56,4 +58,4 @@ const createCartService = async (body) => {
     }
 }
 
-module.exports = {createCartService}
+module.exports = { createCartService }
