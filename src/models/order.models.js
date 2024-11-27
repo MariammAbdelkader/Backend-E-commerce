@@ -15,6 +15,7 @@ const Order = db.define('Order', {
             model: 'Users',
             key: 'userId',
         },
+        
     },
     cartId: {
         type: DataTypes.INTEGER,

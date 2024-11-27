@@ -1,0 +1,4 @@
+productId,name,price,description,category,subCategory,quantity,status
+1,Laptop,1200.5,High-end gaming laptop,Electronics,Computers,50,in_stock
+2,Smartphone,800.75,Latest model smartphone,Electronics,Mobile Phones,200,in_stock
+3,Headphones,150.25,Noise-cancelling headphones,Accessories,Audio,100,out_of_stock

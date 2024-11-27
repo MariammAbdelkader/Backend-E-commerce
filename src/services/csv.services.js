@@ -4,6 +4,7 @@ const { Product } = require("../models/product.models");
 
 const uploadCsvService = async (path)=>{
 try {
+    return new Promise((resolve, reject) => {
     let data = [];
     fs.createReadStream(path)
       .pipe(csv.parse({ headers: true }))
@@ -14,19 +15,16 @@ try {
         data.push(row);
       })
       .on("end", async () => {
-        await Product.bulkCreate(data) 
-        return {
-              message:
-                "Uploaded the file successfully: " + path,
-            };
-         
-         
+        try {
+          await Product.bulkCreate(data);
+          resolve({ message: "Uploaded successfully!" }); // Resolve the Promise here
+        } catch (err) {
+          reject(err); 
+        }
       });
+     }); //
 } catch (error) {
-    return{
-        message: "Fail to import data into database!",
-        error: error.message,
-      };
+    throw new Error("Failed to import data to db")
 }
    
 }
