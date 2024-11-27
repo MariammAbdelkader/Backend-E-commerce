@@ -22,16 +22,16 @@ const User = db.define('User', {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            len: {
-                args: [8, 15],
-                msg: 'Password must be between 8 and 15 characters long.',
-            },
-            is: {
-                args: /^(?=.*[A-Z]).*$/,
-                msg: 'Password must contain at least one uppercase letter.',
-            },
-        },
+        // validate: {
+        //     // len: {
+        //     //     args: [8, 15],
+        //     //     msg: 'Password must be between 8 and 15 characters long.',
+        //     // },
+        //     // // is: {
+        //     // //     args: /^(?=.*[A-Z]).*$/,
+        //     // //     msg: 'Password must contain at least one uppercase letter.',
+        //     // // },
+        // },
     },
     
     isAdmin: {
