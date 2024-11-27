@@ -17,12 +17,19 @@ try {
       .on("end", async () => {
         try {
           await Product.bulkCreate(data);
+          fs.unlink(path, (err) => {
+            if (err) {
+              console.error(`Error deleting file: ${err.message}`);
+              return reject(err);
+            }
+            console.log("File removed successfully!");
+          });
           resolve({ message: "Uploaded successfully!" }); // Resolve the Promise here
         } catch (err) {
           reject(err); 
         }
       });
-     }); //
+     }); 
 } catch (error) {
     throw new Error("Failed to import data to db")
 }

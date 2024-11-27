@@ -8,6 +8,7 @@ const uploadCsv =async (req , res) => {
         const response = await uploadCsvService(filePath);
         res.status(200).json({message : "uploaded succesfully",response });
         
+        
     } catch (err) {
         res.status(400).json({ error : err.message });
      }
