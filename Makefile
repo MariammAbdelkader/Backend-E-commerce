@@ -1,19 +1,23 @@
 # Specify Docker image name for the Backend
 IMAGE_NAME=my-backend-app
 
-# Build the Docker image
+# Build the Docker image using Dockerfile
 build:
 	docker build -t $(IMAGE_NAME) .
 
-# Run the Docker container
-run:
-	docker run -d -p 3000:3000 --name $(IMAGE_NAME) $(IMAGE_NAME)
+# Run the Docker container using docker-compose
+up:
+	docker-compose up --build
 
-# Stop and remove the Docker container
-stop:
-	docker stop $(IMAGE_NAME) && docker rm $(IMAGE_NAME)
+# Stop and remove the Docker container using docker-compose
+down:
+	docker-compose down
 
 # Clean up unused Docker images and containers
 clean:
 	docker system prune -f
 
+# Restart the container (stop, build, and run again using docker-compose)
+restart:
+	make down
+	make up
