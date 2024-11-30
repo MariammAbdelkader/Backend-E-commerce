@@ -1,7 +1,9 @@
 const { Cart, CartItem } = require("../models/cart.models");
 const { Product } = require("../models/product.models");
+const { cleanUpCart } = require("../utilities/cleanUpCart");
 
-const createCartService = async (body, userId) => {
+
+const createCartService = async (body, userId, cart = null) => {
     try {
         const { productId, quantity } = body;
 
@@ -20,17 +22,17 @@ const createCartService = async (body, userId) => {
         if (product.quantity < quantity) {
             throw new Error(`Insufficient product quantity available ,where Requested quantity (${quantity}) exceeds available stock (${product.quantity})`);
         }
-
-        let cart = await Cart.findOne({
-            where: { userId, isCompleted: false ,isExpired:false},
-        });
+        // instead of these using the validated cart  from middleware 
+        // let cart = await Cart.findOne({
+        //     where: { userId, isCompleted: false ,isExpired:false},
+        // });
 
         if (cart) {
             const existingCartItem = await CartItem.findOne({
                 where: { cartId: cart.cartId, productId },
             });
             if (existingCartItem) {
-                existingCartItem.quantity += quantity;
+                existingCartItem.quantity += parseInt(quantity);
                 await existingCartItem.save();
             } else {
                 await CartItem.create({
@@ -79,30 +81,46 @@ const createCartService = async (body, userId) => {
 
 const previewCartService = async (cart) => {
     if (!cart) {
-        throw new Error("There's no active cart for you (cart is expired)");
+        throw new Error("There's no active cart for you ");
     }
 
     const cartItems = await CartItem.findAll({
         where: { cartId: cart.cartId },
         include: {
             model: Product, 
-            as: 'product', 
+            as: 'products', 
             attributes: ['name', 'price', 'description', 'category', 'subCategory'],
         },
     });
 
     const products = cartItems.map(item => ({
         productId: item.productId,
-        name: item.product.name,
-        price: item.product.price,
-        description: item.product.description,
-        category: item.product.category,
-        subCategory: item.product.subCategory,
-        quantity: item.quantity, // Include the quantity in the cart
-        priceAtPurchase: item.priceAtPurchase, // Keep the price at the time of addition
+        name: item.products.name,
+        price: item.products.price,
+        description: item.products.description,
+        category: item.products.category,
+        subCategory: item.products.subCategory,
+        quantity: item.quantity, 
+        priceAtPurchase: item.priceAtPurchase, 
     }));
 
     return products;
 };
 
-module.exports = { createCartService , previewCartService };
+const deleteCartService = async (cart) => {
+    try {
+        if (!cart) {
+            throw new Error('Cart not found');
+        }
+
+        await cleanUpCart(cart);
+    } catch (error) {
+        throw error;
+    }
+;}
+
+const updateCartService = () => {
+    //Todo
+};
+
+module.exports = { createCartService , previewCartService , deleteCartService , updateCartService};

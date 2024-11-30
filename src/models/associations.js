@@ -15,7 +15,20 @@ Cart.belongsToMany(Product, { through: CartItem, foreignKey: 'cartId', as: 'prod
 Product.belongsToMany(Cart, { through: CartItem, foreignKey: 'productId', as: 'carts' });
 
 // CartItem belongs to Product
-CartItem.belongsTo(Product, { foreignKey: 'productId', as: 'product' });
+CartItem.belongsTo(Product, { foreignKey: 'productId', as: 'products' });
+Product.hasMany(CartItem, { foreignKey: 'productId', as: 'cartItems' });
+
+// Cascade delete between Cart and CartItem
+Cart.hasMany(CartItem, {
+    foreignKey: 'cartId',
+    as: 'cartItems',
+    onDelete: 'CASCADE', // Ensures cascading delete
+});
+CartItem.belongsTo(Cart, {
+    foreignKey: 'cartId',
+    as: 'cart',
+    onDelete: 'CASCADE', // Optional for safety
+});
 
 // products Images
 Product.hasMany(ProductImage, { foreignKey: 'productId', as: 'images' });

@@ -43,7 +43,7 @@ async connectToDatabase() {
   try {
         await db.authenticate();     // Test the database connection 
         console.log('Connection to the database has been established successfully.');
-        await db.sync();             // Synchronize models with the database
+        await db.sync({alter:true});             // Synchronize models with the database
         console.log('Database synchronization complete.');
   } catch (error) {
         console.error('Unable to connect to the database:', error);
