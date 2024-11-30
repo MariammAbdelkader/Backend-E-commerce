@@ -7,7 +7,7 @@ build:
 
 # Run the Docker container using docker-compose
 up:
-	docker-compose up --build
+	docker-compose up -d
 
 # Stop and remove the Docker container using docker-compose
 down:
