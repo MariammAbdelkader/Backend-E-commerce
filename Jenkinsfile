@@ -40,13 +40,13 @@ pipeline {
             }
         }
 
-        stage('Deploy Application') {
+       /* stage('Deploy Application') {
             steps {
                 echo 'Deploying application using deploy.sh...'
                 sh './deploy.sh'
             }
         }
-
+*/
         stage('Start Application') {
             steps {
                 echo 'Starting application using docker-compose...'
