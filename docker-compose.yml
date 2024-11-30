@@ -1,0 +1,40 @@
+version: '3.8'  
+
+services:
+  backend:
+    image: my-backend-app 
+    build: .
+    ports:
+      - "3000:3000"  
+    environment:
+      - PORT=3000  
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=123456789
+      - DB_DATABASE=postgres
+      - HASH_SALT_ROUNDS=10
+    depends_on:
+      - postgres 
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456789
+    ports:
+      - "5432:5432"  
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
