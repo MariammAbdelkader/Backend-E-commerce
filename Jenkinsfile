@@ -50,7 +50,7 @@ pipeline {
         stage('Start Application') {
             steps {
                 echo 'Starting application using docker-compose...'
-                sh 'make up -d' 
+                sh 'make up' 
             }
         }
     }
