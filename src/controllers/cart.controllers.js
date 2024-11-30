@@ -1,16 +1,18 @@
-const { createCartService,previewCartService } = require('../services/cart.services')
+const { createCartService,previewCartService,deleteCartService, updateCartService} = require('../services/cart.services')
 
 const createCart = async (req , res) =>{
     try {
         const body = req.body
         const userId  = req.userId
-        const response = await createCartService(body,userId)
+        const cart = req.cart || null ;
+        const response = await createCartService(body,userId,cart)
         res.status(200).json({message : "product added to the cart succesfully",cart:response });
         
     } catch (err) {
         res.status(400).json({ error : err.message });
      }
-}
+};
+
 const previewCart = async (req , res) =>{
     try {
         const body = req.body
@@ -22,6 +24,29 @@ const previewCart = async (req , res) =>{
     } catch (err) {
         res.status(400).json({ error : err.message });
      }
-}
+};
 
-module.exports = { createCart, previewCart }
+const deleteCart = async (req , res) =>{
+    try {
+        const cart = req.cart
+        const response = await deleteCartService(cart)
+        res.status(200).json({message : " your cart deleted succesfully",response });
+        
+    } catch (err) {
+        res.status(400).json({ error : err.message });
+     }
+};
+
+const updateCart = async (req , res) =>{
+    try {
+        const cart = req.cart
+        const response = await updateCartService(cart)
+        res.status(200).json({message : " your cart updated succesfully",response });
+        
+    } catch (err) {
+        res.status(400).json({ error : err.message });
+     }
+
+};
+
+module.exports = { createCart, previewCart , deleteCart ,updateCart}
