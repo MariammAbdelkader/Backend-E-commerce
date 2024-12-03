@@ -4,7 +4,6 @@ const { isAdmin } = require("../utilities/isAdmin");
 const { upload } = require("../middlewares/csv.middlewares");
 const { uploadCsv } = require("../controllers/csv.controllers");
 
-
 const csvRouter = express.Router();
 
 csvRouter.post("/csv",upload.single("file"),uploadCsv)
