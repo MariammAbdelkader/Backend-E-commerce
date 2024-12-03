@@ -83,7 +83,7 @@ const addOrderServic = async (userId,data)=>{
 
 }
 
-//TO DO : check payment and update the order
+//TO DO : check payment and update the order and update the inventory
 const addOrderService = async (userId, cartId, totalAmount, shippingAddress, billingAddress) => {
     try {
         const order = await Order.create({

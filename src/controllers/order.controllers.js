@@ -1,4 +1,4 @@
-const { viewHistoryService } = require("../services/order.services");
+const { viewHistoryService, addOrderService } = require("../services/order.services");
 
 const viewHistory = async (req,res)=>{
     try {
@@ -14,9 +14,9 @@ const viewHistory = async (req,res)=>{
 
 const addOrder = async (req,res)=>{
     try {
-        const data = req.body;
+        const {cartId, totalAmount, shippingAddress, billingAddress} = req.body;
         const userId = req.userId;
-        const response = await addOrderService(userId);
+        const response = await addOrderService(userId,cartId, totalAmount, shippingAddress, billingAddress);
         res.status(200).json({ response });
         
     } catch (err) {
