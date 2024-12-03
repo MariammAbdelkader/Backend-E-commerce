@@ -1,0 +1,15 @@
+const express = require("express");
+const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
+const { viewHistory } = require("../controllers/order.controllers");
+
+
+const orderRouter = express.Router();
+
+//admin
+orderRouter.get('/:productId',AuthMiddleware,);
+
+//user
+orderRouter.get('/',AuthMiddleware,viewHistory);
+
+
+module.exports={orderRouter}
