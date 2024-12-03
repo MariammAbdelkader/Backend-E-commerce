@@ -1,3 +1,4 @@
+const { exist } = require("joi");
 const { Cart, CartItem } = require("../models/cart.models");
 const { Product } = require("../models/product.models");
 const { cleanUpCart } = require("../utilities/cleanUpCart");
@@ -7,8 +8,11 @@ const createCartService = async (body, userId, cart = null) => {
     try {
         const { productId, quantity } = body;
 
-        if (!productId || !quantity) {
+        if (!productId || !quantity ) {
             throw new Error('Product ID and quantity are required');
+        }
+        if(quantity < 0){
+            throw new error(" Not valid quantity number to be processed")
         }
 
         const product = await Product.findByPk(productId);
@@ -22,6 +26,7 @@ const createCartService = async (body, userId, cart = null) => {
         if (product.quantity < quantity) {
             throw new Error(`Insufficient product quantity available ,where Requested quantity (${quantity}) exceeds available stock (${product.quantity})`);
         }
+
         // instead of these using the validated cart  from middleware 
         // let cart = await Cart.findOne({
         //     where: { userId, isCompleted: false ,isExpired:false},
@@ -62,7 +67,7 @@ const createCartService = async (body, userId, cart = null) => {
 
         const totalPrice = cartItems.reduce(
             (sum, item) => sum + item.quantity * item.priceAtPurchase,0);
-        cart.totalPrice = totalPrice;
+        cart.totalPrice = totalPrice.toFixed(3);
         await cart.save();
 
 
@@ -83,7 +88,6 @@ const previewCartService = async (cart) => {
     if (!cart) {
         throw new Error("There's no active cart for you ");
     }
-
     const cartItems = await CartItem.findAll({
         where: { cartId: cart.cartId },
         include: {
@@ -96,15 +100,16 @@ const previewCartService = async (cart) => {
     const products = cartItems.map(item => ({
         productId: item.productId,
         name: item.products.name,
-        price: item.products.price,
         description: item.products.description,
         category: item.products.category,
         subCategory: item.products.subCategory,
         quantity: item.quantity, 
-        priceAtPurchase: item.priceAtPurchase, 
+        pricePerOneItem: item.priceAtPurchase, 
     }));
 
-    return products;
+    const totalPrice = cart.totalPrice.toFixed(3);
+
+    return { products , totalPrice };
 };
 
 const deleteCartService = async (cart) => {
@@ -119,8 +124,62 @@ const deleteCartService = async (cart) => {
     }
 ;}
 
-const updateCartService = () => {
-    //Todo
+const updateCartService = async (cart, productId, quantity) => {
+    try {
+        if (!cart) {
+            throw new Error("There's no active cart for you");
+        }
+
+        const product = await Product.findByPk(productId);
+        if (!product) {
+            throw new Error("Product not found");
+        }
+
+        if (quantity <= 0) {
+            throw new Error("Quantity must be greater than zero");
+        }
+
+        const existingCartItem = await CartItem.findOne({
+            where: { cartId: cart.cartId, productId }
+        });
+        if (!existingCartItem) {
+            throw new Error("This product is not in your cart");
+        }
+
+        const priceAtPurchase = existingCartItem.priceAtPurchase;
+        if (existingCartItem.quantity < quantity) {
+            throw new Error("Requested quantity exceeds the quantity available in your cart.");
+        }
+
+        existingCartItem.quantity -= parseInt(quantity);
+        if (existingCartItem.quantity === 0) {
+            await existingCartItem.destroy(); 
+        } else {
+            await existingCartItem.save();
+        }
+
+        product.quantity += parseInt(quantity);
+        if (product.status === "out_of_stock" && product.quantity > 0) {
+            product.status = "in_stock";
+        }
+        await product.save();
+
+        const cartItems = await CartItem.findAll({ where: { cartId: cart.cartId } });
+        if (cartItems.length == 0) {
+            await cart.destroy(); 
+            return "Your cart has been emptied and deleted";
+        }
+
+        cart.totalPrice = cartItems.reduce(
+            (sum, item) => sum + item.quantity * item.priceAtPurchase,
+            0
+        );
+        await cart.save();
+
+        return previewCartService(cart);
+    } catch (error) {
+        throw error;
+    }
 };
 
 module.exports = { createCartService , previewCartService , deleteCartService , updateCartService};
