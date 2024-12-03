@@ -1,5 +1,5 @@
 const { Cart } = require("../models/cart.models");
-const { cleanupCart } = require("../utilities/cleanUpCart");
+const { cleanUpCart } = require("../utilities/cleanUpCart");
 
 const validateCart = async (req, res, next) => {
     try {
@@ -13,7 +13,7 @@ const validateCart = async (req, res, next) => {
             if (cart.expiresAt < new Date()) {
                 //cart.isExpired = true;
                 //await cart.save();
-                cleanupCart(cart)
+                cleanUpCart(cart)
         
             } else {
                 req.cart = cart; 

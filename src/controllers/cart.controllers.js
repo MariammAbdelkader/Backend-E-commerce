@@ -19,7 +19,7 @@ const previewCart = async (req , res) =>{
         const userId  = req.userId
         const cart = req.cart
         const response = await previewCartService(cart)
-        res.status(200).json({message : "Here is your current cart preview",cart:response });
+        res.status(200).json({message : "Here is your current cart preview", cart: response.products , totalPrice: response.totalPrice });
         
     } catch (err) {
         res.status(400).json({ error : err.message });
@@ -39,9 +39,10 @@ const deleteCart = async (req , res) =>{
 
 const updateCart = async (req , res) =>{
     try {
+        const { productId , quantity } = req.body
         const cart = req.cart
-        const response = await updateCartService(cart)
-        res.status(200).json({message : " your cart updated succesfully",response });
+        const response = await updateCartService(cart , productId , quantity)
+        res.status(200).json({message : "Product at your cart updated succesfully",cart: response });
         
     } catch (err) {
         res.status(400).json({ error : err.message });
