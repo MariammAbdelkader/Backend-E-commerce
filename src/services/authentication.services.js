@@ -34,7 +34,8 @@ const signUpService = async (data) => {
                 email: data.email,
                 password: hashedPassword,
                 phoneNumber: data.phoneNumber,
-                isAdmin: data.isAdmin
+                isAdmin: data.isAdmin,
+                address:data.address,
             });
             const token = createToken(userCreated.userId,userCreated.isAdmin);
             return { userCreated , token };
