@@ -15,6 +15,7 @@ const { router } = require('./routes/authentication.routes.js');
 const { csvRouter } = require('./routes/csv.routes.js');
 const { cartRouter } = require('./routes/cart.router.js');
 const {productRouter} =require('./routes/product.router');
+const { orderRouter } = require('./routes/order.routes.js');
 
 global.__basedir = __dirname;
 
@@ -69,6 +70,7 @@ async connectToDatabase() {
     this.app.use("/upload",csvRouter);
     this.app.use("/cart",cartRouter);
     this.app.use("/product",productRouter);
+    this.app.use("/order",orderRouter);
   }
 
   initializeErrorHandling() {
