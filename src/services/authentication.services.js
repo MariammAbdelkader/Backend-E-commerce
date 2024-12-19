@@ -23,6 +23,7 @@ const createToken = (userId,isAdmin) => {
 }
 const signUpService = async (data) => {
     try {
+        
         const emailExists = await User.findOne({ where: { email:data.email } });
         if (emailExists) {
             throw new Error("Email already exists")    ;
@@ -30,18 +31,20 @@ const signUpService = async (data) => {
          else {
             const hashedPassword = await creatHash(data.password);
             const userCreated = await User.create({
-                name:data.name,
+                firstName:data.firstName,
+                lastName:data.lastName,
                 email: data.email,
                 password: hashedPassword,
                 phoneNumber: data.phoneNumber,
-                isAdmin: data.isAdmin,
+                isAdmin: data.userRole,
                 address:data.address,
             });
+
+         
             const token = createToken(userCreated.userId,userCreated.isAdmin);
             return { userCreated , token };
         }
     } catch (err) {
-        // console.log(err);
         throw err;
     }
 }
