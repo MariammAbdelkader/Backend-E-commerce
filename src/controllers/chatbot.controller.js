@@ -1,11 +1,10 @@
 const { Conversation } = require('../models/conversation.model');
-const {startConversationservices} =require('../services/chatbot.serveices')
+const {startConversationservices,sendMessageservices} =require('../services/chatbot.serveices')
 
 const startConversation =async (req,res)=>{
     try {
 
         const userId=req.userId
-
 
         const newConversationId= await startConversationservices(userId);
 
@@ -18,4 +17,12 @@ const startConversation =async (req,res)=>{
 
 }
 
-module.exports={startConversation}
+const sendMessage= async(req,res)=>{
+    const {conversationId, message}= req.body
+    const userId= req.userId
+    const response= await sendMessageservices(conversationId , message,userId); //which we will integrate with AI
+
+    res.status(200).json({ reply:response.message, conversationId:response.conversationId});
+}
+
+module.exports={startConversation, sendMessage}
