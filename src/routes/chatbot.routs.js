@@ -1,10 +1,14 @@
 const express = require("express");
-const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
-const {startConversation} =require('../controllers/chatbot.controller');
+const { AuthMiddleware,AuthConcersationIdMiddleware } = require("../middlewares/authentication.middlewares");
 const { Model } = require("sequelize");
-const chatbotRouter= express.Router()
+const chatbotRouter= express.Router();
+
+const {startConversation, sendMessage} =require('../controllers/chatbot.controller');
 
 
-chatbotRouter.post('/conversation',AuthMiddleware,startConversation)
+chatbotRouter.post('/start-conversation',AuthMiddleware,startConversation)
+
+chatbotRouter.post('/sendmessage',AuthMiddleware ,AuthConcersationIdMiddleware, sendMessage)
+
 
 module.exports ={chatbotRouter}
