@@ -16,7 +16,8 @@ const { csvRouter } = require('./routes/csv.routes.js');
 const { cartRouter } = require('./routes/cart.router.js');
 const {productRouter} =require('./routes/product.router');
 const { orderRouter } = require('./routes/order.routes.js');
-const {chatbotRouter}= require('./routes/chatbot.routs.js')
+const {chatbotRouter}= require('./routes/chatbot.routs.js');
+const{userProfileRouter}=require('./routes/userprofile.router.js')
 
 global.__basedir = __dirname;
 
@@ -60,7 +61,7 @@ async connectToDatabase() {
     this.app.use(express.json());   // a middleware that used to parse json requests
     this.app.use(cookieParser());   // a middleware used to parse cookies
     this.app.use(cors({
-      origin: "http://localhost:24379", //Port of FrontEnd 
+      origin: "http://localhost:8000", //Port of FrontEnd 
       credentials: true, 
     })); // a middleware that alow cors (requests from other hosts )
     this.app.use((req,res,next)=> {    // next() should be provided in order to go to next middleware
@@ -76,6 +77,7 @@ async connectToDatabase() {
     this.app.use("/product",productRouter);
     this.app.use("/order",orderRouter);
     this.app.use("/chatbot",chatbotRouter);
+    this.app.use("/profile",userProfileRouter);
   }
 
   initializeErrorHandling() {
