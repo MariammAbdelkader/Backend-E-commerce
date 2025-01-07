@@ -3,6 +3,9 @@ const express = require('express');
 const morgan = require("morgan");
 const cors = require ("cors");
 const cookieParser = require("cookie-parser");
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger.js');
+
 
 
 
@@ -64,10 +67,12 @@ async connectToDatabase() {
       origin: "http://localhost:8000", //Port of FrontEnd 
       credentials: true, 
     })); // a middleware that alow cors (requests from other hosts )
+  
     this.app.use((req,res,next)=> {    // next() should be provided in order to go to next middleware
       console.log("we got reqqq");
       next();
     })
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
   
   initializeRoutes() {

@@ -4,7 +4,7 @@ const {Conversation}=require('../models/conversation.model')
 const AuthMiddleware = (req, res, next) => {
   try {
     const token = req.cookies.jwt;
-    console.log(token)
+  
     if (token) {
       const decoded = jwt.decode(token);
       
@@ -26,7 +26,7 @@ const AuthMiddleware = (req, res, next) => {
 };
 
 
-const AuthConcersationIdMiddleware =async(req, res, next) =>{
+const AuthConversationIdMiddleware =async(req, res, next) =>{
   try {
     const conversationId= req.body.conversationId
     const userId=req.userId 
@@ -48,4 +48,4 @@ const AuthConcersationIdMiddleware =async(req, res, next) =>{
   }
 } 
 
-module.exports = { AuthMiddleware, AuthConcersationIdMiddleware };
+module.exports = { AuthMiddleware, AuthConversationIdMiddleware };
