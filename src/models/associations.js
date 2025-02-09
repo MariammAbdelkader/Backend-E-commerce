@@ -3,6 +3,10 @@ const { Category, Subcategory } = require('./category.models');
 const {  User } = require('./user.models');
 const { Cart, CartItem } = require('./cart.models');
 const { Order } = require('./order.models');
+const {CustomerActivity} = require('./customerActivity.models');
+const {CustomerSegment} = require('./customerSegmentation.models');
+const {OrderDetail} = require('./orderDetails.models');
+const{ Return }= require('./returns.models')
 
 
 
@@ -46,4 +50,38 @@ Category.hasMany(Subcategory, { foreignKey: 'categoryId', as: 'subcategories' })
 Subcategory.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
 
 
-module.exports = {  Product, ProductImage,  User , Cart , CartItem , Order , Category , Subcategory};
+
+// One Customer has Many Orders
+User.hasMany(Order, { foreignKey: 'userId' });
+Order.belongsTo(User, { foreignKey: 'userId' });
+
+// One Order has Many OrderDetails
+Order.hasMany(OrderDetail, { foreignKey: 'orderId' });
+OrderDetail.belongsTo(Order, { foreignKey: 'orderId' });
+
+// One Product can be in Many OrderDetails
+Product.hasMany(OrderDetail, { foreignKey: 'productId' });
+OrderDetail.belongsTo(Product, { foreignKey: 'productId' });
+
+// One Order can have Many Returns
+Order.hasMany(Return, { foreignKey: 'orderId' });
+Return.belongsTo(Order, { foreignKey: 'orderId' });
+
+// One Product can be Returned Many Times
+Product.hasMany(Return, { foreignKey: 'productId' });
+Return.belongsTo(Product, { foreignKey: 'productId' });
+
+// One Customer can Make Many Returns
+User.hasMany(Return, { foreignKey: 'userId' });
+Return.belongsTo(User, { foreignKey: 'userId' });
+
+// One Customer has Many Activities
+User.hasMany(CustomerActivity, { foreignKey: 'userId', as: 'activities' });
+CustomerActivity.belongsTo(User, { foreignKey: 'userId', as: 'user', targetKey: 'userId' });
+
+
+// One Customer has One Segment
+User.hasOne(CustomerSegment, { foreignKey: 'userId' });
+CustomerSegment.belongsTo(User, { foreignKey: 'userId' });
+
+module.exports = {  Product, ProductImage,  User , Cart , CartItem , Order , Category , Subcategory, OrderDetail, Return,CustomerActivity, CustomerSegment };
