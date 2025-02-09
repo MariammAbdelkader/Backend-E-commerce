@@ -38,11 +38,6 @@ const User = db.define('User', {
         //     // // },
         // },
     },
-    
-    isAdmin: {
-        type: DataTypes.BOOLEAN, 
-        allowNull: false,
-    },
     phoneNumber: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -51,6 +46,10 @@ const User = db.define('User', {
         type: DataTypes.TEXT,
         allowNull: true,
     },
+    Gender:{
+        type: DataTypes.ENUM('Male', 'Female', 'Other'),
+        allowNull:false
+    }          
 });
 
 
