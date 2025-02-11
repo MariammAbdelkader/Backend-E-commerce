@@ -79,9 +79,44 @@ const viewHistoryService = async (userId) => {
       throw new Error("An error occurred while retrieving order history.");
     }
   };
-const addOrderServic = async (userId,data)=>{
 
-}
+
+const getUserOrderHistoryService = async (userId) => {
+    try {
+        const orders = await Order.findAll({
+            where: { userId },
+            attributes: ['orderId', 'totalAmount', 'orderDate', 'deliveryDate', 'paymentStatus'],
+            include: [
+                {
+                    model: OrderDetail,
+                    attributes: ['productId', 'quantity', 'unitPrice'],
+                    include: {
+                        model: Product,
+                        attributes: ['productId', 'name']
+                    }
+                }
+            ]
+        });
+
+        return orders.map(order => ({
+            orderId: order.orderId,
+            totalAmount: order.totalAmount,
+            orderDate: order.orderDate,
+            deliveryDate: order.deliveryDate,
+            paymentStatus: order.paymentStatus,
+            products: order.OrderDetails.map(detail => ({
+                productId: detail.Product.productId,
+                name: detail.Product.name,
+                price: detail.unitPrice,
+                quantity: detail.quantity
+            }))
+        }));
+    } catch (error) {
+        console.error("Error fetching user order history:", error);
+        throw error;
+    }
+};
+
 
 //TO DO : check payment and update the order and update the inventory
 const addOrderService = async (userId, cartId, totalAmount, shippingAddress, billingAddress) => {
@@ -101,4 +136,4 @@ const addOrderService = async (userId, cartId, totalAmount, shippingAddress, bil
         console.error('Error creating order:', error);
     }
 };
-module.exports = {viewHistoryService,addOrderService}
+module.exports = {viewHistoryService,addOrderService,getUserOrderHistoryService}

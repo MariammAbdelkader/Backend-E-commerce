@@ -16,7 +16,30 @@ const CustomerActivity = db.define('CustomersActivity',
         allowNull: false, 
         references: { model: User, key: 'userId' } },
     ActivityType: { 
-        type: DataTypes.ENUM('Login', 'View Product', 'Add to Cart', 'Purchase', 'Return', 'Review', 'Logout'), 
+        type: DataTypes.ENUM(
+        'Login', 
+        'Logout',
+        'View Product', 
+        'Add to Cart',
+        'Remove From Cart', 
+        'Kill Cart', 
+        'Purchase', 
+        'Return', 
+        'Review', 
+        'Search',                 //  Tracks user searches (important for recommendations)
+        'Apply Coupon',           //  Tracks if the user is deal-driven
+        'Wishlist Add',           //  Tracks user interest before purchase
+        'Wishlist Remove',        //  Tracks change in interest
+        'Compare Products',       //  Shows engagement with similar products
+        'Abandoned Checkout',     //  Detects hesitation before buying
+        'Chat with Support',      //  Detects if the user needs assistance
+        'Click on Recommendation', //  Tracks engagement with AI-based suggestions
+        'Rate Product',           //  Tracks feedback quality
+        'Share Product',          //  Tracks virality & social engagement
+        'Referral Sent',          //  Indicates loyalty (referring others)
+        'Subscription Start',     //  Tracks engagement with subscription services
+        'Subscription Cancel'     //  Detects dissatisfaction or disengagement
+        ), // this all under development, not all recorded in the database !!
         allowNull: false 
     },
     ActivityDate: { 

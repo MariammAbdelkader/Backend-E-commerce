@@ -20,7 +20,8 @@ const { cartRouter } = require('./routes/cart.router.js');
 const {productRouter} =require('./routes/product.router');
 const { orderRouter } = require('./routes/order.routes.js');
 const {chatbotRouter}= require('./routes/chatbot.routs.js');
-const{userProfileRouter}=require('./routes/userprofile.router.js')
+const{userProfileRouter}=require('./routes/userprofile.router.js');
+const {CustomerManagementRouter} =require('./routes/CustomerManagement.router.js');
 
 global.__basedir = __dirname;
 
@@ -83,6 +84,7 @@ async connectToDatabase() {
     this.app.use("/order",orderRouter);
     this.app.use("/chatbot",chatbotRouter);
     this.app.use("/profile",userProfileRouter);
+    this.app.use("/customermanagement",CustomerManagementRouter);
   }
 
   initializeErrorHandling() {
