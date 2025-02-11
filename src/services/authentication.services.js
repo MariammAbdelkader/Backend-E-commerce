@@ -2,7 +2,7 @@ const { HASH_SALT_ROUNDS } = require("../config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/user.models");
-
+const{CustomerSegment}=require('../models/customerSegmentation.models')
 
 
 
@@ -39,8 +39,11 @@ const signUpService = async (data) => {
                 isAdmin: data.userRole,
                 address:data.address,
             });
+            
+            await CustomerSegment.create({
+                userId: userCreated.userId,
+            });
 
-         
             const token = createToken(userCreated.userId,userCreated.isAdmin);
             return { userCreated , token };
         }

@@ -13,13 +13,30 @@ const CustomerSegment = db.define('CustomersSegment', {
         allowNull: false,
         references: { model: User, key: 'userId' } },
     SegmentType: { 
-        type: DataTypes.ENUM('New Customer', 'Frequent Buyer', 'High-Spender', 'Cart Abandoner', 'Inactive', 'Returner'), 
+        type: DataTypes.ENUM(
+            "VIP", // High spenders, frequent buyers
+            "Loyal Customer", // Regular buyers with moderate spending
+            "New Customer", // Just registered, first purchase pending
+            "Discount Seeker", // Only buys with discounts/coupons
+            "Frequent Returner", // High return rate, refund seeker
+            "Occasional Buyer", // Purchases infrequently
+            "Cart Abandoner", // Adds to cart but doesn’t buy
+            "Inactive", // No activity for a long time
+            "Highly Active", // Engages a lot but doesn’t always buy
+            "Impulse Buyer" // Buys randomly, no clear pattern
+            ), 
+        defaultValue: 'New Customer',
         allowNull: false 
     },
 
     LastUpdated: { 
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW }
+        defaultValue: DataTypes.NOW },
+
+    confidenceScore :{
+            type:  DataTypes.FLOAT,
+            defaultValue:1.0
+        }
 }, { timestamps: true });
 
 
