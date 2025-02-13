@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/user.models");
 const{CustomerSegment}=require('../models/customerSegmentation.models')
-
+const { UserRole } = require("../models/userRole.models");
+const {Role} = require("../models/role.models")
 
 
 const creatHash = async (password) => {
@@ -17,10 +18,16 @@ const creatHash = async (password) => {
     }
 }
 
-const createToken = (userId,isAdmin) => {
-    const jwtToken =  jwt.sign({ userId, isAdmin } , 'our secret key' ,{expiresIn : '24h'});
+const createToken = (userId, role) => {
+    const jwtToken = jwt.sign(
+        { userId, role }, 
+        process.env.JWT_SECRET || "our secret key",  
+        { expiresIn: "24h" }
+    );
+
     return jwtToken;
-}
+};
+
 const signUpService = async (data) => {
     try {
         
@@ -36,15 +43,21 @@ const signUpService = async (data) => {
                 email: data.email,
                 password: hashedPassword,
                 phoneNumber: data.phoneNumber,
-                isAdmin: data.userRole,
                 address:data.address,
+                Gender: data.Gender,    
+            });
+
+            const customerRole = await Role.findOne({ where: { roleName: "Customer" } });
+            const userRole=await UserRole.create({
+                userId: userCreated.userId,
+                roleId: customerRole.roleId, // Use the role ID from the database
             });
             
             await CustomerSegment.create({
                 userId: userCreated.userId,
             });
 
-            const token = createToken(userCreated.userId,userCreated.isAdmin);
+            const token = createToken(userCreated.userId,customerRole.roleName);
             return { userCreated , token };
         }
     } catch (err) {
@@ -54,13 +67,26 @@ const signUpService = async (data) => {
 
 const loginService = async (email , password) => {
     try {
-        const emailExists = await User.findOne({ where : {email}});
-        if (emailExists) {
-            const checkPassword = await bcrypt.compare(password , emailExists.password);   
-            if (checkPassword) {
-                const token = createToken(emailExists.userId,emailExists.isAdmin);
+        const user = await User.findOne({
+            where: { email },
+            include: [
+                {
+                    model: UserRole,
+                    include: [{ model: Role, attributes: ["roleName"] }], // Fetch Role through UserRole
+                },
+            ],
+        });
 
-                return {token  ,message : "logged in succesfully",data : emailExists.dataValues };
+        
+        if (user) {
+            const checkPassword = await bcrypt.compare(password , user.password);  
+            
+            const userRoles = user.UserRoles.map(ur => ur.Role.roleName); // Get all roles as an array
+
+            if (checkPassword) {
+                const token = createToken(user.userId,userRoles);
+
+                return {token  ,message : "logged in succesfully",data : user.dataValues };
             } else {
                 throw { message : "incorrect email/password" };
             }
