@@ -130,10 +130,12 @@ const addOrderService = async (userId, cartId, totalAmount, shippingAddress, bil
             paymentStatus: 'pending',  
             orderStatus: 'pending',   
         });
-        console.log('Order created:', order);
+
+        console.log('Order created:', order.toJSON());  // Ensure correct logging
         return order;
     } catch (error) {
         console.error('Error creating order:', error);
+        throw new Error('Failed to create order');  // Ensure error is thrown
     }
 };
 module.exports = {viewHistoryService,addOrderService,getUserOrderHistoryService}
