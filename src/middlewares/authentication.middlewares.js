@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { UnauthorizedError } = require("../exceptions/httpExceptions");
 const {Conversation}=require('../models/conversation.model')
+const {Order}=require('../models/order.models')
 
 const AuthMiddleware = (req, res, next) => {
   try {
@@ -48,6 +49,28 @@ const AuthConversationIdMiddleware =async(req, res, next) =>{
   }
 } 
 
+const AuthOrderMiddleware=async (req, res, next)=>{
+  try {
+      const orderId= req.body.orderId;
+      const userId=req.userId
+
+      const order = await Order.findOne({
+        where: {
+          orderId,
+          userId,
+        },
+      });
+
+      if (!order) {
+        throw new UnauthorizedError("Unauthorized");
+      }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+
+}
 // Middleware to check if the user has a specific role
 const authorizeRole = (requiredRole) => (req, res, next) => {
   try {
@@ -77,4 +100,4 @@ const isShopOwner = authorizeRole("ShopOwner");
 
 
 
-module.exports = { AuthMiddleware, AuthConversationIdMiddleware,isAdmin, isShopOwner  };
+module.exports = { AuthMiddleware, AuthConversationIdMiddleware,isAdmin, isShopOwner,AuthOrderMiddleware  };

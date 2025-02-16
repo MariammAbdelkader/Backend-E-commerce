@@ -1,9 +1,14 @@
 const express = require("express");
-const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
+const { AuthMiddleware,AuthOrderMiddleware } = require("../middlewares/authentication.middlewares");
+const { validateCart } = require("../middlewares/cart.middlewares");
 
-const {initiatePayment, handlePaymentCallback}=require('../controllers/paymentController')
+const {ConfirmOrderController, paymobController}=require('../controllers/payment.controller')
 
 const paymentRouter = express.Router();
 
-paymentRouter.post('/create-order',paymentContoller)
 
+paymentRouter.post('/Confirm-order',validateCart,ConfirmOrderController)
+
+paymentRouter.post('/paymob',paymobController)
+
+module.exports= {paymentRouter}
