@@ -7,6 +7,8 @@ const {CustomerActivity} = require('./customerActivity.models');
 const {CustomerSegment} = require('./customerSegmentation.models');
 const {OrderDetail} = require('./orderDetails.models');
 const{ Return }= require('./returns.models')
+const {Role}= require('./role.models')
+const{UserRole}=require('./userRole.models')
 
 
 
@@ -83,5 +85,10 @@ CustomerActivity.belongsTo(User, { foreignKey: 'userId', as: 'user', targetKey: 
 // One Customer has One Segment
 User.hasOne(CustomerSegment, { foreignKey: 'userId' });
 CustomerSegment.belongsTo(User, { foreignKey: 'userId' });
+
+
+// Define Many-to-Many Relationship
+User.belongsToMany(Role, { through: UserRole, foreignKey: "userId" });
+Role.belongsToMany(User, { through: UserRole, foreignKey: "roleId" });
 
 module.exports = {  Product, ProductImage,  User , Cart , CartItem , Order , Category , Subcategory, OrderDetail, Return,CustomerActivity, CustomerSegment };
