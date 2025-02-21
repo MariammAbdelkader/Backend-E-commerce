@@ -8,6 +8,7 @@ const{CustomerSegment}=require('../models/customerSegmentation.models')
 const { getUserReturnsService } = require('./returns.services');
 const { getUserOrderHistoryService } = require('../services/order.services');
 const { getUserActivitiesServices } = require('../services/CustomerActivity.Services');
+const moment = require("moment");
 
 
 const getUserSegmentationData = async (userId) => {
@@ -84,15 +85,13 @@ const segmentAllUsersServices = async () => {
             const userData = await getUserSegmentationData(userId);
 
             // Send data to AI for segmentation
-            const response = await axios.post( 'http://OMAR_and_EISA.com', userData);// replace with the API url
+            const segmentation = await categorizeCustomer(userData)
 
-            if (response.status === 200 && response.data.segment) {
-                const segmentType = response.data.segment; // AI returns a segmentation label
-
+            if (segmentation) {
                 // Store segmentation result in the database
                 await CustomerSegment.upsert({
                     userId,
-                    SegmentType: segmentType
+                    SegmentType: segmentation
                 });
 
                 console.log(`User ${userId} segmented as: ${segmentType}`);
@@ -137,4 +136,88 @@ const getAllSegmentationsServices = async () => {
 };
 
 
+function categorizeCustomer(customer) {
+    const totalSpent = customer.totalOrderPrice;
+    const numOrders = customer.numberOfOrders;
+    const totalReturns = customer.numberOfReturns;
+    const returnRate = numOrders > 0 ? totalReturns / numOrders : 0;
+    const userActivity = customer.userActivity;
+    const orderHistory = customer.orderHistory;
+
+    // Get the last activity date
+    const lastActivityDates = customer.activityHistory.map(act => moment(act.ActivityDate));
+    const lastActivity = lastActivityDates.length > 0 ? moment.max(lastActivityDates) : null;
+
+    const now = moment();
+    const sixMonthsAgo = now.subtract(6, "months");
+
+    const priorityOrder = [
+        "VIP", "Loyal Customer", "Frequent Returner", "Impulse Buyer",
+        "Highly Active", "Cart Abandoner", "Occasional Buyer", "Inactive",
+        "New Customer"
+    ];
+
+
+    let categories = []; // Store all matching categories
+
+    // VIP
+    if (totalSpent > 1000 && numOrders > 10) {
+        categories.push("VIP");
+    }
+
+    // Loyal Customer
+    if (numOrders >= 5 && numOrders <= 10 && totalSpent >= 500 && totalSpent <= 1000) {
+        categories.push("Loyal Customer");
+    }
+
+    // New Customer
+    if (numOrders === 0) {
+        categories.push("New Customer");
+    }
+
+    // Frequent Returner
+    if (returnRate > 0.5) {
+        categories.push("Frequent Returner");
+    }
+
+    // Occasional Buyer
+    if (numOrders >= 1 && numOrders < 5) {
+        categories.push("Occasional Buyer");
+    }
+
+    // Cart Abandoner
+    if (userActivity["Add to Cart"] > 5 && userActivity["Purchase"] === 0) {
+        categories.push("Cart Abandoner");
+    }
+
+    // Inactive
+    if (lastActivity && lastActivity.isBefore(sixMonthsAgo)) {
+        categories.push("Inactive");
+    }
+
+    // Highly Active
+    if (userActivity["View Product"] > 20 && userActivity["Purchase"] < 2) {
+        categories.push("Highly Active");
+    }
+
+    // Impulse Buyer
+    const uniqueOrderDates = new Set(orderHistory.map(order => order.orderDate));
+    if (numOrders > 0 && uniqueOrderDates.size === numOrders) {
+        categories.push("Impulse Buyer");
+    }
+
+    // Conflict Detection
+    if (categories.length > 1) {
+
+        console.warn(`Conflict detected! User matches multiple categories:`, categories);
+        for (const category of priorityOrder) {
+            if (categories.includes(category)) {
+                return category;
+            }
+        }
+    }
+
+
+    return "Uncategorized";
+}
 module.exports = {segmentAllUsersServices,getAllSegmentationsServices};
