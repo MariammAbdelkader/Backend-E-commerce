@@ -7,10 +7,15 @@ const User = db.define('User', {
         primaryKey: true,
         autoIncrement: true,
     },
-    name: {
+    firstName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -33,11 +38,6 @@ const User = db.define('User', {
         //     // // },
         // },
     },
-    
-    isAdmin: {
-        type: DataTypes.BOOLEAN, 
-        allowNull: false,
-    },
     phoneNumber: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -46,6 +46,10 @@ const User = db.define('User', {
         type: DataTypes.TEXT,
         allowNull: true,
     },
+    Gender:{
+        type: DataTypes.ENUM('Male', 'Female', 'Other'),
+        allowNull:false
+    }          
 });
 
 

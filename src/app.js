@@ -3,6 +3,9 @@ const express = require('express');
 const morgan = require("morgan");
 const cors = require ("cors");
 const cookieParser = require("cookie-parser");
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger.js');
+
 
 
 
@@ -15,6 +18,10 @@ const { router } = require('./routes/authentication.routes.js');
 const { csvRouter } = require('./routes/csv.routes.js');
 const { cartRouter } = require('./routes/cart.router.js');
 const {productRouter} =require('./routes/product.router');
+const { orderRouter } = require('./routes/order.routes.js');
+const {chatbotRouter}= require('./routes/chatbot.routs.js');
+const{userProfileRouter}=require('./routes/userprofile.router.js');
+const {CustomerManagementRouter} =require('./routes/CustomerManagement.router.js');
 
 global.__basedir = __dirname;
 
@@ -57,11 +64,16 @@ async connectToDatabase() {
     this.app.use(morgan('dev'));    // a middleware that logs the request details
     this.app.use(express.json());   // a middleware that used to parse json requests
     this.app.use(cookieParser());   // a middleware used to parse cookies
-    this.app.use(cors()); // a middleware that alow cors (requests from other hosts )
+    this.app.use(cors({
+      origin: "http://localhost:8000", //Port of FrontEnd 
+      credentials: true, 
+    })); // a middleware that alow cors (requests from other hosts )
+  
     this.app.use((req,res,next)=> {    // next() should be provided in order to go to next middleware
       console.log("we got reqqq");
       next();
     })
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
   
   initializeRoutes() {
@@ -69,6 +81,10 @@ async connectToDatabase() {
     this.app.use("/upload",csvRouter);
     this.app.use("/cart",cartRouter);
     this.app.use("/product",productRouter);
+    this.app.use("/order",orderRouter);
+    this.app.use("/chatbot",chatbotRouter);
+    this.app.use("/profile",userProfileRouter);
+    this.app.use("/customermanagement",CustomerManagementRouter);
   }
 
   initializeErrorHandling() {
