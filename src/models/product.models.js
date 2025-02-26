@@ -1,6 +1,6 @@
 const {  DataTypes } = require('sequelize');
 const { db } = require('../database');
-
+const Category = require('./category.models'); // Import Category model
 
 const Product = db.define('Product', {
     productId: {
@@ -16,12 +16,16 @@ const Product = db.define('Product', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
+    disCountPrice:{
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
     description: {
         type: DataTypes.TEXT,
         allowNull: true,
     },
     category: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
     },
     subCategory: {
         type: DataTypes.STRING
@@ -34,7 +38,19 @@ const Product = db.define('Product', {
         type: DataTypes.ENUM('in_stock', 'out_of_stock', 'discontinued'),
         allowNull: false,
         defaultValue: 'in_stock',
-    }
+    },
+    rete:{
+        type:DataTypes.FLOAT,
+        allowNull:true,
+    },
+    categoryId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Category,
+            key: 'categoryId',
+        },
+        allowNull: true,
+    },
     
 });
 

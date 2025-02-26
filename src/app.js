@@ -22,7 +22,8 @@ const { orderRouter } = require('./routes/order.routes.js');
 const {chatbotRouter}= require('./routes/chatbot.routs.js');
 const{userProfileRouter}=require('./routes/userprofile.router.js');
 const {CustomerManagementRouter} =require('./routes/CustomerManagement.router.js');
-const {paymentRouter}=require=require('./routes/payment.router.js');
+const {paymentRouter}=require('./routes/payment.router.js');
+const {DiscountRouter}=require('./routes/discount.routes.js')
 
 global.__basedir = __dirname;
 
@@ -66,7 +67,7 @@ async connectToDatabase() {
     this.app.use(express.json());   // a middleware that used to parse json requests
     this.app.use(cookieParser());   // a middleware used to parse cookies
     this.app.use(cors({
-      origin: "http://localhost:8000", //Port of FrontEnd 
+      origin: "http://localhost:8001", //Port of FrontEnd 
       credentials: true, 
     })); // a middleware that alow cors (requests from other hosts )
   
@@ -87,6 +88,8 @@ async connectToDatabase() {
     this.app.use("/profile",userProfileRouter);
     this.app.use("/customermanagement",CustomerManagementRouter);
     this.app.use("/payment",paymentRouter);
+    this.app.use("/discount",DiscountRouter);
+
   }
 
   initializeErrorHandling() {
