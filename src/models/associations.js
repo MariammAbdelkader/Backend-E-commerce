@@ -91,4 +91,8 @@ CustomerSegment.belongsTo(User, { foreignKey: 'userId' });
 User.belongsToMany(Role, { through: UserRole, foreignKey: "userId" });
 Role.belongsToMany(User, { through: UserRole, foreignKey: "roleId" });
 
+// Define the relationship
+Category.hasMany(Product, { foreignKey: 'categoryId' });
+Product.belongsTo(Category, { foreignKey: 'categoryId' });
+
 module.exports = {  Product, ProductImage,  User , Cart , CartItem , Order , Category , Subcategory, OrderDetail, Return,CustomerActivity, CustomerSegment };

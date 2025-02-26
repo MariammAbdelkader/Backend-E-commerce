@@ -2,7 +2,8 @@ const { getProductServices,
         deleteProductServices,
         createProductServices,
         updateProductServices,
-         getProductsService } = require("../services/product.services");
+         getProductsService,
+         AllCategoriesServices } = require("../services/product.services");
 
 
 const getProductController =async (req , res) => {
@@ -102,9 +103,27 @@ const updateProductController= async (req,res)=>{
         res.status(400).json({ error: err.message });
     }
 }
+
+const getAllCatigoriesController= async (req,res)=>{
+    try {
+
+        const categories = await AllCategoriesServices()
+
+        res.status(200).json({
+            message: "All Categories returned sccessfully",
+            categories,
+        });
+
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+
+}
+
 module.exports={
     getProductController,
     getProductsController,
     deleteProductController,
     createProductController,
-    updateProductController}
+    updateProductController,
+    getAllCatigoriesController}
