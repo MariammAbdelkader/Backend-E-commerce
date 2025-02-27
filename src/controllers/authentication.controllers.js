@@ -1,4 +1,4 @@
-const { signUpService, loginService } = require("../services/authentication.services");
+const { signUpService, loginService ,logoutService} = require("../services/authentication.services");
 
 
 
@@ -26,4 +26,18 @@ const login =async (req , res) => {
      }
 
 }
-module.exports = {signUp , login}
+
+const logout = (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.status(200).json({ message: "No active session" }); // Already logged out
+    }
+
+    res.clearCookie("jwt", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "development",
+        sameSite: "Strict",
+    });
+
+    res.status(200).json({ message: "Logged out successfully" });
+};
+module.exports = {signUp , login , logout}

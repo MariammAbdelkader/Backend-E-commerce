@@ -100,4 +100,16 @@ const loginService = async (email , password) => {
 
 
 }
-module.exports={signUpService,loginService}
+const logoutService = (res) => {
+    res.clearCookie("jwt", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "development",  // working over HTTP only (not secured)
+        sameSite: "Strict",
+    });
+
+    return { message: "Logged out successfully" };
+};
+
+
+
+module.exports={signUpService,loginService,logoutService}

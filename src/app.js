@@ -23,7 +23,8 @@ const {chatbotRouter}= require('./routes/chatbot.routs.js');
 const{userProfileRouter}=require('./routes/userprofile.router.js');
 const {CustomerManagementRouter} =require('./routes/CustomerManagement.router.js');
 const {paymentRouter}=require('./routes/payment.router.js');
-const {DiscountRouter}=require('./routes/discount.routes.js')
+const {DiscountRouter}=require('./routes/discount.routes.js');
+
 
 global.__basedir = __dirname;
 
