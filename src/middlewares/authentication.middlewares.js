@@ -5,25 +5,22 @@ const {Order}=require('../models/order.models')
 
 const AuthMiddleware = (req, res, next) => {
   try {
-    const token = req.cookies.jwt;
-  
-    if (token) {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const token = req.cookies.jwt || req.headers.authorization?.split(" ")[1];
 
-      // User Role
-      if (decoded && decoded.userId) {
-        const userId = decoded.userId;
-        req.userId = userId;
-      } else {
-        throw new UnauthorizedError("Invalid JWT");
-      }
-    } else {
-      throw new UnauthorizedError("Invalid JWT");
-    }
+      if (!token) 
+          throw new UnauthorizedError("JWT token is missing");
+      
 
-    next();
+      const decoded = jwt.verify(token, process.env.JWT_SECRET); 
+
+      if (!decoded || !decoded.userId) 
+          throw new UnauthorizedError("Invalid JWT");
+      
+      req.userId = decoded.userId;
+      next();
   } catch (error) {
-    next(error);
+      console.error("JWT Verification Error:", error.message);
+      next(error);
   }
 };
 

@@ -8,7 +8,8 @@ const {CustomerSegment} = require('./customerSegmentation.models');
 const {OrderDetail} = require('./orderDetails.models');
 const{ Return }= require('./returns.models')
 const {Role}= require('./role.models')
-const{UserRole}=require('./userRole.models')
+const{UserRole}=require('./userRole.models');
+const { Review } = require('./review.models');
 
 
 
@@ -95,4 +96,12 @@ Role.belongsToMany(User, { through: UserRole, foreignKey: "roleId" });
 Category.hasMany(Product, { foreignKey: 'categoryId' });
 Product.belongsTo(Category, { foreignKey: 'categoryId' });
 
-module.exports = {  Product, ProductImage,  User , Cart , CartItem , Order , Category , Subcategory, OrderDetail, Return,CustomerActivity, CustomerSegment };
+
+User.hasMany(Review, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Review.belongsTo(User, { foreignKey: 'userId' });
+
+Product.hasMany(Review, { foreignKey: 'productId', onDelete: 'CASCADE' });
+Review.belongsTo(Product, { foreignKey: 'productId' });
+
+
+module.exports = {  Product, ProductImage,  User , Cart , CartItem , Order , Category , Subcategory, OrderDetail, Return,CustomerActivity, CustomerSegment ,Review};

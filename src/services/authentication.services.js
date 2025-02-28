@@ -21,7 +21,7 @@ const creatHash = async (password) => {
 const createToken = (userId, role) => {
     const jwtToken = jwt.sign(
         { userId, role }, 
-        process.env.JWT_SECRET || "our secret key",  
+        process.env.JWT_SECRET ,  
         { expiresIn: "24h" }
     );
 
