@@ -39,10 +39,6 @@ const Product = db.define('Product', {
         allowNull: false,
         defaultValue: 'in_stock',
     },
-    rete:{
-        type:DataTypes.FLOAT,
-        allowNull:true,
-    },
     categoryId: {
         type: DataTypes.INTEGER,
         references: {
