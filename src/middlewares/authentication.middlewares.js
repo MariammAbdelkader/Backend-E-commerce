@@ -5,6 +5,7 @@ const {Order}=require('../models/order.models')
 
 const AuthMiddleware = (req, res, next) => {
   try {
+  
       const token = req.cookies.jwt || req.headers.authorization?.split(" ")[1];
 
       if (!token) 
@@ -17,6 +18,7 @@ const AuthMiddleware = (req, res, next) => {
           throw new UnauthorizedError("Invalid JWT");
       
       req.userId = decoded.userId;
+      console.log("Authenticated User ID:", req.userId);
       next();
   } catch (error) {
       console.error("JWT Verification Error:", error.message);

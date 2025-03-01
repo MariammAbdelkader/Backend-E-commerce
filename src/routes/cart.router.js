@@ -7,6 +7,22 @@ const { validateCart } = require("../middlewares/cart.middlewares");
 const cartRouter = express.Router();
 
 
+
+
+cartRouter.post("/add",AuthMiddleware,validateCart,createCart)
+
+
+cartRouter.get("/preview",AuthMiddleware,validateCart,previewCart)
+
+
+cartRouter.delete("/delete",AuthMiddleware,validateCart,deleteCart)
+
+
+cartRouter.patch("/update",AuthMiddleware,validateCart,updateCart)
+
+
+module.exports={cartRouter}
+
 /**
  * @swagger
  * tags:
@@ -71,98 +87,6 @@ const cartRouter = express.Router();
  *         description: Internal server error.
  */
 
-cartRouter.post("/add-product",AuthMiddleware,validateCart,createCart)
-/**
- * @swagger
- *   /cart/preview:
- *   get:
- *     summary: Preview the user's current cart
- *     description: Retrieves the current products in the user's cart along with the total price.
- *     tags:
- *       - Cart
- *     responses:
- *       200:
- *         description: Successfully retrieved the cart preview.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Here is your current cart preview"
- *                 cart:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       productId:
- *                         type: integer
- *                         example: 101
- *                       productName:
- *                         type: string
- *                         example: "Laptop"
- *                       quantity:
- *                         type: integer
- *                         example: 2
- *                       price:
- *                         type: number
- *                         example: 25.00
- *                 totalPrice:
- *                   type: number
- *                   example: 50.00
- *       400:
- *         description: Failed to retrieve cart preview.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Cart not found"
- *       500:
- *         description: Internal server error.
- */
-
-
-cartRouter.get("/preview",AuthMiddleware,validateCart,previewCart)
-
-/**
- * @swagger
- *   /cart/delete:
- *   delete:
- *     summary: Delete the user's cart
- *     description: Deletes the entire cart for the authenticated user.
- *     tags:
- *       - Cart
- *     responses:
- *       200:
- *         description: Successfully deleted the cart.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Your cart deleted successfully"
- *       400:
- *         description: Failed to delete the cart.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Cart not found"
- *       500:
- *         description: Internal server error.
- */
-
-cartRouter.delete("/delete",AuthMiddleware,validateCart,deleteCart)
-
 /**
  * @swagger
  * /cart/update:
@@ -220,7 +144,89 @@ cartRouter.delete("/delete",AuthMiddleware,validateCart,deleteCart)
  *         description: Internal server error.
  */
 
-cartRouter.patch("/update",AuthMiddleware,validateCart,updateCart)
 
+/**
+ * @swagger
+ *   /cart/delete:
+ *   delete:
+ *     summary: Delete the user's cart
+ *     description: Deletes the entire cart for the authenticated user.
+ *     tags:
+ *       - Cart
+ *     responses:
+ *       200:
+ *         description: Successfully deleted the cart.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Your cart deleted successfully"
+ *       400:
+ *         description: Failed to delete the cart.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Cart not found"
+ *       500:
+ *         description: Internal server error.
+ */
 
-module.exports={cartRouter}
+/**
+ * @swagger
+ *   /cart/preview:
+ *   get:
+ *     summary: Preview the user's current cart
+ *     description: Retrieves the current products in the user's cart along with the total price.
+ *     tags:
+ *       - Cart
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the cart preview.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Here is your current cart preview"
+ *                 cart:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       productId:
+ *                         type: integer
+ *                         example: 101
+ *                       productName:
+ *                         type: string
+ *                         example: "Laptop"
+ *                       quantity:
+ *                         type: integer
+ *                         example: 2
+ *                       price:
+ *                         type: number
+ *                         example: 25.00
+ *                 totalPrice:
+ *                   type: number
+ *                   example: 50.00
+ *       400:
+ *         description: Failed to retrieve cart preview.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Cart not found"
+ *       500:
+ *         description: Internal server error.
+ */
