@@ -5,9 +5,10 @@ const cors = require ("cors");
 const cookieParser = require("cookie-parser");
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger.js');
+const passport = require("passport");
 
 
-
+require("./config/passport");
 
 // entities must to be with db.resync() function to create the table
 const { PORT }= require("./config/index.js");
@@ -25,6 +26,7 @@ const {CustomerManagementRouter} =require('./routes/CustomerManagement.router.js
 const {paymentRouter}=require('./routes/payment.router.js');
 const {DiscountRouter}=require('./routes/discount.routes.js');
 const {reviewRouter}=require('./routes/review.routes.js');
+const {googleAuthRouter}=require('./routes/googleAuth.routes.js');
 
 global.__basedir = __dirname;
 
@@ -76,11 +78,15 @@ async connectToDatabase() {
       console.log("we got reqqq");
       next();
     })
+
+    this.app.use(passport.initialize());
+
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
   
   initializeRoutes() {
     this.app.use("", router);
+    this.app.use("/auth",googleAuthRouter)
     this.app.use("/upload",csvRouter);
     this.app.use("/cart",cartRouter);
     this.app.use("/product",productRouter);

@@ -1,3 +1,4 @@
+const passport = require("passport");
 const { signUpService, loginService ,logoutService} = require("../services/authentication.services");
 
 
@@ -40,4 +41,18 @@ const logout = (req, res) => {
 
     res.status(200).json({ message: "Logged out successfully" });
 };
-module.exports = {signUp , login , logout}
+
+const googleAuthController = passport.authenticate("google", { scope: ["profile", "email"] });
+
+const googleAuthCallbackController = (req, res, next) => {
+    passport.authenticate("google", { session: false }, (err, user) => {
+        if (err || !user) {
+            return res.status(401).json({ error: "Authentication failed" });
+        }
+
+        // Send token to frontend
+        res.redirect(`http://localhost:8001?token=${user.token}`);
+    })(req, res, next);
+};
+
+module.exports = {signUp , login , logout , googleAuthController , googleAuthCallbackController}

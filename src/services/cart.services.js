@@ -6,6 +6,7 @@ const { cleanUpCart } = require("../utilities/cleanUpCart");
 
 const createCartService = async (body, userId, cart = null) => {
     try {
+
         const { productId, quantity } = body;
 
         if (!productId || !quantity ) {

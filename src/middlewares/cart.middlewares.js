@@ -3,7 +3,7 @@ const { cleanUpCart } = require("../utilities/cleanUpCart");
 
 const validateCart = async (req, res, next) => {
     try {
-        const userId = req.body.userId; 
+        const userId = req.userId; 
         const cart = await Cart.findOne({
             where: { userId, isCompleted: false, isExpired: false },
             order: [['createdAt', 'DESC']],
@@ -23,7 +23,7 @@ const validateCart = async (req, res, next) => {
 
         next();
     } catch (error) {
-        
+        console.log('sedecc')
         next(error);
     }
 };
