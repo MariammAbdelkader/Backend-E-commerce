@@ -24,8 +24,13 @@ const getProductController =async (req , res) => {
 
 const getProductsController =async (req , res) => {
     try {
+        const { category, subcategory, price_lt } = req.query;
+        const filters = {};
 
-        const filters = req.filters;
+        if (category) filters.category = category;
+        if (subcategory) filters.subCategory = subcategory;
+        if (price_lt) filters.price = { [Op.lt]: price_lt };
+        
         const products = await getProductsService(filters);
 
         if(products.length>0)
@@ -34,11 +39,14 @@ const getProductsController =async (req , res) => {
                 message: "Products fetched successfully",
                 products,
             });
+        }else{
+            throw (new Error("the specific products are not found"))
         }
+        
 
-        res.status(200).json({
-            message: "the specific products are not found",
-            });
+        // res.status(200).json({
+        //     message: "the specific products are not found",
+        //     });
         
       
     
@@ -119,6 +127,7 @@ const getAllCatigoriesController= async (req,res)=>{
     }
 
 }
+
 
 module.exports={
     getProductController,

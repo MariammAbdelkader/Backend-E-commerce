@@ -109,6 +109,11 @@ const productRouter= express.Router()
  *         description: Internal server error.
  */
 productRouter.get('/:productId', getProductController)
+
+
+
+
+
 /**
  * @swagger
  * /product:
@@ -225,7 +230,7 @@ productRouter.get('/:productId', getProductController)
  *           example: "2024-12-02T17:41:20.048Z"
  */
 
-productRouter.get('/', filterMiddleware , getProductsController);
+productRouter.get('/', getProductsController);
 /**
  * @swagger
  * /product/{productId}:

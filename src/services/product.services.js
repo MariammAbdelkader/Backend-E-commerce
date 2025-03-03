@@ -116,13 +116,14 @@ const updateProductServices = async(productId,updateData)=>{
 const AllCategoriesServices=async()=>{
     try{
         const categories = await Category.findAll({
-            attributes: ['name'], // Fetch only the name column
+            attributes: ['name'], 
         });
     
         return categories.map(category => category.name);
     }catch(err){
         throw err;
        
+        
     }
 }
 
