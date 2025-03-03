@@ -102,6 +102,7 @@ async connectToDatabase() {
     this.app.use("/reviews",reviewRouter);
 
   }
+  
 
   initializeErrorHandling() {
     this.app.use(ErrorMiddleware);
