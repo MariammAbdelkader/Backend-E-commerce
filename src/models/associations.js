@@ -90,7 +90,13 @@ CustomerSegment.belongsTo(User, { foreignKey: 'userId' });
 
 // Define Many-to-Many Relationship
 User.belongsToMany(Role, { through: UserRole, foreignKey: "userId" });
+
 Role.belongsToMany(User, { through: UserRole, foreignKey: "roleId" });
+
+User.hasOne(UserRole, { foreignKey: "userId" });
+UserRole.belongsTo(User, { foreignKey: "userId" });
+UserRole.belongsTo(Role, { foreignKey: "roleId" });
+Role.hasMany(UserRole, { foreignKey: "roleId" });
 
 // Define the relationship
 Category.hasMany(Product, { foreignKey: 'categoryId' });

@@ -42,13 +42,14 @@ const signUpService = async (data) => {
                 lastName:data.lastName,
                 email: data.email,
                 password: hashedPassword,
-                phoneNumber: data.phoneNumber,
+                phoneNumber: data.phone,
                 address:data.address,
-                Gender: data.Gender,    
+                Gender: data.gender,    
             });
 
             const customerRole = await Role.findOne({ where: { roleName: "Customer" } });
-            const userRole=await UserRole.create({
+
+            const userRole = await UserRole.create({
                 userId: userCreated.userId,
                 roleId: customerRole.roleId, // Use the role ID from the database
             });
@@ -67,24 +68,27 @@ const signUpService = async (data) => {
 
 const loginService = async (email , password) => {
     try {
+        console.log(email+"  "+password)
+        
         const user = await User.findOne({
             where: { email },
             include: [
                 {
                     model: UserRole,
-                    include: [{ model: Role, attributes: ["roleName"] }], // Fetch Role through UserRole
+                    include: [{ model: Role, attributes: ["roleName"] }],
                 },
             ],
+            
         });
 
         
         if (user) {
             const checkPassword = await bcrypt.compare(password , user.password);  
             
-            const userRoles = user.UserRoles.map(ur => ur.Role.roleName); // Get all roles as an array
+            const userRole = user?.UserRole?.Role?.roleName;
 
             if (checkPassword) {
-                const token = createToken(user.userId,userRoles);
+                const token = createToken(user.userId, userRole);
 
                 return {token  ,message : "logged in succesfully",data : user.dataValues };
             } else {

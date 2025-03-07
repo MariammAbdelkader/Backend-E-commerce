@@ -3,7 +3,8 @@ const { Conversation } = require("../models/conversation.model");
 const { User } = require("../models/user.models");
 const {db} =require('../database/index')
 
-const {viewHistoryService}=require('./order.services') 
+const {viewHistoryService}=require('./order.services'); 
+const { where } = require("sequelize");
 
 const startConversationservices = async (userId)=>{
     try {
@@ -23,28 +24,25 @@ const startConversationservices = async (userId)=>{
 
 
 const sendMessageservices=async(conversationId , message, userId)=>{
-  
- 
+
 
   const username = await User.findByPk(userId, {
     attributes: ['firstName'], 
   });
- //const userHistory = viewHistoryService(userId)
-  //for AI
-  // data= {
-  //   user_id: userId,
-  //   user_history: userHistory,
-  //   messages: message,
-  //   thread_id: conversationId,
-  //   //if needed
-  //   name:username
-  // }
-  //const respons = SendToAi(data)
 
-  return {
-    message: `hello ${username.firstName} from the backend till now`, 
-    conversationId: conversationId
-  };
+
+  const result = await viewHistoryService(userId)
+
+  const AiData={
+    user_id:userId,
+    user_history:result.user_history,
+    messages: message,
+    thread_id:conversationId
+  }
+
+  //////////////here you integrate with AI
+
+  return AiData;
 
 }
 
