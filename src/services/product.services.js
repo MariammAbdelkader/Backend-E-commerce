@@ -1,9 +1,11 @@
 const {Product, ProductImage} = require ("../models/product.models.js");
-const {Category} = require ("../models/category.models.js");
+const {Category, Subcategory} = require ("../models/category.models.js");
 
 const Joi = require("joi");
+const { name } = require("ejs");
 
 const getProductServices = async (productId)=>{
+
     if(!productId){
         throw new Error('Product ID are required');
     }
@@ -13,12 +15,22 @@ const getProductServices = async (productId)=>{
 
     const product = await Product.findByPk(productId);
 
-        if (!product) {
+    if (!product) {
             throw new Error('Product not found');
-        }
+    }
 
-    return product
+    const returnedProduct={
+        productId:product.productId,
+        name:product.name,
+        description:product.description,
+        category:product.category,
+        subcategory:product.subCategory,
+        price:product.price,
+        discountprice:product.disCountPrice,
+        status:product.status,
+    }
 
+    return returnedProduct;
 }
 const getProductsService=async (filters) => {
     try {
@@ -26,15 +38,31 @@ const getProductsService=async (filters) => {
         const products = await Product.findAll({
         where: filters,
         });
-    
-        return products;
+
+        if(products.length==0){
+            return message({message:'no Products Found', data: []})
+        }
+        
+        //TODO Rearrange the Products according to Customer History
+        const formattedProducts = products.map((product) => ({
+            productId: product.productId,
+            name: product.name,
+            description: product.description,
+            category: product.category,
+            subcategory: product.subCategory, 
+            price: product.price,
+            discountPrice: product.disCountPrice, 
+            status: product.status,
+        }));
+        return {message:"Products returned successfully", data: formattedProducts};
+
     } catch (error) {
         throw new Error(error.message);
     }
 };
 
 const deleteProductServices =async (productId)=>{
-    ret =false
+
 
     if(!productId){
         throw new Error('Product ID are required');
@@ -48,9 +76,15 @@ const deleteProductServices =async (productId)=>{
     if (!product) {
         throw new Error('Product not found');
     }
+
     await product.destroy();
 
-    return product
+    const checkProduct = await Product.findByPk(productId);
+    if (checkProduct) {
+        throw new Error('Product deletion failed');
+    }
+
+    return {message:"Product was successfully deleted",}
 
 }
 
