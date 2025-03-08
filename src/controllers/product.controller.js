@@ -10,13 +10,12 @@ const getProductController =async (req , res) => {
     try {
     
         const { productId }= req.params;    
-        const response =await getProductServices(productId)
+        const data =await getProductServices(productId);
 
-        res.status(200).json({message : "Product returned successfully" , response });
-        
+        res.status(200).json({message : "Product returned successfully" , data });
         
     } catch (err) {
-        res.status(400).json({ error : err.message });
+        res.status(400).json({ message : err.message });
      }
 
 }
@@ -24,7 +23,7 @@ const getProductController =async (req , res) => {
 
 const getProductsController =async (req , res) => {
     try {
-        const { category, subcategory, price_lt } = req.query;
+        const { category, subcategory, price_lt } = req.body;
         const filters = {};
 
         if (category) filters.category = category;
@@ -32,26 +31,12 @@ const getProductsController =async (req , res) => {
         if (price_lt) filters.price = { [Op.lt]: price_lt };
         
         const products = await getProductsService(filters);
-
-        if(products.length>0)
-        {
-            res.status(200).json({
-                message: "Products fetched successfully",
-                products,
-            });
-        }else{
-            throw (new Error("the specific products are not found"))
-        }
+        
+        res.status(200).json({message: products.message, data :products.data});
         
 
-        // res.status(200).json({
-        //     message: "the specific products are not found",
-        //     });
-        
-      
-    
     } catch (err) {
-        res.status(500).json({ error : err.message });
+        res.status(500).json({ message : err.message });
     }
 
 }
@@ -63,10 +48,10 @@ const deleteProductController=async (req , res) => {
         
         const response =await deleteProductServices(productId)
         
-            res.status(200).json({message : "Product Deleted successfully",response });
+        res.status(200).json({message : response.message});
         
     } catch (err) {
-        res.status(400).json({ error : err.message });
+        res.status(400).json({ message : err.message });
      }
 
 }
