@@ -37,7 +37,7 @@ const viewHistoryService = async (userId) => {
 
                 cartItems.forEach(item => {
                     userHistory.push({
-                        productId: item.products.id,
+                        productId: item.products.productId,
                         name: item.products.name,
                         price: item.products.price,
                         description: item.products.description,
