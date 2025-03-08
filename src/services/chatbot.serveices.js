@@ -1,3 +1,4 @@
+const axios = require('axios');
 
 const { Conversation } = require("../models/conversation.model");
 const { User } = require("../models/user.models");
@@ -23,27 +24,35 @@ const startConversationservices = async (userId)=>{
 }
 
 
-const sendMessageservices=async(conversationId , message, userId)=>{
+const sendMessageservices = async (conversationId, message, userId) => {
+  try {
+      const username = await User.findByPk(userId, { attributes: ['firstName'] });
 
+      const result = await viewHistoryService(userId);
 
-  const username = await User.findByPk(userId, {
-    attributes: ['firstName'], 
-  });
+      const AiData = {
+          user_id: userId,
+          user_history: result.user_history,
+          messages: message,
+          thread_id: conversationId
+      };
+      console.log(AiData)
+      // Send request to AI FastAPI service
+      const response = await axios.post("http://127.0.0.1:8000/process_input/", AiData, {
+        headers: { "Content-Type": "application/json" },
+    });
+    // console.log("AI Response:", response.data);  // Debugging
 
+      // Extract response from AI service
+      return {
+          message: response.data.responses,  // Assuming FastAPI returns { "reply": "AI response text" }
+          conversationId
+      };
 
-  const result = await viewHistoryService(userId)
-
-  const AiData={
-    user_id:userId,
-    user_history:result.user_history,
-    messages: message,
-    thread_id:conversationId
+  } catch (error) {
+      console.error("Error communicating with AI service:", error.message);
+      throw new Error("Failed to get AI response");
   }
-
-  //////////////here you integrate with AI
-
-  return AiData;
-
-}
+};
 
 module.exports = {startConversationservices,sendMessageservices}

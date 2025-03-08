@@ -37,7 +37,7 @@ const User = db.define("User", {
     },
     Gender: {
         type: DataTypes.ENUM("Male", "Female", "Other"),
-        allowNull: false,
+        allowNull: true,
     },
     authProvider: {
         type: DataTypes.ENUM("manual", "google", "facebook"), // Added "facebook"
