@@ -11,6 +11,8 @@ const {Role}= require('./role.models')
 const{UserRole}=require('./userRole.models');
 const { Review } = require('./review.models');
 
+const {DiscountOnProducts,DiscountOnCategories,DiscountLogs} = require('./discounts.model')
+
 
 
 // Cart-User associations
@@ -99,8 +101,11 @@ UserRole.belongsTo(Role, { foreignKey: "roleId" });
 Role.hasMany(UserRole, { foreignKey: "roleId" });
 
 // Define the relationship
-Category.hasMany(Product, { foreignKey: 'categoryId' });
+Category.hasMany(Product, { foreignKey: 'categoryId', onDelete: 'CASCADE' });
 Product.belongsTo(Category, { foreignKey: 'categoryId' });
+
+Subcategory.hasMany(Product, { foreignKey: 'subcategoryId', onDelete: 'CASCADE' });
+Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' });
 
 
 User.hasMany(Review, { foreignKey: 'userId', onDelete: 'CASCADE' });
@@ -110,4 +115,17 @@ Product.hasMany(Review, { foreignKey: 'productId', onDelete: 'CASCADE' });
 Review.belongsTo(Product, { foreignKey: 'productId' });
 
 
-module.exports = {  Product, ProductImage,  User , Cart , CartItem , Order , Category , Subcategory, OrderDetail, Return,CustomerActivity, CustomerSegment ,Review};
+DiscountOnProducts.belongsTo(Product, { foreignKey: 'productId' });
+DiscountOnProducts.belongsTo(DiscountLogs, { foreignKey: 'logId' });
+
+DiscountOnCategories.belongsTo(Category, { foreignKey: 'categoryId' });
+DiscountOnCategories.belongsTo(DiscountLogs, { foreignKey: 'logId' });
+
+DiscountLogs.belongsTo(User, { foreignKey: 'adminId' });
+
+
+module.exports = {  Product, ProductImage,  User , Cart , CartItem ,
+                    Order , Category , Subcategory, OrderDetail, Return,
+                    CustomerActivity, CustomerSegment ,Review,
+                    DiscountOnProducts,DiscountOnCategories,
+                    DiscountLogs,};

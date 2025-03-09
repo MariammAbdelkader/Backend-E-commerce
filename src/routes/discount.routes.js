@@ -2,12 +2,19 @@ const express= require("express");
 const {discountCategoryController,
     discountProductController,
     removeProductDiscountController,
-    removeCategotyDiscountController}=require('../controllers/discount.controller')
+    removeCategotyDiscountController,
+    getDiscountsController}=require('../controllers/discount.controller')
 const DiscountRouter=express.Router();
 
-DiscountRouter.post('/product',discountProductController) //productId, prec
-DiscountRouter.post('/category/',discountCategoryController)//catName, prec
+DiscountRouter.post('/product',discountProductController)
 
+DiscountRouter.post('/category',discountCategoryController)
+
+
+DiscountRouter.get("/", getDiscountsController);
+
+
+//deprecated
 DiscountRouter.post('/remove/product',removeProductDiscountController)
 DiscountRouter.post('/remove/category',removeCategotyDiscountController)
 

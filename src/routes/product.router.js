@@ -230,7 +230,7 @@ productRouter.get('/:productId', getProductController)
  *           example: "2024-12-02T17:41:20.048Z"
  */
 
-productRouter.get('/', getProductsController);
+productRouter.post('/', getProductsController);
 /**
  * @swagger
  * /product/{productId}:
