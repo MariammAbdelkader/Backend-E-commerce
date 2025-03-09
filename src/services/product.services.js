@@ -3,6 +3,9 @@ const {Category, Subcategory} = require ("../models/category.models.js");
 
 const Joi = require("joi");
 const { name } = require("ejs");
+const { DiscountOnProducts, DiscountOnCategories } = require("../models/discounts.model.js");
+
+const {getThePercentage}= require('../utilities/ProductUtilities.js')
 
 const getProductServices = async (productId)=>{
 
@@ -13,21 +16,33 @@ const getProductServices = async (productId)=>{
         throw new Error('Not a valid number');
     }
 
-    const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId, {
+        include: [
+            { model: Category, as: 'Category', attributes: ['name'] }, 
+            { model: Subcategory, as: 'Subcategory', attributes: ['name'] } 
+        ]
+    });
 
     if (!product) {
             throw new Error('Product not found');
     }
 
+    const { productDiscountPercentage, categoryDiscountPercentage } =
+                await getThePercentage(productId, product.categoryId);
+
+                
+
     const returnedProduct={
         productId:product.productId,
         name:product.name,
         description:product.description,
-        category:product.category,
-        subcategory:product.subCategory,
+        category: product.Category ? product.Category.name : null,
+        subcategory: product.Subcategory ? product.Subcategory.name : null,
         price:product.price,
         discountprice:product.disCountPrice,
         status:product.status,
+        productDiscountPercentage,
+        categoryDiscountPercentage
     }
 
     return returnedProduct;
@@ -35,26 +50,48 @@ const getProductServices = async (productId)=>{
 const getProductsService=async (filters) => {
     try {
         //TODO engance the database for better searching 
+        const filterConditions = { ...filters };
+
+        if (filters.category) {
+            const category = await Category.findOne({ where: { name: filters.category } });
+            if (category) {
+                filterConditions.categoryId = category.categoryId;
+            }
+            delete filterConditions.category; // Remove the incorrect key
+        }
+
+        if (filters.subcategory) {
+            const subcategory = await Subcategory.findOne({ where: { name: filters.subcategory } });
+            if (subcategory) {
+                filterConditions.subcategoryId = subcategory.subcategoryId;
+            }
+            delete filterConditions.subcategory; // Remove the incorrect key
+        }
+
         const products = await Product.findAll({
-        where: filters,
+            where: filterConditions,
+            include: [
+                { model: Category, as: 'Category', attributes: ['name'] },
+                { model: Subcategory, as: 'Subcategory', attributes: ['name'] }
+            ]
         });
 
         if(products.length==0){
             return message({message:'no Products Found', data: []})
         }
         
-        //TODO Rearrange the Products according to Customer History
-        const formattedProducts = products.map((product) => ({
-            productId: product.productId,
-            name: product.name,
-            description: product.description,
-            category: product.category,
-            subcategory: product.subCategory, 
-            price: product.price,
-            discountPrice: product.disCountPrice, 
-            status: product.status,
-        }));
-        return {message:"Products returned successfully", data: formattedProducts};
+        const productsData = [];
+
+        for (const product of products) {
+            try {
+                const detailedProduct = await getProductServices(product.productId);
+                productsData.push(detailedProduct);
+            } catch (error) {
+                console.error(`Failed to fetch product ${product.productId}: ${error.message}`);
+            }
+        }
+
+        return {message:"Products returned successfully", data: productsData};
 
     } catch (error) {
         throw new Error(error.message);
@@ -168,3 +205,5 @@ module.exports ={
     updateProductServices,
     getProductsService,
     AllCategoriesServices}
+
+    

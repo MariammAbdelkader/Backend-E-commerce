@@ -5,6 +5,7 @@ const { getProductServices,
          getProductsService,
          AllCategoriesServices } = require("../services/product.services");
 
+const{processFilters}=require('../utilities/ProductUtilities')
 
 const getProductController =async (req , res) => {
     try {
@@ -16,7 +17,7 @@ const getProductController =async (req , res) => {
         
     } catch (err) {
         res.status(400).json({ message : err.message });
-     }
+    }
 
 }
 
@@ -26,11 +27,15 @@ const getProductsController =async (req , res) => {
         const { category, subcategory, price_lt } = req.body;
         const filters = {};
 
+
         if (category) filters.category = category;
         if (subcategory) filters.subCategory = subcategory;
         if (price_lt) filters.price = { [Op.lt]: price_lt };
+
+        const filterConditions = await processFilters(filters);
+
         
-        const products = await getProductsService(filters);
+        const products = await getProductsService(filterConditions);
         
         res.status(200).json({message: products.message, data :products.data});
         
