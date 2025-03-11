@@ -24,13 +24,7 @@ const getProductController =async (req , res) => {
 
 const getProductsController =async (req , res) => {
     try {
-        const { category, subcategory, price_lt } = req.body;
-        const filters = {};
-
-
-        if (category) filters.category = category;
-        if (subcategory) filters.subCategory = subcategory;
-        if (price_lt) filters.price = { [Op.lt]: price_lt };
+        filters =  req.filters;
 
         const filterConditions = await processFilters(filters);
 

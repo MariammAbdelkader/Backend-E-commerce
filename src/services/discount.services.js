@@ -1,10 +1,10 @@
 const { Product } = require("../models/product.models")
 const{Category}= require("../models/category.models");
 const { DiscountOnCategories,DiscountOnProducts,DiscountLogs } = require("../models/discounts.model");
+const {DiscountPriceUpdater}= require('../utilities/ProductUtilities')
 const { Op } = require("sequelize");
 
-const discountProductServices= async (productId, percentage, startDate , endDate,adminId=1)=>{
-
+const discountProductServices = async (productId, percentage, startDate, endDate, adminId) => {
     if (!productId || !percentage || !startDate || !endDate) {
         throw new Error("Missing required data");
     }
@@ -38,25 +38,18 @@ const discountProductServices= async (productId, percentage, startDate , endDate
         throw new Error("End date must be after start date");
     }
 
-    const discountPrice = product.disCountPrice !== null
-        ? product.disCountPrice * (1 - percentage / 100)
-        : product.price * (1 - percentage / 100);
+    // Update product discount price using the reusable function
+    await DiscountPriceUpdater.addProductDiscount(product, percentage);
 
-    const [updatedCount] = await Product.update(
-        { disCountPrice: discountPrice },
-        { where: { productId } }
-    );
-    if (updatedCount === 0) {
-        throw new Error("Product update failed or no changes were made");
-    }
-
+    // Log the discount creation
     const discountLog = await DiscountLogs.create({
         adminId: adminId,
         time: now,
         process: "Create",
     });
 
-    const discount = await DiscountOnProducts.create({
+    // Create discount record
+    await DiscountOnProducts.create({
         productId,
         status: "valid",
         percentage,
@@ -65,95 +58,75 @@ const discountProductServices= async (productId, percentage, startDate , endDate
         logId: discountLog.logId,
     });
 
-    return {message: "Product discount applied successfully",}
+    return { message: "Product discount applied successfully" };
 };
 
+const discountCategoryServices = async (categoryId, percentage, startDate, endDate, adminId) => {
+    if (!categoryId || !percentage || !startDate || !endDate) {
+        throw new Error("Missing required data");
+    }
 
-const discountCategoryServices= async (categoryId, percentage, startDate,endDate,adminId=1)=>{
+    if (categoryId < 0 || percentage <= 0 || percentage > 100) {
+        throw new Error("Invalid values for categoryId or percentage");
+    }
 
-        if(!categoryId ||!percentage || !startDate || !endDate){
-            throw new Error('data missing');
-        }
-        if(categoryId < 0  || percentage <= 0|| percentage>100){
-            throw new Error('Not a valid number');
-        }
-        const now = new Date();
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-    
-        if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-            throw new Error('Invalid date format');
-        }
-        if (start >= end) {
-            throw new Error('Start date must be before end date');
-        }
-    
-        // Check if the category exists
-        const category = await Category.findByPk(categoryId);
-        if (!category) {
-            throw new Error("Category not found");
-        }
-    
-        // Check if there's already an active discount for this category in the same period
-        const existingDiscount = await DiscountOnCategories.findOne({
-            where: {
-                categoryId,
-                status: "valid",
-                startDate: { [Op.lte]: endDate }, 
-                endDate: { [Op.gte]: startDate }
-            }
-        });
-    
-        if (existingDiscount) {
-            throw new Error('A discount already exists for this category in the selected period.');
-        }
-    
-        // Retrieve all products in this category
-        const products = await Product.findAll({ where: { categoryId } });
-    
-        if (products.length === 0) {
-            throw new Error("No products found in this category");
-        }
-    
-        // Apply discount to all products
-        const updatedProducts = await Promise.all(
-            products.map(async (product) => {
-                const discountPrice = product.disCountPrice !== null
-                    ? product.disCountPrice * (1 - percentage / 100)
-                    : product.price * (1 - percentage / 100);
-    
-                await product.update({ disCountPrice: discountPrice });
-    
-                return {
-                    productId: product.productId,
-                    name: product.name,
-                    description: product.description,
-                    categoryId: product.categoryId,
-                    price: product.price,
-                    discountPrice,
-                    status: product.status,
-                };
-            })
-        );
-    
-        const discountLog = await DiscountLogs.create({
-            adminId: adminId,
-            time: now,
-            process: "Create",
-        });
-    
-        // Save the discount in the database
-        await DiscountOnCategories.create({
+    const now = new Date();
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (isNaN(start) || isNaN(end)) {
+        throw new Error("Invalid date format");
+    }
+    if (start >= end) {
+        throw new Error("Start date must be before end date");
+    }
+
+    const category = await Category.findByPk(categoryId);
+    if (!category) {
+        throw new Error("Category not found");
+    }
+
+    const existingDiscount = await DiscountOnCategories.findOne({
+        where: {
             categoryId,
             status: "valid",
-            percentage,
-            startDate,
-            endDate,
-            logId: discountLog.logId,
-        });
+            startDate: { [Op.lte]: endDate },
+            endDate: { [Op.gte]: startDate }
+        }
+    });
 
-       
-        return { message: "Category discount applied successfully" };
+    if (existingDiscount) {
+        throw new Error("A discount already exists for this category in the selected period.");
+    }
+
+    // Get all products in the category
+    const products = await Product.findAll({ where: { categoryId } });
+
+    if (products.length === 0) {
+        throw new Error("No products found in this category");
+    }
+
+    // Apply discount to all products in the category
+    await Promise.all(products.map(product => DiscountPriceUpdater.addProductDiscount(product, percentage)));
+
+    // Log the discount creation
+    const discountLog = await DiscountLogs.create({
+        adminId: adminId,
+        time: now,
+        process: "Create",
+    });
+
+    // Create discount record for the category
+    await DiscountOnCategories.create({
+        categoryId,
+        status: "valid",
+        percentage,
+        startDate,
+        endDate,
+        logId: discountLog.logId,
+    });
+
+    return { message: "Category discount applied successfully" };
 };
 
 const getDiscountsService = async (status) => {
@@ -195,6 +168,7 @@ const getDiscountsService = async (status) => {
 
     // Format data with additional info
     const formattedCategoryDiscounts = categoryDiscounts.map(discount => ({
+        discountId: discount.discountId,
         begin: discount.begin,
         end: discount.end,
         categoryName: discount.Category.name,
@@ -204,6 +178,7 @@ const getDiscountsService = async (status) => {
     }));
 
     const formattedProductDiscounts = productDiscounts.map(discount => ({
+        discountId: discount.discountId,
         begin: discount.begin,
         end: discount.end,
         productName: discount.Product.name,
@@ -215,99 +190,109 @@ const getDiscountsService = async (status) => {
     }));
 
     return { CategoryDiscounts: formattedCategoryDiscounts, ProductDiscounts: formattedProductDiscounts };
-} catch (error) {
-    throw new Error(error.message);
+    } catch (error) {
+        throw new Error(error.message);
+    }
 }
-}
 
+const updateDiscountService = async (type, id, updateData, adminId = 1) => {
+    try {
+        let model = type === "product" ? DiscountOnProducts : DiscountOnCategories;
+        let discount = await model.findByPk(id);
+        if (!discount) {
+            throw new Error("Discount not found.");
+        }
 
+        // Check if any value is actually changing
+        const isSameData = Object.keys(updateData).every(key => discount[key] === updateData[key]);
+        if (isSameData) {
+            throw new Error("No updates made.");
+        }
 
+         // Check if percentage is updated
+         const percentageUpdated = updateData.percentage !== undefined && updateData.percentage !== discount.percentage;
+         const oldPercentage = discount.percentage;
+         const newPercentage = updateData.percentage;
+        // Update discount
+        await discount.update(updateData);
 
+        // Log the update
+        await DiscountLogs.create({
+            adminId,
+            time: new Date(),
+            process: "Update"
+        });
 
+        // If percentage is updated, update the discount price of products
+        if (percentageUpdated) {
+            if (type === "product") {
+                // Update single product discount price
+                const product = await Product.findByPk(discount.productId);
+                if (product) {
+                    await DiscountPriceUpdater.updateProductDiscount(product, oldPercentage, newPercentage);
+                }
+            } else if (type === "category") {
+                // Update all products in the category
+                const products = await Product.findAll({ where: { categoryId: discount.categoryId } });
+                await Promise.all(products.map(product =>  DiscountPriceUpdater.updateCategoryDiscount(product, oldPercentage, newPercentage)));
+            }
+        }
 
-
-const removeProductDiscountService = async (productId) => {
-    if(!productId){
-        throw new Error('Product ID are required');
+        return { message: "Discount updated successfully." };
+    } catch (error) {
+        throw new Error(error.message);
     }
-    if(productId<0){
-        throw new Error('Not a valid number');
-    }
-
-    const product = await Product.findByPk(productId);
-
-    if (!product) {
-            throw new Error('Product not found');
-    }
-    // Update product's discount price
-    const [updatedCount] = await Product.update(
-        { disCountPrice: null },
-        { where: { productId } }
-    );
-
-    if (updatedCount === 0) {
-        throw new Error("Product update failed or no changes were made");
-    }
-    const newproduct = await Product.findByPk(productId);
-
-    const returnedProduct={
-        productId:newproduct.productId,
-        name:newproduct.name,
-        description:newproduct.description,
-        category:newproduct.category,
-        subcategory:newproduct.subCategory,
-        price:newproduct.price,
-        discountprice:newproduct.disCountPrice,
-        status:newproduct.status,
-    }
-
-    return { message: "Product discount removed successfully", product:returnedProduct };
 };
 
-const removeCategoryDiscountService = async (categoryId) => {
 
-        if(!categoryId){
-            throw new Error('Category ID are required');
-        }
-        if(categoryId<0){
-            throw new Error('Not a valid number');
-        }
-        
-        const category = await Category.findOne({ where: categoryId  });
+const terminateDiscountService = async (type, id, adminId = 1) => {
+    try {
+        let model = type === "product" ? DiscountOnProducts : DiscountOnCategories;
 
-        if (!category) {
-            throw new Error("Category not found");
+        let discount = await model.findByPk(id);
+
+        if (!discount) {
+            throw new Error("Discount not found.");
         }
 
-        // Fetch all products in the category
-        const products = await Product.findAll({ where: { categoryId: category.categoryId } });
-
-        if (products.length === 0) {
-            throw new Error("No products found in this category");
+        if (discount.status === "expired") {
+            throw new Error("Discount is already expired.");
         }
 
-        // Update all products in the category to remove discount price
-        await Promise.all(products.map(async (product) => {
-            await product.update({ disCountPrice: null });
-        }));
+        // Expire the discount
+        await discount.update({ status: "expired" });
 
-        const Newproducts = await Product.findAll({ where: { categoryId: category.categoryId } });
+        // Get affected products
+        // Get affected products
+        let products;
+        if (type === "product") {
+            products = await Product.findAll({ where: { productId: discount.productId } });
+            await Promise.all(products.map(product => 
+                DiscountPriceUpdater.removeProductDiscount(product, discount.percentage)
+            ));
+        } else {
+            products = await Product.findAll({ where: { categoryId: discount.categoryId } });
+            await Promise.all(products.map(product => 
+                DiscountPriceUpdater.removeCategoryDiscount(product, discount.percentage)
+            ));
+        }
 
-        const formattedProducts = Newproducts.map((product) => ({
-            productId: product.productId,
-            name: product.name,
-            description: product.description,
-            category: product.category,
-            subcategory: product.subCategory, 
-            price: product.price,
-            discountPrice: product.disCountPrice, 
-            status: product.status,
-        }));
+        // Log the termination
+        await DiscountLogs.create({
+            adminId,
+            time: new Date(),
+            process: "Terminate",
+        });
 
-        return { message: "Category discount removed successfully", updatedProducts: formattedProducts };
+        return { message: "Discount terminated successfully." };
+
+    } catch (error) {
+        throw new Error(error.message);
+    }
 };
+
 module.exports={discountProductServices,
                 discountCategoryServices,   
-                removeProductDiscountService,
-                removeCategoryDiscountService,
-                getDiscountsService}
+                getDiscountsService,
+                updateDiscountService,
+                terminateDiscountService}

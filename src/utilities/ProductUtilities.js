@@ -45,4 +45,39 @@ const processFilters = async (filters) => {
 };
 
 
-module.exports={getThePercentage,processFilters}
+
+class DiscountPriceUpdater {
+    static async addProductDiscount(product, percentage) {let discountPrice = product.disCountPrice != null
+        ? product.disCountPrice * (1 - percentage / 100)
+        : product.price * (1 - percentage / 100);
+
+    // Fix floating-point precision issue
+    discountPrice = Math.round(discountPrice * 100) / 100;
+
+    await product.update({ disCountPrice: Math.abs(discountPrice - product.price) < 0.01 ? null : discountPrice });
+}
+
+    static async updateProductDiscount(product, oldPercentage, newPercentage) {
+        let discountPrice = product.disCountPrice / (1 - oldPercentage / 100);
+        discountPrice *= (1 - newPercentage / 100);
+        await product.update({ disCountPrice: discountPrice === product.price ? null : discountPrice });
+    }
+
+    static async updateCategoryDiscount(product, oldPercentage, newPercentage) {
+        let discountPrice = product.disCountPrice / (1 - oldPercentage / 100);
+        discountPrice *= (1 - newPercentage / 100);
+        await product.update({ disCountPrice: discountPrice === product.price ? null : discountPrice });
+    }
+
+    static async removeProductDiscount(product, percentage) {
+        let discountPrice = product.disCountPrice / (1 - percentage / 100);
+        await product.update({ disCountPrice: discountPrice === product.price ? null : discountPrice });
+    }
+
+    static async removeCategoryDiscount(product, percentage) {
+        let discountPrice = product.disCountPrice / (1 - percentage / 100);
+        await product.update({ disCountPrice: discountPrice === product.price ? null : discountPrice });
+    }
+}
+
+module.exports={getThePercentage,processFilters,DiscountPriceUpdater}
