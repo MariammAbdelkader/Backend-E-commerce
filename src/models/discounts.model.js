@@ -24,7 +24,7 @@ const DiscountLogs = db.define('DiscountLogs', {
     defaultValue: DataTypes.NOW,
     },
     process: {
-    type: DataTypes.ENUM('Terminate', 'Create'),
+    type: DataTypes.ENUM('Terminate', 'Create','Update'),
     allowNull: false,
     },
 });
