@@ -1,15 +1,24 @@
 const express= require("express");
 const {discountCategoryController,
     discountProductController,
-    removeProductDiscountController,
-    removeCategotyDiscountController}=require('../controllers/discount.controller')
+    getDiscountsController,
+    updateDiscountController,
+    terminateDiscountController}=require('../controllers/discount.controller')
 const DiscountRouter=express.Router();
 
-DiscountRouter.post('/product',discountProductController) //productId, prec
-DiscountRouter.post('/category/',discountCategoryController)//catName, prec
+DiscountRouter.post('/product',discountProductController)
 
-DiscountRouter.post('/remove/product',removeProductDiscountController)
-DiscountRouter.post('/remove/category',removeCategotyDiscountController)
+DiscountRouter.post('/category',discountCategoryController)
 
+
+DiscountRouter.get("/", getDiscountsController);
+
+DiscountRouter.patch("/product/:id", updateDiscountController);
+
+DiscountRouter.patch("/category/:id", updateDiscountController);
+
+
+DiscountRouter.delete("/product/:id", terminateDiscountController);
+DiscountRouter.delete("/category/:id", terminateDiscountController);
 
 module.exports= {DiscountRouter};

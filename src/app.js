@@ -14,6 +14,7 @@ require("./config/passport");
 const { PORT }= require("./config/index.js");
 const { db } =require("./database");
 const associations = require('./models/associations.js');
+require("./job/discount.job.js");
 const { ErrorMiddleware } = require('./middlewares/errors.middlewares.js');
 const { router } = require('./routes/authentication.routes.js');
 const { csvRouter } = require('./routes/csv.routes.js');
