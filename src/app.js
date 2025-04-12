@@ -29,6 +29,7 @@ const {DiscountRouter}=require('./routes/discount.routes.js');
 const {reviewRouter}=require('./routes/review.routes.js');
 const {googleAuthRouter}=require('./routes/googleAuth.routes.js');
 const {facebookAuthRouter}=require('./routes/facebookAuth.routes.js');
+const imageRouter = require('./routes/image.routes.js');
 
 
 global.__basedir = __dirname;
@@ -101,6 +102,7 @@ async connectToDatabase() {
     this.app.use("/payment",paymentRouter);
     this.app.use("/discount",DiscountRouter);
     this.app.use("/reviews",reviewRouter);
+    this.app.use("/image",imageRouter);
 
   }
   

@@ -56,21 +56,37 @@ const Product = db.define('Product', {
 // Image Model
 const ProductImage = db.define('ProductImages', {
     imageId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
     url: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    publicId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    originalName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    mimeType: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    size: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     productId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'Products',
-            key: 'productId',
-        },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Products',
+        key: 'productId',
+      },
     },
   });
 

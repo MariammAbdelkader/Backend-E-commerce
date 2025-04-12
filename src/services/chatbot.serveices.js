@@ -43,9 +43,9 @@ const sendMessageservices = async (conversationId, message, userId) => {
     });
     // console.log("AI Response:", response.data);  // Debugging
 
-      // Extract response from AI service
+      
       return {
-          message: response.data.responses,  // Assuming FastAPI returns { "reply": "AI response text" }
+          message: response.data.responses,  
           conversationId
       };
 
