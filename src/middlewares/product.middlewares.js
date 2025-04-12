@@ -4,8 +4,11 @@ const { Op } = require("sequelize");
 
 const filterMiddleware = (req, res, next) => {
   try {
+
+    console.log(req.query)
     const { category, subcategory, price_lt } = req.query;
     const filters = {};
+ 
 
     if (category) filters.category = category;
     if (subcategory) filters.subCategory = subcategory;
@@ -13,6 +16,7 @@ const filterMiddleware = (req, res, next) => {
 
     req.filters = filters; // Attach filters to the request object
     
+    console.log(filters)
     next(); // Proceed to the next middleware or controller
   } catch (error) {
     res.status(400).json({ error: "Invalid query parameters" });

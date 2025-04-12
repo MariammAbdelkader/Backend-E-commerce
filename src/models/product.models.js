@@ -1,7 +1,7 @@
 const {  DataTypes } = require('sequelize');
 const { db } = require('../database');
-const Category = require('./category.models'); // Import Category model
-
+const {Category} = require('./category.models'); // Import Category model
+const {Subcategory}= require('./category.models')
 const Product = db.define('Product', {
     productId: {
         type: DataTypes.INTEGER,
@@ -24,12 +24,6 @@ const Product = db.define('Product', {
         type: DataTypes.TEXT,
         allowNull: true,
     },
-    category: {
-        type: DataTypes.STRING,
-    },
-    subCategory: {
-        type: DataTypes.STRING
-    },
     quantity: {
         type:DataTypes.INTEGER,
         allowNull:false,
@@ -44,6 +38,14 @@ const Product = db.define('Product', {
         references: {
             model: Category,
             key: 'categoryId',
+        },
+        allowNull: true,
+    },
+    subcategoryId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Subcategory,
+            key: 'subcategoryId',
         },
         allowNull: true,
     },
