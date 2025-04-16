@@ -138,13 +138,14 @@ const deleteProductServices =async (productId)=>{
 }
 
 const createProductServices = async (productData) => {
+    console.log(productData)
     // Define validation schema
     const schema = Joi.object({
         name: Joi.string().min(3).max(100).required(),
         price: Joi.number().positive().required(),
         description: Joi.string().allow(null, ""),
         category: Joi.string().min(3).max(50).required(), // category name, not ID
-        subCategory: Joi.string().min(3).max(50).allow(null, ""),
+        subCategory: Joi.string().min(3).max(50).required(),
         quantity: Joi.number().integer().min(0).required(),
         status: Joi.string().valid("in_stock", "out_of_stock", "discontinued").default("in_stock"),
     });
@@ -156,27 +157,41 @@ const createProductServices = async (productData) => {
     }
 
     try {
-        // Find the categoryId from the Category table using category name
+       
         const category = await Category.findOne({ where: { name: value.category } });
+    
+        if (!category) {
+            throw new Error(`Category "${value.category}" not found.`);
+        }
+
+        const subCategory = await Subcategory.findOne({ where: { name: value.subCategory } }) ;
+        if (!subCategory) {
+            throw new Error(`Subcategory "${value.subCategory}" not found.`);
+        }
 
         // categoryId can be null if category doesn't exist
         const categoryId = category ? category.categoryId : null;
+        const subcategoryId = subCategory ? subCategory.subcategoryId : null;
 
-        // Check if product already exists (same name & description)
+
         const existingProduct = await Product.findOne({
             where: { name: value.name, description: value.description }
         });
-
         if (existingProduct) {
             return { message: `Product with name "${value.name}" already exists. Consider updating the quantity.` };
         }
 
-        // Create the product with categoryId
-        const product = await Product.create({ 
-            ...value, 
-            categoryId 
+        
+        const product = await Product.create({
+            name: value.name,
+            price: value.price,
+            description: value.description,
+            quantity: value.quantity,
+            status: value.status,
+            categoryId,
+            subcategoryId,
         });
-
+        console.log("PRODUCT CREATED:", product);
         return product;
     } catch (err) {
         throw new Error(`Database error: ${err.message}`);
