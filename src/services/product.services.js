@@ -1,6 +1,6 @@
 const {Product, ProductImage} = require ("../models/product.models.js");
 const {Category, Subcategory} = require ("../models/category.models.js");
-
+const {deleteImageService}=require("../services/image.service.js")
 const Joi = require("joi");
 const { name } = require("ejs");
 const { DiscountOnProducts, DiscountOnCategories } = require("../models/discounts.model.js");
@@ -119,14 +119,22 @@ const deleteProductServices =async (productId)=>{
     if (!product) {
         throw new Error('Product not found');
     }
+    const images = await ProductImage.findAll({
+        where: { productId: productId }
+    });
     
+    await Promise.all(
+        images.map(image => deleteImageService(image.imageId))
+    );
+    
+
     await ProductImage.destroy({
         where: { productId }
-      });
+    });
 
+    
     await product.destroy();
 
-   
 
     const checkProduct = await Product.findByPk(productId);
     if (checkProduct) {
