@@ -12,6 +12,11 @@ try {
         throw error.message;
       })
       .on("data", (row) => {
+
+        Object.keys(row).forEach((key) => {
+          if (row[key] === "") {
+            row[key] = null;
+          }});
         data.push(row);
       })
       .on("end", async () => {
