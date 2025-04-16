@@ -38,14 +38,16 @@ const discountCategoryController=async (req, res)=>{
 
 const  getDiscountsController = async (req, res)=> {
     try {
-        const { status } = req.query; // ممكن يكون "valid" أو غير موجود
+        const { status } = req.query; // valid or not exist
         const data = await getDiscountsService(status);
-        
+        // console.log(data)
         res.json({ message: "the discounts returned successfullly", data  });
     } catch (error) {
         res.status(500).json({message: error.message });
     }
 }
+
+
 const updateDiscountController = async (req, res) => {
     try {
         console.log(req.params);

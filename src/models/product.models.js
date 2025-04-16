@@ -88,6 +88,10 @@ const ProductImage = db.define('ProductImages', {
         key: 'productId',
       },
     },
+    ismasterImage:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    }
   });
 
 

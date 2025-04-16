@@ -110,10 +110,6 @@ const productRouter= express.Router()
  */
 productRouter.get('/one/:productId', getProductController)
 
-
-
-
-
 /**
  * @swagger
  * /product:

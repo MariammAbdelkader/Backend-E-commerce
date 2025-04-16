@@ -151,7 +151,8 @@ class SalesService {
 
     return ((completedOrders / totalVisitors) * 100).toFixed(2);
   }
-
+  
+//deprecated
   static async getTopSellingProducts(limit = 10) {
     try {
       const topProducts = await OrderDetail.findAll({
