@@ -62,7 +62,9 @@ const createProductController= async (req, res) =>{
             const product= req.body
 
             console.log("Received product data:", product);
+
             const newProduct = await createProductServices(product)
+            
 
             if (newProduct.message) {
                 return res.status(200).json({ message: newProduct.message });

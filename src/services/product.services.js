@@ -22,18 +22,23 @@ const getProductServices = async (productId)=>{
             { model: Subcategory, as: 'Subcategory', attributes: ['name'] } 
         ]
     });
-
     if (!product) {
-            throw new Error('Product not found');
-    }
+        throw new Error('Product not found');
+}
+    const ProductImages =await ProductImage.findAll({
+        where: {
+        productId: productId
+        },
+        attributes: ['imageId', 'url', 'ismasterImage']
+        }
+    );
 
     const { productDiscountPercentage, categoryDiscountPercentage } =
                 await getThePercentage(productId, product.categoryId);
 
-                
+
 
     const returnedProduct={
-        productId:product.productId,
         name:product.name,
         description:product.description,
         category: product.Category ? product.Category.name : null,
@@ -42,7 +47,8 @@ const getProductServices = async (productId)=>{
         discountprice:product.disCountPrice,
         status:product.status,
         productDiscountPercentage,
-        categoryDiscountPercentage
+        categoryDiscountPercentage,
+        images:ProductImages
     }
 
     return returnedProduct;
@@ -113,8 +119,14 @@ const deleteProductServices =async (productId)=>{
     if (!product) {
         throw new Error('Product not found');
     }
+    
+    await ProductImage.destroy({
+        where: { productId }
+      });
 
     await product.destroy();
+
+   
 
     const checkProduct = await Product.findByPk(productId);
     if (checkProduct) {
