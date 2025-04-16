@@ -1,6 +1,7 @@
 const { exist } = require("joi");
 const { Cart, CartItem } = require("../models/cart.models");
 const { Product } = require("../models/product.models");
+const { Category, Subcategory} = require('../models/category.models');
 const { cleanUpCart } = require("../utilities/cleanUpCart");
 
 
@@ -94,7 +95,17 @@ const previewCartService = async (cart) => {
         include: {
             model: Product, 
             as: 'products', 
-            attributes: ['name', 'price', 'description', 'category', 'subCategory'],
+            attributes: ['name', 'price', 'description'],
+            include: [
+                {
+                    model: Category,
+                    attributes: ['name'],
+                },
+                {
+                    model: Subcategory,
+                    attributes: ['name'],
+                }
+            ]
         },
     });
 
@@ -102,8 +113,8 @@ const previewCartService = async (cart) => {
         productId: item.productId,
         name: item.products.name,
         description: item.products.description,
-        category: item.products.category,
-        subCategory: item.products.subCategory,
+        category: item.products.Category?.name || "Uncategorized",
+        subCategory: item.products.Subcategory?.name || "None",
         quantity: item.quantity, 
         pricePerOneItem: item.priceAtPurchase, 
     }));

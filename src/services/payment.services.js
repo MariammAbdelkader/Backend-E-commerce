@@ -7,9 +7,9 @@ const {User}=require('../models/user.models')
 const axios = require('axios'); 
 
 
-const ConfirmOrderServices = async (billingAddress,shippingAddress,cart,userId)=>{
+const ConfirmOrderServices = async (userId, cart, shippingAddress, billingAddress)=>{
     try{
-        const order = await addOrderService(userId, cart.cartId, cart.totalPrice, shippingAddress, billingAddress)
+        const order = await addOrderService(userId, cart, shippingAddress, billingAddress)
          // Fetch cart items for the order's cartId
          const cartItems = await CartItem.findAll({
             where: { cartId: order.cartId },
