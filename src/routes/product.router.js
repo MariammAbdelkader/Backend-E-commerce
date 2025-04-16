@@ -108,7 +108,7 @@ const productRouter= express.Router()
  *       500:
  *         description: Internal server error.
  */
-productRouter.get('/one/:productId', getProductController)
+productRouter.get('/:productId', getProductController)
 
 /**
  * @swagger
