@@ -14,9 +14,10 @@ const viewHistory = async (req,res)=>{
 
 const addOrder = async (req,res)=>{
     try {
-        const {cartId, totalAmount, shippingAddress, billingAddress} = req.body;
+        const { shippingAddress, billingAddress} = req.body;
         const userId = req.userId;
-        const response = await addOrderService(userId,cartId, totalAmount, shippingAddress, billingAddress);
+        const cart = req.cart
+        const response = await addOrderService(userId,cart, shippingAddress, billingAddress);
         res.status(200).json({ response });
         
     } catch (err) {

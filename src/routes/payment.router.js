@@ -7,7 +7,7 @@ const {ConfirmOrderController, paymobController}=require('../controllers/payment
 const paymentRouter = express.Router();
 
 
-paymentRouter.post('/Confirm-order',validateCart,ConfirmOrderController)
+paymentRouter.post('/Confirm-order',AuthMiddleware,validateCart,ConfirmOrderController)
 
 paymentRouter.post('/paymob',paymobController)
 

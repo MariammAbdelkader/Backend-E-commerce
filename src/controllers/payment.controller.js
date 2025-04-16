@@ -6,9 +6,11 @@ const axios = require('axios'); // To make requests to Paymob
 const ConfirmOrderController = async (req, res) => {
 
     try{
-        const {billingAddress,shippingAddress, cart,userId} =req.body;
+        const {billingAddress,shippingAddress} =req.body;
+        const cart = req.cart
+        const userId = req.userId
 
-        const details = await ConfirmOrderServices(billingAddress,shippingAddress,cart,userId);
+        const details = await ConfirmOrderServices(userId, cart, shippingAddress, billingAddress);
     
         res.status(200).json({ details });
 

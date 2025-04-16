@@ -1,7 +1,8 @@
 const express = require("express");
 const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
 const { viewHistory, addOrder } = require("../controllers/order.controllers");
-
+const { validateCart } = require('../middlewares/cart.middlewares')
+const { getProductController } = require('../controllers/product.controller')
 
 const orderRouter = express.Router();
 /**
@@ -12,7 +13,8 @@ const orderRouter = express.Router();
  */
 
 //admin
-orderRouter.get('/:productId',AuthMiddleware,);
+
+// orderRouter.get('/:productId',AuthMiddleware,);
 
 
 /**
@@ -181,7 +183,7 @@ orderRouter.get('/',AuthMiddleware,viewHistory);
  */
 
 
-orderRouter.post('/',AuthMiddleware,addOrder);
+orderRouter.post('/',AuthMiddleware,validateCart,addOrder);
 
 
 module.exports={orderRouter}

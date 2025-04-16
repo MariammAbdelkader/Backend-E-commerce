@@ -1,6 +1,7 @@
 const { Cart, CartItem } = require("../models/cart.models");
 const { Order } = require("../models/order.models");
 const { Product } = require("../models/product.models");
+const { Category, Subcategory } = require('../models/category.models')
 
 const viewHistoryService = async (userId) => {
     try {
@@ -19,7 +20,17 @@ const viewHistoryService = async (userId) => {
                                 {
                                     model: Product,
                                     as: 'products',
-                                    attributes: ['productId', 'name', 'price', 'description', 'category', 'subCategory'],
+                                    attributes: ['productId', 'name', 'price', 'description'],
+                                    include: [
+                                        {
+                                            model: Category,
+                                            attributes: ['name'],
+                                        },
+                                        {
+                                            model: Subcategory,
+                                            attributes: ['name'],
+                                        },
+                                    ],
                                 },
                             ],
                         },
@@ -41,10 +52,10 @@ const viewHistoryService = async (userId) => {
                         name: item.products.name,
                         price: item.products.price,
                         description: item.products.description,
-                        category: item.products.category,
-                        subCategory: item.products.subCategory,
+                        category: item.products.Category?.name || "Uncategorized",
+                        subCategory: item.products.Subcategory?.name || "None",
                         quantity: item.quantity,
-                        status: order.paymentStatus, // Using paymentStatus to represent order status
+                        status: order.paymentStatus,
                     });
                 });
             });
@@ -65,7 +76,6 @@ const viewHistoryService = async (userId) => {
         throw new Error("An error occurred while retrieving order history.");
     }
 };
-
 
 
 const getUserOrderHistoryService = async (userId) => {
@@ -106,12 +116,15 @@ const getUserOrderHistoryService = async (userId) => {
 
 
 //TO DO : check payment and update the order and update the inventory
-const addOrderService = async (userId, cartId, totalAmount, shippingAddress, billingAddress) => {
+const addOrderService = async (userId, cart, shippingAddress, billingAddress) => {
     try {
+        if(!cart){
+            throw new error("There's no active cart for you!")
+        }
         const order = await Order.create({
             userId,
-            cartId,
-            totalAmount,
+            cartId:cart.cartId,
+            totalAmount:cart.totalAmount,
             shippingAddress,
             billingAddress,
             paymentStatus: 'pending',  
