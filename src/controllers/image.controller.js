@@ -1,4 +1,4 @@
-const { uploadImageService,deleteImageService,replaceImageService} = require('../services/image.service');
+const { uploadImageService,deleteImageService,replaceImageService, getAllProductImageServices} = require('../services/image.service');
   
   // UPLOAD
   const uploadImageController = async (req, res) => {
@@ -32,8 +32,17 @@ const { uploadImageService,deleteImageService,replaceImageService} = require('..
       res.status(500).json({ message: err.message });
     }
   };
+  const getAllProductImageController = async(req,res)=>{
+    try {
+      const { productId } = req.params;
+      const imagesDetails = await getAllProductImageServices(productId);
+      res.status(200).json({ message: 'Product images', data: imagesDetails });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  }
   
   module.exports = {
-    uploadImageController,deleteImageController, replaceImageController
+    uploadImageController,deleteImageController, replaceImageController,getAllProductImageController
   };
   

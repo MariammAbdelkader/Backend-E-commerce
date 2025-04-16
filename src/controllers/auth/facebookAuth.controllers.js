@@ -10,13 +10,13 @@ const facebookAuthCallbackController = (req, res, next) => {
         }
 
         // Redirect with token (Same as Google)
-        res.redirect(`http://localhost:8001?token=${user.token}`);
-        // res.cookie("auth_token", user.token, {
-        //     httpOnly: true, // Prevents access via JavaScript (helps prevent XSS attacks)
-        //     secure: true,   // Ensures cookie is only sent over HTTPS
-        //     sameSite: "Strict" // Prevents CSRF attacks
-        // });
-        // res.redirect("http://localhost:3000/reviews/2"); // home page 
+        // res.redirect(`http://localhost:8001?token=${user.token}`);
+        res.cookie("auth_token", user.token, {
+            httpOnly: true, // Prevents access via JavaScript (helps prevent XSS attacks)
+            secure: true,   // Ensures cookie is only sent over HTTPS
+            sameSite: "Strict" // Prevents CSRF attacks
+        });
+        res.redirect("http://localhost:3000/cart/preview"); // home page 
     })(req, res, next);
 };
 

@@ -1,5 +1,5 @@
 const cloudinary = require('../config/cloudinary');
-const { ProductImage } = require('../models/product.models');
+const { Product, ProductImage } = require('../models/product.models');
 
 // UPLOAD
 const uploadImageService = async ({ file, productId }) => {
@@ -45,6 +45,27 @@ const replaceImageService = async ({ imageId, file }) => {
   return existingImage;
 };
 
+const getAllProductImageServices = async (productId) => {
+
+  const product = await Product.findByPk(productId);
+  if (!product) {
+    throw new Error("Product not found");
+  }
+
+  const images = await ProductImage.findAll({
+    where: { productId },
+    attributes: ['imageId', 'url'], 
+  });
+
+  return {
+    productId: product.productId,
+    images: images.map(img => ({
+      imageId: img.imageId,
+      url: img.url
+    }))
+  };
+};
+
 module.exports = {
-  uploadImageService,deleteImageService,replaceImageService
+  uploadImageService,deleteImageService,replaceImageService , getAllProductImageServices
 };
