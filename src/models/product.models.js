@@ -90,7 +90,7 @@ const ProductImage = db.define('ProductImages', {
     },
     ismasterImage:{
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     }
   });
 
