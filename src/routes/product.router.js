@@ -7,7 +7,8 @@ const { getProductController,
         createProductController,
         updateProductController,
         getProductsController,
-        getAllCatigoriesController} =require("../controllers/product.controller");
+        getAllCatigoriesController,
+        getAllSubCatigoriesController} =require("../controllers/product.controller");
 
 
 const { Model } = require("sequelize");
@@ -560,5 +561,7 @@ productRouter.post('/create', createProductController)
 productRouter.patch('/:productId', updateProductController)
 
 productRouter.get('/get/categories',getAllCatigoriesController)
+productRouter.get('/get/subcategories',getAllSubCatigoriesController)
+
 
 module.exports={productRouter}

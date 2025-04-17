@@ -1,7 +1,8 @@
 const express = require("express");
 const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
-const { viewHistory, addOrder } = require("../controllers/order.controllers");
+const { viewOrderedProductController, addOrder,getOrdersController } = require("../controllers/order.controllers");
 const { validateCart } = require('../middlewares/cart.middlewares')
+const {filterOrderMiddleware}=require('../middlewares/order.middleware')
 const { getProductController } = require('../controllers/product.controller')
 
 const orderRouter = express.Router();
@@ -107,7 +108,7 @@ const orderRouter = express.Router();
  *         description: Internal server error.
  */
 
-orderRouter.get('/',AuthMiddleware,viewHistory);
+orderRouter.get('/orderd-products',AuthMiddleware,viewOrderedProductController);
 /**
  * @swagger
  * /order:
@@ -182,8 +183,8 @@ orderRouter.get('/',AuthMiddleware,viewHistory);
  *         description: Internal server error.
  */
 
-
 orderRouter.post('/',AuthMiddleware,validateCart,addOrder);
 
+orderRouter.post('/all',filterOrderMiddleware,getOrdersController)
 
 module.exports={orderRouter}

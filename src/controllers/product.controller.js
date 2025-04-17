@@ -3,7 +3,8 @@ const { getProductServices,
         createProductServices,
         updateProductServices,
          getProductsService,
-         AllCategoriesServices } = require("../services/product.services");
+         AllCategoriesServices,
+         AllSubCategoriesServices } = require("../services/product.services");
 
 const{processFilters}=require('../utilities/ProductUtilities')
 
@@ -114,6 +115,22 @@ const getAllCatigoriesController= async (req,res)=>{
 
 }
 
+const getAllSubCatigoriesController= async (req,res)=>{
+    try {
+
+        const subcategories = await AllSubCategoriesServices()
+
+        res.status(200).json({
+            message: "All SubCategories returned sccessfully",
+            subcategories,
+        });
+
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+
+}
+
 
 module.exports={
     getProductController,
@@ -121,4 +138,5 @@ module.exports={
     deleteProductController,
     createProductController,
     updateProductController,
-    getAllCatigoriesController}
+    getAllCatigoriesController,
+    getAllSubCatigoriesController}
