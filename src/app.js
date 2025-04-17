@@ -20,6 +20,8 @@ const { router } = require('./routes/authentication.routes.js');
 const { csvRouter } = require('./routes/csv.routes.js');
 const { cartRouter } = require('./routes/cart.router.js');
 const {productRouter} =require('./routes/product.router');
+const {categoryRouter} =require('./routes/category.router');
+const {subcategoryRouter} =require('./routes/subcategory.routes');
 const { orderRouter } = require('./routes/order.routes.js');
 const {chatbotRouter}= require('./routes/chatbot.routs.js');
 const{userProfileRouter}=require('./routes/userprofile.router.js');
@@ -95,6 +97,8 @@ async connectToDatabase() {
     this.app.use("/upload",csvRouter);
     this.app.use("/cart",cartRouter);
     this.app.use("/product",productRouter);
+    this.app.use("/category",categoryRouter);
+    this.app.use("/subcategory",subcategoryRouter);
     this.app.use("/order",orderRouter);
     this.app.use("/chatbot",chatbotRouter);
     this.app.use("/profile",userProfileRouter);

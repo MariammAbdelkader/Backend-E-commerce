@@ -1,4 +1,3 @@
-const { exist } = require("joi");
 const { Cart, CartItem } = require("../models/cart.models");
 const { Product } = require("../models/product.models");
 const { Category, Subcategory} = require('../models/category.models');
