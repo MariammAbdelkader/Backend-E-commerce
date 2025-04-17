@@ -51,7 +51,7 @@ const signUpService = async (data) => {
 
             const userRole = await UserRole.create({
                 userId: userCreated.userId,
-                roleId: customerRole.roleId, // Use the role ID from the database
+                roleId: customerRole.roleId || null, // Use the role ID from the database
             });
             
             await CustomerSegment.create({

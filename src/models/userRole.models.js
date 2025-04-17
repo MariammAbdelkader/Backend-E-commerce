@@ -28,3 +28,4 @@ const UserRole = db.define("UserRole", {
 
 
 module.exports = {UserRole};
+
