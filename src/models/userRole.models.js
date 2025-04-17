@@ -17,7 +17,7 @@ const UserRole = db.define("UserRole", {
     },
     roleId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: { model: Role , key: "roleId" },
         onDelete: "CASCADE",
     },
