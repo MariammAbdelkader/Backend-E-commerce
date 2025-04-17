@@ -142,15 +142,17 @@ const addOrderService = async (userId, cart, shippingAddress, billingAddress) =>
         if(!cart){
             throw new error("There's no active cart for you!")
         }
+        console.log("cart::::",cart)
         const order = await Order.create({
             userId,
             cartId:cart.cartId,
-            totalAmount:cart.totalAmount,
+            totalAmount:cart.totalPrice,
             shippingAddress,
             billingAddress,
             paymentStatus: 'pending',  
             orderStatus: 'pending',   
         });
+        
 
         console.log('Order created:', order.toJSON());  // Ensure correct logging
         return order;

@@ -4,7 +4,7 @@ const { Conversation } = require("../models/conversation.model");
 const { User } = require("../models/user.models");
 const {db} =require('../database/index')
 
-const {viewHistoryService}=require('./order.services'); 
+const {viewOrderedProductServices}=require('./order.services'); 
 const { where } = require("sequelize");
 
 const startConversationservices = async (userId)=>{
@@ -28,7 +28,7 @@ const sendMessageservices = async (conversationId, message, userId) => {
   try {
       const username = await User.findByPk(userId, { attributes: ['firstName'] });
 
-      const result = await viewHistoryService(userId);
+      const result = await viewOrderedProductServices(userId);
 
       const AiData = {
           user_id: userId,
