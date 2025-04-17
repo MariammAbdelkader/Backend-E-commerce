@@ -222,10 +222,25 @@ const updateProductServices = async(productId,updateData)=>{
 const AllCategoriesServices=async()=>{
     try{
         const categories = await Category.findAll({
-            attributes: ['name'], 
+            attributes: ['categoryId','name'], 
         });
     
-        return categories.map(category => category.name);
+        return categories;
+    }catch(err){
+        throw err;
+       
+        
+    }
+}
+
+const AllSubCategoriesServices=async()=>{
+    try{
+        const subcategories = await Subcategory.findAll({
+            attributes: ['subcategoryId','categoryId','name'], 
+        });
+    
+    
+        return subcategories;
     }catch(err){
         throw err;
        
@@ -239,6 +254,7 @@ module.exports ={
     createProductServices,
     updateProductServices,
     getProductsService,
-    AllCategoriesServices}
+    AllCategoriesServices,
+    AllSubCategoriesServices}
 
     
