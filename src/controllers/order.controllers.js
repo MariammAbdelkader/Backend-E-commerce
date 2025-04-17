@@ -1,9 +1,9 @@
-const { viewHistoryService, addOrderService } = require("../services/order.services");
+const { viewOrderedProductServices, addOrderService ,getOrdersService} = require("../services/order.services");
 
-const viewHistory = async (req,res)=>{
+const viewOrderedProductController = async (req,res)=>{
     try {
         const userId = req.userId;
-        const response = await viewHistoryService(userId);
+        const response = await viewOrderedProductServices(userId);
         res.status(200).json({ response });
         
     } catch (err) {
@@ -26,5 +26,24 @@ const addOrder = async (req,res)=>{
 
 }
 
+const getOrdersController = async (req, res) => {
+    try {
+        const where= req.filters 
+        const orders = await getOrdersService(where);
 
-module.exports = {viewHistory,addOrder};
+        return res.status(200).json({
+            status: 'success',
+            orders,
+        });
+    } catch (error) {
+        console.error('Controller Error:', error);
+        return res.status(500).json({
+            status: 'error',
+            message: 'Failed to fetch orders.',
+        });
+    }
+};
+
+
+
+module.exports = {viewOrderedProductController,addOrder,getOrdersController};
