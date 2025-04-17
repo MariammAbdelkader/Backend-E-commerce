@@ -4,7 +4,10 @@ const viewOrderedProductController = async (req,res)=>{
     try {
         const userId = req.userId;
         const response = await viewOrderedProductServices(userId);
-        res.status(200).json({ response });
+        res.status(200).json({
+            status: 'success',
+            message : "Product purchased by you:", 
+            response });
         
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -18,7 +21,10 @@ const addOrder = async (req,res)=>{
         const userId = req.userId;
         const cart = req.cart
         const response = await addOrderService(userId,cart, shippingAddress, billingAddress);
-        res.status(200).json({ response });
+        res.status(200).json({ 
+            status: 'success',
+            message : "your order placed well, Please proceed",
+            response });
         
     } catch (err) {
         res.status(400).json({ error: err.message });
