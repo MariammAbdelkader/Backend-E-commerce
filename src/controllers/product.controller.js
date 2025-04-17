@@ -71,7 +71,7 @@ const createProductController= async (req, res) =>{
                 return res.status(200).json({ message: newProduct.message });
             }
             
-            res.status(200).json({message : "Product Created successfully", newProduct });
+            res.status(200).json({success:true , message : "Product Created successfully", newProduct });
 
         
     } catch (err) {
