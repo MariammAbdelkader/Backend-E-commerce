@@ -36,7 +36,7 @@ const Return = db.define('Return', {
         allowNull: false, defaultValue: 'Pending' 
     },
     quantity:{
-        type:DataTypes.NUMBER,
+        type:DataTypes.INTEGER,
         allowNull:false
     },
     RefundAmount: { 
