@@ -5,8 +5,8 @@ const{Conversation}=require('../models/conversation.model')
 const {Return} = require('../models/returns.models')
 const{CustomerSegment}=require('../models/customerSegmentation.models')
 
-const { getUserReturnsService } = require('./returns.services');
-const { getUserOrderHistoryService } = require('../services/order.services');
+const { getReturnsService } = require('./returns.services');
+const { getOrdersService } = require('../services/order.services');
 const { getUserActivitiesServices } = require('../services/CustomerActivity.Services');
 const moment = require("moment");
 
@@ -18,7 +18,7 @@ const getUserSegmentationData = async (userId) => {
         const numberOfOrders = await Order.count({ where: { userId } });
 
         // Fetch Order History
-        const orderHistory = await getUserOrderHistoryService(userId);
+        const orderHistory = await getOrdersService({userId});
 
         // Fetch Total Return Price, Number of Returns & Reasons
         const returnsData = await Return.findAll({
@@ -31,7 +31,7 @@ const getUserSegmentationData = async (userId) => {
         const returnReasons = returnsData.map(r => r.ReturnReason);
 
         // Fetch Return History
-        const returnHistory = await getUserReturnsService(userId);
+        const returnHistory = await getReturnsService({userId});
 
         // Fetch User Activities Count
         const activities = await CustomerActivity.findAll({
@@ -186,7 +186,7 @@ function categorizeCustomer(customer) {
     }
 
     // Cart Abandoner
-    if (userActivity["Add to Cart"] > 5 && userActivity["Purchase"] === 0) {
+    if ((userActivity["Add to Cart"] / userActivity["Purchase"] ) > 2  ) {
         categories.push("Cart Abandoner");
     }
 
@@ -218,6 +218,6 @@ function categorizeCustomer(customer) {
     }
 
 
-    return "Uncategorized";
+    return "New Customer";
 }
 module.exports = {segmentAllUsersServices,getAllSegmentationsServices};

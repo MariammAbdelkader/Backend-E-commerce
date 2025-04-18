@@ -105,15 +105,6 @@ const requestreturnService = async ({ orderId, productId, userId, ReturnReason, 
             Status: "Pending", // optional if default is already 'Pending'
         });
 
-        // 5. Update cart quantity
-        const remainingQty = cartItem.quantity - quantity;
-
-        if (remainingQty === 0) {
-            await cartItem.destroy(); // all returned
-        } else {
-            await cartItem.update({ quantity: remainingQty });
-        }
-
 
         const product = await Product.findByPk(productId);
         if (!product) throw new Error("Product not found in inventory");
