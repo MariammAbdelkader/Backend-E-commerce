@@ -35,7 +35,10 @@ const Return = db.define('Return', {
         type: DataTypes.ENUM('Pending', 'Approved', 'Rejected', 'Refunded'), 
         allowNull: false, defaultValue: 'Pending' 
     },
-
+    quantity:{
+        type:DataTypes.NUMBER,
+        allowNull:false
+    },
     RefundAmount: { 
         type: DataTypes.DECIMAL(10,2), 
         defaultValue: 0 
