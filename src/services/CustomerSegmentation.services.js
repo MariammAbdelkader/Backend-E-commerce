@@ -107,17 +107,29 @@ const segmentAllUsersServices = async () => {
 };
 
 
-const getAllSegmentationsServices = async () => {
+const getSegmentationsServices = async ({userId,type}) => {
     try {
-        // Fetch users with their segmentation
+        
+        const userWhereClause = {};
+        const segmentWhereClause = {};
+
+        if (userId) {
+            userWhereClause.userId = userId;
+        }
+
+        if (type) {
+            segmentWhereClause.SegmentType = type;
+        }
+
         const usersWithSegments = await User.findAll({
+            where: userWhereClause,
             attributes: ['userId', 'firstName', 'lastName', 'phoneNumber', 'address', 'Gender'],
             include: [{
                 model: CustomerSegment,
-                attributes: ['SegmentType']
+                attributes: ['SegmentType'],
+                where: Object.keys(segmentWhereClause).length ? segmentWhereClause : undefined // only apply `where` if needed
             }]
         });
-
         // Format the response
         const result = usersWithSegments.map(user => ({
             ID: user.userId,
@@ -125,7 +137,7 @@ const getAllSegmentationsServices = async () => {
             phoneNumber: user.phoneNumber,
             address: user.address,
             gender: user.gender,
-            segmentation: user.CustomerSegment
+            segmentation: user.CustomerSegment?.SegmentType || 'N/A'
         }));
 
         return result;
@@ -220,4 +232,4 @@ function categorizeCustomer(customer) {
 
     return "New Customer";
 }
-module.exports = {segmentAllUsersServices,getAllSegmentationsServices};
+module.exports = {segmentAllUsersServices,getSegmentationsServices};

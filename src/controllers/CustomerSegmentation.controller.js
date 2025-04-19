@@ -1,5 +1,5 @@
 const { segmentAllUsersServices } = require('../services/CustomerSegmentation.services');
-const { getAllSegmentationsServices } = require('../services/CustomerSegmentation.services');
+const { getSegmentationsServices } = require('../servicses/CustomerSegmentation.services');
 
 const segmentAllUsersController = async (req, res) => {
     try {
@@ -12,13 +12,14 @@ const segmentAllUsersController = async (req, res) => {
     }
 };
 
-const getAllSegmentationsController = async (req, res) => {
+const getSegmentationsController = async (req, res) => {
     try {
-        const data = await getAllSegmentationsServices(); // Wait for function result
+        
+        const data = await getSegmentationsServices(req.filter); // Wait for function result
         res.status(200).json({segmenteedUsers:data});
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
 };
 
-module.exports = { segmentAllUsersController, getAllSegmentationsController };
+module.exports = { segmentAllUsersController, getSegmentationsController };
