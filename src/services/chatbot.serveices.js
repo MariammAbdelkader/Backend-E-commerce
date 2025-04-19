@@ -6,6 +6,7 @@ const {db} =require('../database/index')
 
 const {viewOrderedProductServices}=require('./order.services'); 
 const { where } = require("sequelize");
+const { AI_API_URL } = require('../config');
 
 const startConversationservices = async (userId)=>{
     try {
@@ -38,9 +39,13 @@ const sendMessageservices = async (conversationId, message, userId) => {
       };
       console.log(AiData)
       // Send request to AI FastAPI service
-      const response = await axios.post("http://127.0.0.1:8000/process_input/", AiData, {
-        headers: { "Content-Type": "application/json" },
-    });
+      const response = await axios.post(
+        `${AI_API_URL}/process_input/`,
+        AiData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     // console.log("AI Response:", response.data);  // Debugging
 
       
