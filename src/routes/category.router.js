@@ -10,7 +10,7 @@ const categoryRouter = express.Router();
 
 
 categoryRouter.post("/add",AuthMiddleware,addCategoryController)
-categoryRouter.get("/",AuthMiddleware,getAllCategoryController)
+categoryRouter.get("/",getAllCategoryController)
 categoryRouter.delete("/:categoryId",AuthMiddleware,deleteCategoryController)
 categoryRouter.patch("/:categoryId",AuthMiddleware,updateCategoryController)
 
