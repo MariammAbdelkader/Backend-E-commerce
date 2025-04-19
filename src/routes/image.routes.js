@@ -28,4 +28,4 @@ imageRouter.delete('/delete', AuthMiddleware, deleteUserImageController);
 imageRouter.put('/replace', AuthMiddleware,userUpload.single('image'), replaceUserImageController);
 
 
-module.exports = imageRouter;
+module.exports = {imageRouter};
