@@ -6,7 +6,7 @@ const userProfileController= async(req,res)=>{
         const userId = req.userId;
         const response = await userProfileServices(userId);
         
-        res.status(200).json( response );
+        res.status(200).json( {profile:response} );
         
     } catch (err) {
         res.status(400).json({ error: err.message });
