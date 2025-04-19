@@ -1,6 +1,6 @@
 
-const { getUserReturnsService } = require('../services/returns.services');
-const { getUserOrderHistoryService } = require('../services/order.services');
+const { getReturnsService } = require('../services/returns.services');
+const { getOrdersService } = require('../services/order.services');
 const { getUserActivitiesServices } = require('../services/CustomerActivity.Services');
 
 const getUserHistoryController = async (req, res) => {
@@ -11,10 +11,11 @@ const getUserHistoryController = async (req, res) => {
         }x
 
 
-        const orderHistory = await getUserOrderHistoryService(userId);
-        const returns = await getUserReturnsService(userId);
+        const orderHistory = await getOrdersService({userId});
+        const returns = await getReturnsService({userId});
         const activities = await getUserActivitiesServices(userId);
-
+        ///what happend if the user has no histoy?
+        
         res.status(200).json({
             orders: orderHistory,
             returns: returns,
