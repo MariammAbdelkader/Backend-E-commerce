@@ -15,7 +15,7 @@ const segmentAllUsersController = async (req, res) => {
 const getAllSegmentationsController = async (req, res) => {
     try {
         const data = await getAllSegmentationsServices(); // Wait for function result
-        res.status(200).json(data);
+        res.status(200).json({segmenteedUsers:data});
     } catch (err) {
         res.status(400).json({ error: err.message });
     }

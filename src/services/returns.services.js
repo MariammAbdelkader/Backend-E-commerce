@@ -1,46 +1,120 @@
 const { Return } = require('../models/returns.models');
-const { OrderDetail } = require('../models/orderDetails.models');
+const { Order } = require('../models/order.models');
 const { Product } = require('../models/product.models');
+const { User } = require('../models/user.models');
 
-const getUserReturnsService = async (userId) => {
-    try {
+const{CartItem,Cart}=require('../models/cart.models')
+
+const getReturnsService = async (where) => {
+    try{
+
         const returns = await Return.findAll({
-            where: { userId },
-            attributes: ['orderId', 'ReturnDate', 'ReturnReason', 'RefundAmount'],
+            where,
             include: [
-                {
-                    model: OrderDetail,
-                    attributes: ['ProductId', 'UnitPrice'],
-                    include: [
-                        {
-                            model: Product,
-                            attributes: ['name']
-                        }
-                    ]
+            {
+                model: Product,
+                attributes: ['productId', 'name', 'price'],
+            },
+            {
+                model: Order,
+                attributes: ['orderId', 'orderDate', 'totalAmount'],
+            },
+            {
+                model: User,
+                attributes: ['userId', 'username', 'email'],
+            },
+            ],
+            order: [['createdAt', 'DESC']], // Optional: newest first
+        });
+        
+        return returns.map((ret) => ({
+            returnId: ret.ReturnID,
+            returnDate: ret.ReturnDate,
+            returnReason: ret.ReturnReason,
+            status: ret.Status,
+            refundAmount: ret.RefundAmount,
+            user: ret.User
+            ? {
+                userId: ret.User.userId,
+                username: ret.User.username,
+                email: ret.User.email,
                 }
-            ]
-        });
-
-        const formattedReturns = returns.map(returnItem => {
-            return {
-                orderId: returnItem.orderId,
-                ReturnDate: returnItem.ReturnDate,
-                ReturnReason: returnItem.ReturnReason,
-                RefundAmount: returnItem.RefundAmount,
-                products: returnItem.OrderDetails.map(detail => ({
-                    productId: detail.ProductId,
-                    name: detail.Product.name,
-                    UnitPrice: detail.UnitPrice,
-                    quantity: detail.UnitPrice > 0 ? (returnItem.RefundAmount / detail.UnitPrice) : 0
-                }))
-            };
-        });
-
-        return formattedReturns;
-    } catch (err) {
-        console.error("Error fetching user return history:", err);
-        throw err;
+            : null,
+            product: ret.Product
+            ? {
+                productId: ret.Product.productId,
+                name: ret.Product.name,
+                price: ret.Product.price,
+                }
+            : null,
+            order: ret.Order
+            ? {
+                orderId: ret.Order.orderId,
+                orderDate: ret.Order.orderDate,
+                totalAmount: ret.Order.totalAmount,
+                }
+            : null,
+        }));
+    }catch(err){
+        throw new Error(err.message);
     }
 };
 
-module.exports = { getUserReturnsService };
+const requestreturnService = async ({ orderId, productId, userId, ReturnReason, quantity }) => {
+    try{
+        // 1. Get the order with product for this user
+        const order = await Order.findOne({
+            where: { orderId, userId },
+            include: {
+            model: Cart,
+            as: "cart",
+            include: {
+                model: CartItem,
+                as: "cartItems",
+                where: { productId },
+            },
+            },
+        });
+
+        if (!order) throw new Error("Order or product not found for this user");
+
+        const cartItem = order.cart.cartItems[0];
+        if (!cartItem) throw new Error("Product not found in order");
+
+        // 2. Validate return quantity
+        if (!quantity || quantity <= 0) {
+            throw new Error("Return quantity must be greater than 0");
+        }
+
+        if (quantity > cartItem.quantity) {
+            throw new Error(`You can't return more than ${cartItem.quantity} items`);
+        }
+
+        // 3. Calculate refund amount
+        const refundAmount = parseFloat(cartItem.price) * quantity;
+
+        // 4. Create return record
+        const newReturn = await Return.create({
+            orderId,
+            productId,
+            userId,
+            ReturnReason,
+            quantity,
+            RefundAmount: refundAmount,
+            ReturnDate: new Date(),
+            Status: "Pending", // optional if default is already 'Pending'
+        });
+
+
+        const product = await Product.findByPk(productId);
+        if (!product) throw new Error("Product not found in inventory");
+
+        await product.update({ quantity: product.quantity + quantity });
+
+        return newReturn;
+    }catch(err){
+        throw new Error(err.message);
+    }
+};
+
+module.exports = { getReturnsService,requestreturnService };
