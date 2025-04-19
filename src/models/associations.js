@@ -1,6 +1,6 @@
 const { ProductImage, Product } = require('./product.models');
 const { Category, Subcategory } = require('./category.models');
-const {  User } = require('./user.models');
+const {  User, UserImage } = require('./user.models');
 const { Cart, CartItem } = require('./cart.models');
 const { Order } = require('./order.models');
 const {CustomerActivity} = require('./customerActivity.models');
@@ -18,6 +18,10 @@ const {DiscountOnProducts,DiscountOnCategories,DiscountLogs} = require('./discou
 // Cart-User associations
 User.hasMany(Cart, { foreignKey: 'userId', as: 'carts' });
 Cart.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+// User Images
+User.hasOne(UserImage, { foreignKey: 'userId', as: 'image' });
+UserImage.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 // Cart and Product relationship via CartItem
 Cart.belongsToMany(Product, { through: CartItem, foreignKey: 'cartId', as: 'products' });
