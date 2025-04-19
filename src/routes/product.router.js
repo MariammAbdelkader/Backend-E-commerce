@@ -14,6 +14,22 @@ const { getProductController,
 const { Model } = require("sequelize");
 
 const productRouter= express.Router()
+
+productRouter.get('/:productId', getProductController);
+
+productRouter.get('',filterMiddleware, getProductsController);
+
+productRouter.delete('/:productId',deleteProductController);
+
+productRouter.post('/create', createProductController);
+
+productRouter.patch('/:productId', updateProductController);
+
+productRouter.get('/get/categories',getAllCatigoriesController);
+
+productRouter.get('/get/subcategories',getAllSubCatigoriesController);
+
+
 /**
  * @swagger
  * tags:
@@ -109,7 +125,7 @@ const productRouter= express.Router()
  *       500:
  *         description: Internal server error.
  */
-productRouter.get('/:productId', getProductController)
+
 
 /**
  * @swagger
@@ -227,7 +243,7 @@ productRouter.get('/:productId', getProductController)
  *           example: "2024-12-02T17:41:20.048Z"
  */
 
-productRouter.get('',filterMiddleware, getProductsController);
+
 /**
  * @swagger
  * /product/{productId}:
@@ -316,7 +332,7 @@ productRouter.get('',filterMiddleware, getProductsController);
  *         description: Internal server error.
  */
 
-productRouter.delete('/:productId',deleteProductController)
+
 /**
  * @swagger
  * /product/create:
@@ -433,7 +449,7 @@ productRouter.delete('/:productId',deleteProductController)
  *                   type: string
  *                   example: "Database error: Unable to create product."
  */
-productRouter.post('/create', createProductController)
+
 /**
  * @swagger
  * /product/{productId}:
@@ -558,10 +574,7 @@ productRouter.post('/create', createProductController)
  *                   type: string
  *                   example: "Database error: Unable to update product."
  */
-productRouter.patch('/:productId', updateProductController)
 
-productRouter.get('/get/categories',getAllCatigoriesController)
-productRouter.get('/get/subcategories',getAllSubCatigoriesController)
 
 
 module.exports={productRouter}
