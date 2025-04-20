@@ -17,7 +17,11 @@ const orderRouter = express.Router();
 
 // orderRouter.get('/:productId',AuthMiddleware,);
 
+orderRouter.get('/orderd-products',AuthMiddleware,viewOrderedProductController);
 
+orderRouter.post('/',AuthMiddleware,validateCart,addOrder);
+
+orderRouter.post('/all',filterOrderMiddleware,getOrdersController)
 /**
  * @swagger
  * /order:
@@ -108,7 +112,7 @@ const orderRouter = express.Router();
  *         description: Internal server error.
  */
 
-orderRouter.get('/orderd-products',AuthMiddleware,viewOrderedProductController);
+
 /**
  * @swagger
  * /order:
@@ -183,8 +187,6 @@ orderRouter.get('/orderd-products',AuthMiddleware,viewOrderedProductController);
  *         description: Internal server error.
  */
 
-orderRouter.post('/',AuthMiddleware,validateCart,addOrder);
 
-orderRouter.post('/all',filterOrderMiddleware,getOrdersController)
 
 module.exports={orderRouter}
