@@ -63,7 +63,7 @@ const getProductRatingController = async (req, res) => {
     try {
         const { productId } = req.params;
         const averageRating = await getProductRatingService(productId);
-        res.status(200).json({ productId, averageRating });
+        res.status(200).json({averageRating });
     } catch (error) {
         return res.status(404).json({ error: error.message });
     }

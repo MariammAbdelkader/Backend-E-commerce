@@ -1,18 +1,31 @@
 const express = require('express');
 const imageRouter = express.Router();
-const upload = require('../middlewares/upload.middlewares');
-const { uploadImageController, deleteImageController, replaceImageController, getAllProductImageController} = require('../controllers/image.controller');
+const {upload,userUpload} = require('../middlewares/image.middlewares');
+const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
 const { isShopOwner } = require('../middlewares/authentication.middlewares')
+const { 
+    uploadProductImageController, deleteProductImageController, replaceProductImageController, getAllProductImageController,
+    uploadUserImageController   , deleteUserImageController,    replaceUserImageController,    getUserImageController
+} = require('../controllers/image.controller');
 
-// Upload an image to a specific product
-imageRouter.post('/upload/:productId', upload.single('image'), uploadImageController);
-
-imageRouter.delete('/delete/:imageId', deleteImageController);
-
-// Replace an image by imageId (DB) — uses new image file in body
-imageRouter.put('/replace/:imageId',upload.single('image'), replaceImageController);
 
 imageRouter.get('/:productId',getAllProductImageController)
 
+imageRouter.post('/upload/:productId', upload.single('image'), uploadProductImageController);
 
-module.exports = imageRouter;
+imageRouter.delete('/delete/:imageId', deleteProductImageController);
+
+imageRouter.put('/replace/:imageId',upload.single('image'), replaceProductImageController);
+
+//<==============================================================================>//
+
+imageRouter.get('/', AuthMiddleware,getUserImageController)
+
+imageRouter.post('/upload', AuthMiddleware,userUpload.single('image'), uploadUserImageController);
+
+imageRouter.delete('/delete', AuthMiddleware, deleteUserImageController);
+
+imageRouter.put('/replace', AuthMiddleware,userUpload.single('image'), replaceUserImageController);
+
+
+module.exports = {imageRouter};

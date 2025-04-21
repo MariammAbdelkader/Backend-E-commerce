@@ -2,7 +2,7 @@ const express = require("express");
 const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
 const { isAdmin } = require("../utilities/isAdmin");
 const { upload } = require("../middlewares/csv.middlewares");
-const { segmentAllUsersController,getAllSegmentationsController } = require("../controllers/CustomerSegmentation.controller");
+const { segmentAllUsersController,getSegmentationsController } = require("../controllers/CustomerSegmentation.controller");
 const {getUserHistoryController}=require('../controllers/userHistory.controller')
 const CustomerManagementRouter = express.Router();
 
@@ -50,7 +50,9 @@ CustomerManagementRouter.get("/update-users-seg" , segmentAllUsersController)
  */
 
 
-CustomerManagementRouter.get("/users-info" , getAllSegmentationsController)
+CustomerManagementRouter.get("/customer-info" , getSegmentationsController)
+
+
 
 /**
  * @swagger
