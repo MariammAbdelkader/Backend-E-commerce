@@ -62,6 +62,7 @@ class App {
   }
 
 
+
 async connectToDatabase() {
   try {
         await db.authenticate();     // Test the database connection 
@@ -94,23 +95,23 @@ async connectToDatabase() {
   }
   
   initializeRoutes() {
-    this.app.use("", router);
-    this.app.use("/auth",googleAuthRouter);
-    this.app.use("/auth",facebookAuthRouter);
-    this.app.use("/auth",passwordRouter);
-    this.app.use("/upload",csvRouter);
-    this.app.use("/cart",cartRouter);
-    this.app.use("/product",productRouter);
-    this.app.use("/category",categoryRouter);
-    this.app.use("/subcategory",subcategoryRouter);
-    this.app.use("/order",orderRouter);
-    this.app.use("/chatbot",chatbotRouter);
-    this.app.use("/profile",userProfileRouter);
-    this.app.use("/customermanagement",CustomerManagementRouter);
-    this.app.use("/payment",paymentRouter);
-    this.app.use("/discount",DiscountRouter);
-    this.app.use("/reviews",reviewRouter);
-    this.app.use("/image",imageRouter);
+    this.app.use("/api", router);
+    this.app.use("/api/auth",googleAuthRouter);
+    this.app.use("/api/auth",facebookAuthRouter);
+    this.app.use("/api/auth",passwordRouter);
+    this.app.use("/api/upload",csvRouter);
+    this.app.use("/api/cart",cartRouter);
+    this.app.use("/api/product",productRouter);
+    this.app.use("/api/category",categoryRouter);
+    this.app.use("/api/subcategory",subcategoryRouter);
+    this.app.use("/api/order",orderRouter);
+    this.app.use("/api/chatbot",chatbotRouter);
+    this.app.use("/api/profile",userProfileRouter);
+    this.app.use("/api/customermanagement",CustomerManagementRouter);
+    this.app.use("/api/payment",paymentRouter);
+    this.app.use("/api/discount",DiscountRouter);
+    this.app.use("/api/reviews",reviewRouter);
+    this.app.use("/api/image",imageRouter);
 
 
   }

@@ -1,5 +1,5 @@
 const { segmentAllUsersServices } = require('../services/CustomerSegmentation.services');
-const { getSegmentationsServices } = require('../servicses/CustomerSegmentation.services');
+const { getSegmentationsServices } = require('../services/CustomerSegmentation.services');
 
 const segmentAllUsersController = async (req, res) => {
     try {
