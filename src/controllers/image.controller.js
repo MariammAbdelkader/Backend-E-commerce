@@ -1,10 +1,14 @@
-const { uploadImageService,deleteImageService,replaceImageService, getAllProductImageServices} = require('../services/image.service');
+const { response } = require('express');
+const { 
+  uploadProductImageService, deleteProductImageService, replaceProductImageService, getAllProductImageServices,
+  uploadUserImageService   , deleteUserImageService,    replaceUserImageService,    getUserImageServices
+} = require('../services/image.service');
   
   // UPLOAD
-  const uploadImageController = async (req, res) => {
+  const uploadProductImageController = async (req, res) => {
     try {
       const { productId } = req.params;
-      const image = await uploadImageService({ file: req.file, productId });
+      const image = await uploadProductImageService({ file: req.file, productId });
       res.status(201).json({ message: 'Image uploaded', data: image });
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -12,10 +16,10 @@ const { uploadImageService,deleteImageService,replaceImageService, getAllProduct
   };
   
   // DELETE
-  const deleteImageController = async (req, res) => {
+  const deleteProductImageController = async (req, res) => {
     try {
       const { imageId } = req.params;
-      const result = await deleteImageService(imageId);
+      const result = await deleteProductImageService(imageId);
       res.status(200).json(result);
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -23,10 +27,10 @@ const { uploadImageService,deleteImageService,replaceImageService, getAllProduct
   };
   
   // REPLACE
-  const replaceImageController = async (req, res) => {
+  const replaceProductImageController = async (req, res) => {
     try {
       const { imageId } = req.params;
-      const updated = await replaceImageService({ imageId, file: req.file });
+      const updated = await replaceProductImageService({ imageId, file: req.file });
       res.status(200).json({ message: 'Image replaced', data: updated });
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -41,8 +45,51 @@ const { uploadImageService,deleteImageService,replaceImageService, getAllProduct
       res.status(500).json({ message: err.message });
     }
   }
+
+//<==============================================================================>//
+
+  const uploadUserImageController = async (req, res) => {
+    try {
+      const userId = req.userId
+      const image = await uploadUserImageService({ file: req.file, userId });
+      res.status(201).json({ message: 'Image uploaded', data: image });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
+
+  const deleteUserImageController = async (req, res) => {
+    try {
+      const userId = req.userId;
+      const result = await deleteUserImageService(userId);
+      res.status(200).json({message: 'Image deleted', response: result});
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
+  
+  // REPLACE
+  const replaceUserImageController = async (req, res) => {
+    try {
+      const userId = req.userId;
+      const updated = await replaceUserImageService({ userId, file: req.file });
+      res.status(200).json({ message: 'Image replaced', data: updated });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
+  const getUserImageController = async(req,res)=>{
+    try {
+      const  userId  = req.userId;
+      const imageDetails = await getUserImageServices(userId);
+      res.status(200).json({ message: 'user image', data: imageDetails });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  }
   
   module.exports = {
-    uploadImageController,deleteImageController, replaceImageController,getAllProductImageController
+    uploadProductImageController, deleteProductImageController, replaceProductImageController, getAllProductImageController,
+    uploadUserImageController   , deleteUserImageController,    replaceUserImageController,    getUserImageController
   };
   

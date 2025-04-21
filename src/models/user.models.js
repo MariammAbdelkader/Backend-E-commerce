@@ -60,4 +60,42 @@ const User = db.define("User", {
     },
 });
 
-module.exports = { User };
+const UserImage = db.define('UserImage', {
+    imageId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    publicId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    originalName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    mimeType: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    size: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'userId',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }
+  });
+
+module.exports = { User, UserImage };
