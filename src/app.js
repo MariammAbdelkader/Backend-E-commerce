@@ -33,6 +33,9 @@ const {googleAuthRouter}=require('./routes/googleAuth.routes.js');
 const {facebookAuthRouter}=require('./routes/facebookAuth.routes.js');
 const {imageRouter} = require('./routes/image.routes.js');
 const { passwordRouter } = require('./routes/managePassword.routes.js');
+const { Salesrouter } = require('./routes/Metric.sales.routs.js');
+
+
 
 
 
@@ -112,6 +115,8 @@ async connectToDatabase() {
     this.app.use("/api/discount",DiscountRouter);
     this.app.use("/api/reviews",reviewRouter);
     this.app.use("/api/image",imageRouter);
+    this.app.use("/api/sales",Salesrouter);
+
 
 
   }
