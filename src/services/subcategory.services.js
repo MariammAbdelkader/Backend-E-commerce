@@ -21,7 +21,6 @@ const addSubcategoryService = async (body) => {
     const category = await Category.findByPk(finalCategoryId);
     if (!category) throw new Error("Category with the given ID was not found.");
 
-   
     const existing = await Subcategory.findOne({
         where: {
           categoryId: finalCategoryId,
@@ -39,9 +38,12 @@ const addSubcategoryService = async (body) => {
         throw error;
     }
 
-    const newSubcategory = await Subcategory.create({ name, categoryId: finalCategoryId });
-
-    return newSubcategory;
+    try{
+        const newSubcategory = await Subcategory.create({ name, categoryId: finalCategoryId });
+        return newSubcategory;
+    }catch(error){
+        console.error("Failed to create subcategory:", error.errors || error.message || error);
+    }
 };
 
 const getAllSubcategoriesService = async () => {

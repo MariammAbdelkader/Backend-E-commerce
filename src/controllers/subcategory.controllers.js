@@ -2,6 +2,7 @@ const { addSubcategoryService,getAllSubcategoriesService, updateSubcategoryServi
 
 const addSubcategoryController = async (req, res) => {
     try {
+        console.log(req.body)
         const response = await addSubcategoryService(req.body);
         res.status(201).json({ message: "Subcategory added successfully", subcategory: response });
     }  catch (err) {
@@ -34,6 +35,7 @@ const updateSubcategoryController = async (req, res) => {
 const deleteSubcategoryController = async (req, res) => {
     try {
         const { subcategoryId } = req.params;
+        console.log("subcategoryId:",subcategoryId)
         const response = await deleteSubcategoryService(subcategoryId);
         res.status(200).json({ message: "Subcategory deleted successfully", response });
     } catch (err) {
