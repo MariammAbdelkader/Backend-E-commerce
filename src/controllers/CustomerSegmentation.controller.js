@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 const { segmentAllUsersServices,getSegmentationsServices } = require('../services/CustomerSegmentation.services');
+=======
+const { segmentAllUsersServices } = require('../services/CustomerSegmentation.services');
+const { getSegmentationsServices } = require('../services/CustomerSegmentation.services');
+>>>>>>> ec244469c6f78b4994afa07c675db5eac3e18abe
 
 const segmentAllUsersController = async (req, res) => {
     try {
