@@ -6,8 +6,13 @@ const addCategoryService = async (name) => {
     const existing = await Category.findOne({ where: { name } });
     if (existing) throw new Error("Category already exists");
 
+    try{
     const newCategory = await Category.create({ name });
     return newCategory;
+    }catch(err){
+        return{message:err.message}
+    }
+   
 };
 
 
