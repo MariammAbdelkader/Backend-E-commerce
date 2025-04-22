@@ -11,6 +11,8 @@ services:
       - db
       - ai  # The backend depends on the AI service
 
+    container_name: backend
+
   ai:
     image: ahmedkhamis10/gp-ai1:latest  # AI service image
     ports:
@@ -27,6 +29,18 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  apache:
+    image: httpd:2.4
+    container_name: apache
+    ports:
+      - "80:80"
+    volumes:
+      - ./httpd/proxy.conf:/usr/local/apache2/conf/extra/proxy.conf:ro
+    command: >
+      bash -c "echo 'Include conf/extra/proxy.conf' >> /usr/local/apache2/conf/httpd.conf && httpd-foreground"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
