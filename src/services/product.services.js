@@ -1,9 +1,11 @@
 const {Product, ProductImage} = require ("../models/product.models.js");
 const {Category, Subcategory} = require ("../models/category.models.js");
-const {deleteImageService}=require("../services/image.service.js")
+const {deleteProductImageService}=require("../services/image.service.js")
 const Joi = require("joi");
 const { name } = require("ejs");
 const { DiscountOnProducts, DiscountOnCategories } = require("../models/discounts.model.js");
+const {getProductRatingService}=require('../services/review.services')
+const { Op } = require('sequelize');
 
 const {getThePercentage}= require('../utilities/ProductUtilities.js')
 
@@ -37,8 +39,11 @@ const getProductServices = async (productId)=>{
                 await getThePercentage(productId, product.categoryId);
 
 
+    const rate=await getProductRatingService(productId)
+    console.log(rate)
 
     const returnedProduct={
+        productId:product.productId,
         name:product.name,
         description:product.description,
         category: product.Category ? product.Category.name : null,
@@ -46,6 +51,7 @@ const getProductServices = async (productId)=>{
         price:product.price,
         discountprice:product.disCountPrice,
         status:product.status,
+        rate:rate,
         productDiscountPercentage,
         categoryDiscountPercentage,
         images:ProductImages
@@ -55,25 +61,26 @@ const getProductServices = async (productId)=>{
 }
 const getProductsService=async (filters) => {
     try {
+        filterConditions={}
         //TODO engance the database for better searching 
-        const filterConditions = { ...filters };
-
-        if (filters.category) {
-            const category = await Category.findOne({ where: { name: filters.category } });
+        if (filters.categoryId) {
+            const category = await Category.findOne({ where: { categoryId: filters.categoryId } });
             if (category) {
                 filterConditions.categoryId = category.categoryId;
             }
-            delete filterConditions.category; // Remove the incorrect key
+     
         }
 
-        if (filters.subcategory) {
-            const subcategory = await Subcategory.findOne({ where: { name: filters.subcategory } });
+        if (filters.subcategoryId) {
+            const subcategory = await Subcategory.findOne({ where: { subcategoryId: filters.subcategoryId } });
             if (subcategory) {
                 filterConditions.subcategoryId = subcategory.subcategoryId;
             }
-            delete filterConditions.subcategory; // Remove the incorrect key
         }
 
+        if (filters.price_lt) {
+            filterConditions.price = { [Op.lt]: filters.price_lt };
+        }
         const products = await Product.findAll({
             where: filterConditions,
             include: [
@@ -124,7 +131,7 @@ const deleteProductServices =async (productId)=>{
     });
     
     await Promise.all(
-        images.map(image => deleteImageService(image.imageId))
+        images.map(image => deleteProductImageService(image.imageId))
     );
     
 

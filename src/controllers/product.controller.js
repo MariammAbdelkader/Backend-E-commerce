@@ -25,12 +25,8 @@ const getProductController =async (req , res) => {
 
 const getProductsController =async (req , res) => {
     try {
-        filters =  req.filters;
 
-        const filterConditions = await processFilters(filters);
-
-        
-        const products = await getProductsService(filterConditions);
+        const products = await getProductsService(req.filters);
         
         res.status(200).json({message: products.message, data :products.data});
         
