@@ -4,6 +4,7 @@ const {Product} = require('../models/product.models');
 const {Cart, CartItem} = require('../models//cart.models');
 const {Return} = require('../models//returns.models');
 const {User } =require('../models/user.models')
+const {MonthlyAnalytics}=require('../models/monthlyAnalytics.model')
 const { UserRole} =require('../models/userRole.models')
 const { Op ,Sequelize} = require('sequelize');
 const { Role } = require('../models/role.models');
@@ -185,6 +186,103 @@ class SalesService {
       order: [[Sequelize.literal('totalSold'), 'DESC']],
       limit
     });
+  }
+
+
+  static async calculateMonthlyAnalytics(month, year) {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+
+    // Fetch all orders for the month
+    const orders = await Order.findAll({
+      where: {
+        orderDate: {
+          [Sequelize.Op.between]: [startDate, endDate],
+        },
+        paymentStatus: 'paid',
+      },
+      include: [
+        {
+          model: Cart,
+          include: [{
+            model: CartItem,
+            include: [Product],
+          }],
+        },
+      ],
+    });
+
+    // Revenue and Top Products
+    let totalRevenue = 0;
+    const productSalesMap = {}; // { productId: { name, quantity, totalRevenue } }
+    const categoryRevenueMap = {}; // { categoryId: revenue }
+
+    for (const order of orders) {
+      const cartItems = order.Cart?.CartItems || [];
+
+      for (const item of cartItems) {
+        const revenue = item.quantity * item.priceAtPurchase;
+        totalRevenue += revenue;
+
+        const product = item.Product;
+        if (product) {
+          // Top products
+          if (!productSalesMap[product.productId]) {
+            productSalesMap[product.productId] = {
+              productId: product.productId,
+              name: product.name,
+              quantity: 0,
+              totalRevenue: 0,
+            };
+          }
+          productSalesMap[product.productId].quantity += item.quantity;
+          productSalesMap[product.productId].totalRevenue += revenue;
+
+          // Top categories
+          const catId = product.categoryId;
+          if (catId !== null) {
+            categoryRevenueMap[catId] = (categoryRevenueMap[catId] || 0) + revenue;
+          }
+        }
+      }
+    }
+
+    // Returns
+    const returns = await Return.findAll({
+      where: {
+        ReturnDate: {
+          [Sequelize.Op.between]: [startDate, endDate],
+        },
+        Status: 'Refunded',
+      },
+    });
+    const totalReturnAmount = returns.reduce((sum, r) => sum + parseFloat(r.RefundAmount), 0);
+    const returnRate = orders.length > 0 ? (returns.length / orders.length) * 100 : 0;
+
+    // Conversion Rate = #orders / #users
+    const userCount = await User.count();
+    const conversionRate = userCount > 0 ? (orders.length / userCount) * 100 : 0;
+
+    // Top 5 Products
+    const topProducts = Object.values(productSalesMap)
+      .sort((a, b) => b.totalRevenue - a.totalRevenue)
+      .slice(0, 5);
+
+    // Top 5 Categories
+    const topCategories = Object.entries(categoryRevenueMap)
+      .map(([categoryId, revenue]) => ({ categoryId: parseInt(categoryId), revenue }))
+      .sort((a, b) => b.revenue - a.revenue)
+      .slice(0, 5);
+
+    return {
+      totalRevenue,
+      grossProfit,
+      totalReturnAmount,
+      returnRate: returnRate.toFixed(2),
+      conversionRate: conversionRate.toFixed(2),
+      topProducts,
+      topCategories,
+    };
   }
 }
 
