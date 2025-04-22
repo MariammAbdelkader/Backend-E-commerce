@@ -17,7 +17,7 @@ const productRouter= express.Router()
 
 productRouter.get('/:productId', getProductController);
 
-productRouter.get('',filterMiddleware, getProductsController);
+productRouter.post('',filterMiddleware, getProductsController);
 
 productRouter.delete('/:productId',deleteProductController);
 
