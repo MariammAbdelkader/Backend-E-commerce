@@ -90,8 +90,6 @@ const discountCategoryServices = async (categoryId, percentage, startDate, endDa
         where: {
             categoryId,
             status: "valid",
-            startDate: { [Op.lte]: endDate },
-            endDate: { [Op.gte]: startDate }
         }
     });
 
