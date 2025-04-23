@@ -94,7 +94,7 @@ const discountCategoryServices = async (categoryId, percentage, startDate, endDa
     });
 
     if (existingDiscount) {
-        throw new Error("A discount already exists for this category in the selected period.");
+        throw new Error("A discount already exists for this category.");
     }
 
     // Get all products in the category
