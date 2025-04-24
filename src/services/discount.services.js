@@ -139,6 +139,7 @@ const getDiscountsService = async (status) => {
         where: whereCondition,
         include: [{ model: Category, attributes: ["name"] }],
         attributes: [
+            "discountId",
             ["startDate", "begin"],  // First column is date
             ["endDate", "end"],
             ["percentage", "percentage"],
@@ -154,6 +155,7 @@ const getDiscountsService = async (status) => {
         where: whereCondition,
         include: [{ model: Product, attributes: ["name", "description", "price", "disCountPrice"] }],
         attributes: [
+            "discountId",
             ["startDate", "begin"],  // First column is date
             ["endDate", "end"],
             ["percentage", "percentage"],
