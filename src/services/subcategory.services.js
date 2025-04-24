@@ -47,19 +47,16 @@ const addSubcategoryService = async (body) => {
 };
 
 const getAllSubcategoriesService = async () => {
-    const subcategories = await Subcategory.findAll({
-        include: {
-            model: Category,
-            as: 'category', 
-            attributes: ['categoryId', 'name'], 
-          },
-    });
-
-    if (subcategories.length === 0) {
-        return { message: "No subcategories found.", subcategories: [] };
+    try{
+        const subcategories = await Subcategory.findAll({
+            attributes: ['subcategoryId','categoryId','name'], 
+        });
+        return subcategories;
+    }catch(err){
+        throw err;
+       
+        
     }
-
-    return { message: "Subcategories retrieved successfully.", subcategories };
 };
 
 const updateSubcategoryService = async (subcategoryId, body) => {
