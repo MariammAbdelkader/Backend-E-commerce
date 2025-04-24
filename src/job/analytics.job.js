@@ -1,6 +1,8 @@
 const cron = require('node-cron');
-const SalesService = require('./services/sales.service'); // adjust the path if needed
+const {AnalyticsCalculations,SalesService} = require('./services/sales.service'); 
 const {MonthlyAnalytics}=require('../models/monthlyAnalytics.model')
+const {GrowthRate}=require('../models/growthRate.model')
+
 
 // Run every day at 00:05 AM
 cron.schedule('5 0 * * *', async () => {
@@ -10,19 +12,49 @@ cron.schedule('5 0 * * *', async () => {
 
   try {
     console.log(`[Analytics Job] Running for ${month}/${year}`);
-    const analytics = await SalesService.calculateMonthlyAnalytics(month, year);
+    const analytics = await AnalyticsCalculations.calculateMonthlyAnalytics(month, year);
     const monthAnalytics= await MonthlyAnalytics.upsert({
         month,
         year,
-        totalRevenue:analytics.totalRevenue,
-        grossProfit:analytics.grossProfit ,
+        Revenue:analytics.Revenue,
+        profit:analytics.profit ,
         returnRate: analytics.returnRate,
         conversionRate: analytics.conversionRate,
-        topSellingProducts: analytics.topProducts,
-        topCategories:analytics.topCategories,
+        grossRate: analytics.grossRate,        
       });
 
     console.log(`[Analytics Job] Done. Total Revenue: $${monthAnalytics.totalRevenue}`);
+    
+  } catch (err) {
+    console.error('[Analytics Job] Failed:', err);
+  }
+});
+
+
+cron.schedule('0 0 1 1 *', async () => {
+  const year = now.getFullYear();
+
+  try {
+    console.log(`[Analytics growth] Running for ${year}`);
+    const growthRateProfitBased = await AnalyticsCalculations.calculateGrowthRates({year,metric:'Profit'});
+    const growthRateRevenueBased = await AnalyticsCalculations.calculateGrowthRates({year,metric:'Revenue'});
+        await GrowthRate.upsert({
+            year,
+            quarterYear:growthRateProfitBased.quarterYear,
+            halfYear:growthRateProfitBased.quarterYear,
+            fullYear:growthRateProfitBased.quarterYear,
+            basedOn:'Profit',
+          });
+
+          await GrowthRate.upsert({
+            year,
+            quarterYear:growthRateRevenueBased.quarterYear,
+            halfYear:growthRateRevenueBased.quarterYear,
+            fullYear:growthRateRevenueBased.quarterYear,
+            basedOn:'Revenue',
+          });
+
+    console.log(`[Analytics growth] Done`);
     
   } catch (err) {
     console.error('[Analytics Job] Failed:', err);
