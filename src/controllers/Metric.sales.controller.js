@@ -1,47 +1,59 @@
 const SalesService = require('../services/Metric.sales.services');
 
 class SalesController {
-  static async totalRevenue(req, res) {
+  static async getSumMetricAnalytics(req, res) {
     try {
-      const totalRevenue = await SalesService.getTotalRevenue();
-      res.json({ totalRevenue });
+      const data={}
+      data.year= req.body.year;
+      data.metric= req.metric;
+      if(req.body.quarter) data.quarter=req.body.quarter;
+
+      const total = await SalesService.getSumMetricAnalytics(data);
+      res.status(200).json({ total });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
+  static async getMetricAnalytics(req,res){
+    try{
+      const data={}
+      data.start= req.body.start;
+      data.end= req.body.end;
+      data.metric= req.metric;
 
-  static async profit(req, res) {
+      const response= SalesService.getMetricAnalytics(data);
+      res.status(200).json({response});
+    }catch(error){
+      res.status(500).json({ error: error.message });
+    }
+
+  } 
+
+  static async getGrowthRates(req, res) {
     try {
-      const profit = await SalesService.getProfit();
-      res.json(profit);
+      const data={}
+      data.year= req.body.year;
+      data.metric= req.metric;
+        const growth = await SalesService.getGrowthRates(data);
+        res.status(200)({growth});
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
-
-  static async salesGrowth(req, res) {
+  
+  static async getTopSellingProducts(req, res) {
     try {
-        const { period } = req.query; // Get period from query params (e.g., ?period=3months)
-        const growth = await SalesService.getSalesGrowth(period);
-        res.json(growth);
+      const products = await SalesService.getTopSellingProducts();
+      res.status(200).json({products});
     } catch (error) {
       res.status(500).json({ error: error.message });
-    }
+    }es.status(500).json({ error: error.message });
   }
-
-  static async returnRate(req, res) {
+  
+  static async getTopCategories(req, res) {
     try {
-      const returnRate = await SalesService.getReturnRate();
-      res.json({ returnRate });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-
-  static async topReturnReasons(req, res) {
-    try {
-      const reasons = await SalesService.getTopReturnReasons();
-      res.json(reasons);
+      const categories = await SalesService.getTopCategories();
+      res.json({ categories });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -50,39 +62,12 @@ class SalesController {
   static async mostReturnedProducts(req, res) {
     try {
       const products = await SalesService.getMostReturnedProducts();
-      res.json(products);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-  static async getConversionRate(req, res) {
-    try {
-      const rate = await SalesService.calculateConversionRate();
-      res.json({ conversionRate: rate });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-
-  static async getTopSellingProducts(req, res) {
-    try {
-      const {limits} =req.query
-      const products = await SalesService.getTopSellingProducts(limits);
-      res.json({ topSellingProducts: products });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-
-  static async getTopProductCategories(req, res) {
-    try {
-      const {limits} =req.query
-      const categories = await SalesService.getTopProductCategories(limits);
-      res.json({ topProductCategories: categories });
+      res.status(200).json({products});
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
 }
+
 
 module.exports = SalesController;

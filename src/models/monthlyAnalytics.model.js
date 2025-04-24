@@ -16,11 +16,11 @@ const MonthlyAnalytics = db.define('MonthlyAnalytics', {
     type: DataTypes.INTEGER, // Store year as integer (e.g., 2025)
     allowNull: false,
   },
-  totalRevenue: {
+  Revenue: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
   },
-  grossProfit: {
+  Profit: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
   },
@@ -32,13 +32,9 @@ const MonthlyAnalytics = db.define('MonthlyAnalytics', {
     type: DataTypes.FLOAT,
     defaultValue: 0,
   },
-  topSellingProducts: {
-    type: DataTypes.JSON,
-    defaultValue: [],
-  },
-  topCategories: {
-    type: DataTypes.JSON,
-    defaultValue: [],
+  grossRate: {
+    type: DataTypes.FLOAT,
+    defaultValue: 0,
   },
 }, {
   timestamps: true,

@@ -13,6 +13,7 @@ const { Review } = require('./review.models');
 
 const {DiscountOnProducts,DiscountOnCategories,DiscountLogs} = require('./discounts.model')
 const{MonthlyAnalytics}=require('./monthlyAnalytics.model')
+const {GrowthRate} =require('./growthRate.model')
 
 
 
@@ -133,4 +134,4 @@ module.exports = {  Product, ProductImage,  User , Cart , CartItem ,
                     Order , Category , Subcategory, OrderDetail, Return,
                     CustomerActivity, CustomerSegment ,Review,
                     DiscountOnProducts,DiscountOnCategories,
-                    DiscountLogs,MonthlyAnalytics};
+                    DiscountLogs,MonthlyAnalytics,GrowthRate};
