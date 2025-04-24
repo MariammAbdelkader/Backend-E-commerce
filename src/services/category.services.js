@@ -15,15 +15,18 @@ const addCategoryService = async (name) => {
    
 };
 
-
 const getAllCategoryService = async () => {
-    const categories = await Category.findAll();
-
-    if (categories.length === 0) {
-        return { message: "There are no categories yet.", categories: [] };
+    try{
+        const categories = await Category.findAll({
+            attributes: ['categoryId','name'], 
+        });
+    
+        return categories;
+    }catch(err){
+        throw err;
+       
+        
     }
-
-    return { message: "Categories retrieved successfully.", categories };
 };
 
 const deleteCategoryService = async (categoryId) => {

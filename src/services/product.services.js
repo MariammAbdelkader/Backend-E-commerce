@@ -40,7 +40,6 @@ const getProductServices = async (productId)=>{
 
 
     const rate=await getProductRatingService(productId)
-    console.log(rate)
 
     const returnedProduct={
         productId:product.productId,
@@ -49,12 +48,12 @@ const getProductServices = async (productId)=>{
         category: product.Category ? product.Category.name : null,
         subcategory: product.Subcategory ? product.Subcategory.name : null,
         price:product.price,
-        discountprice:product.disCountPrice,
+        discountprice:product.disCountPrice?product.disCountPrice.toFixed(2):null,
         status:product.status,
         rate:rate,
         productDiscountPercentage,
         categoryDiscountPercentage,
-        images:ProductImages
+        images:ProductImages 
     }
 
     return returnedProduct;
@@ -68,7 +67,7 @@ const getProductsService=async (filters) => {
             if (category) {
                 filterConditions.categoryId = category.categoryId;
             }
-     
+
         }
 
         if (filters.subcategoryId) {
