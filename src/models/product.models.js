@@ -29,7 +29,7 @@ const Product = db.define('Product', {
         allowNull:false,
     },
     status: {
-        type: DataTypes.ENUM('in_stock', 'out_of_stock', 'discontinued'),
+        type: DataTypes.ENUM('in_stock', 'out_of_stock'),
         allowNull: false,
         defaultValue: 'in_stock',
     },
