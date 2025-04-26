@@ -1,0 +1,22 @@
+[
+    { "name": "Electronics" },
+    { "name": "Fashion" },
+    { "name": "Home & Furniture" },
+    { "name": "Beauty & Personal Care" },
+    { "name": "Sports & Outdoors" },
+    { "name": "Books" },
+    { "name": "Toys & Games" },
+    { "name": "Health & Wellness" },
+    { "name": "Food & Beverages" },
+    { "name": "Automotive" },
+    { "name": "Jewelry" },
+    { "name": "Music & Movies" },
+    { "name": "Office Supplies" },
+    { "name": "Pet Supplies" },
+    { "name": "Grocery" },
+    { "name": "Garden & Outdoors" },
+    { "name": "Baby Products" },
+    { "name": "Tools & Home Improvement" },
+    { "name": "Crafts & Hobbies" },
+    { "name": "Gaming" }
+]

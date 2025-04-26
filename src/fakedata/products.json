@@ -1,0 +1,4502 @@
+[
+  {
+    "name": "Luxury Device",
+    "price": 1780.79,
+    "description": "High quality product.",
+    "quantity": 80,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Budget Device",
+    "price": 1280.36,
+    "description": "High quality product.",
+    "quantity": 62,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 663.51,
+    "description": "High quality product.",
+    "quantity": 30,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Premium Device",
+    "price": 134.28,
+    "description": "High quality product.",
+    "quantity": 7,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Awesome Device",
+    "price": 1185.44,
+    "description": "High quality product.",
+    "quantity": 46,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Premium Device",
+    "price": 611.63,
+    "description": "High quality product.",
+    "quantity": 9,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Premium Furniture",
+    "price": 447.82,
+    "description": "High quality product.",
+    "quantity": 63,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Premium Gadget",
+    "price": 1513.81,
+    "description": "High quality product.",
+    "quantity": 68,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Awesome Item",
+    "price": 959.3,
+    "description": "High quality product.",
+    "quantity": 37,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1266.97,
+    "description": "High quality product.",
+    "quantity": 12,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Premium Gear",
+    "price": 137.32,
+    "description": "High quality product.",
+    "quantity": 43,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 517.1,
+    "description": "High quality product.",
+    "quantity": 64,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Eco Gear",
+    "price": 949.24,
+    "description": "High quality product.",
+    "quantity": 12,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Awesome Item",
+    "price": 201.38,
+    "description": "High quality product.",
+    "quantity": 54,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Smart Appliance",
+    "price": 1995.8,
+    "description": "High quality product.",
+    "quantity": 47,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Awesome Appliance",
+    "price": 772.56,
+    "description": "High quality product.",
+    "quantity": 77,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Smart Device",
+    "price": 1586.15,
+    "description": "High quality product.",
+    "quantity": 14,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Pro Device",
+    "price": 1856.27,
+    "description": "High quality product.",
+    "quantity": 11,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Smart Appliance",
+    "price": 1298.05,
+    "description": "High quality product.",
+    "quantity": 65,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Pro Wearable",
+    "price": 1006.6,
+    "description": "High quality product.",
+    "quantity": 82,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 1318.92,
+    "description": "High quality product.",
+    "quantity": 27,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Awesome Item",
+    "price": 882.56,
+    "description": "High quality product.",
+    "quantity": 55,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Gadget",
+    "price": 1923.99,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Eco Device",
+    "price": 412.59,
+    "description": "High quality product.",
+    "quantity": 17,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Smart Item",
+    "price": 468.2,
+    "description": "High quality product.",
+    "quantity": 85,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Budget Device",
+    "price": 1803.55,
+    "description": "High quality product.",
+    "quantity": 37,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Budget Item",
+    "price": 1523.39,
+    "description": "High quality product.",
+    "quantity": 39,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 715.05,
+    "description": "High quality product.",
+    "quantity": 26,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Premium Item",
+    "price": 373.81,
+    "description": "High quality product.",
+    "quantity": 44,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Luxury Device",
+    "price": 694.4,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Compact Gadget",
+    "price": 478.69,
+    "description": "High quality product.",
+    "quantity": 35,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Luxury Furniture",
+    "price": 1412.94,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Awesome Item",
+    "price": 268.72,
+    "description": "High quality product.",
+    "quantity": 25,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 1139.07,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Awesome Gadget",
+    "price": 295.66,
+    "description": "High quality product.",
+    "quantity": 41,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Luxury Item",
+    "price": 357.72,
+    "description": "High quality product.",
+    "quantity": 46,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 1629.2,
+    "description": "High quality product.",
+    "quantity": 91,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Luxury Accessory",
+    "price": 1878.83,
+    "description": "High quality product.",
+    "quantity": 13,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Compact Accessory",
+    "price": 742.75,
+    "description": "High quality product.",
+    "quantity": 69,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Eco Item",
+    "price": 1447.95,
+    "description": "High quality product.",
+    "quantity": 3,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Smart Appliance",
+    "price": 1211.11,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 1687.71,
+    "description": "High quality product.",
+    "quantity": 61,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Awesome Item",
+    "price": 477.58,
+    "description": "High quality product.",
+    "quantity": 61,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 1996.14,
+    "description": "High quality product.",
+    "quantity": 46,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 1841.48,
+    "description": "High quality product.",
+    "quantity": 50,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Awesome Gear",
+    "price": 290.83,
+    "description": "High quality product.",
+    "quantity": 57,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Eco Furniture",
+    "price": 799.5,
+    "description": "High quality product.",
+    "quantity": 86,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Furniture",
+    "price": 1464.01,
+    "description": "High quality product.",
+    "quantity": 79,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 600.92,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Smart Gear",
+    "price": 617.23,
+    "description": "High quality product.",
+    "quantity": 76,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Compact Gadget",
+    "price": 1215.84,
+    "description": "High quality product.",
+    "quantity": 62,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1753.01,
+    "description": "High quality product.",
+    "quantity": 47,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 1416.86,
+    "description": "High quality product.",
+    "quantity": 2,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Eco Accessory",
+    "price": 649.16,
+    "description": "High quality product.",
+    "quantity": 34,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 1911.63,
+    "description": "High quality product.",
+    "quantity": 16,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Luxury Wearable",
+    "price": 1013.03,
+    "description": "High quality product.",
+    "quantity": 47,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 1012.98,
+    "description": "High quality product.",
+    "quantity": 17,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 279.02,
+    "description": "High quality product.",
+    "quantity": 58,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Pro Gadget",
+    "price": 1161.47,
+    "description": "High quality product.",
+    "quantity": 32,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Appliance",
+    "price": 702.57,
+    "description": "High quality product.",
+    "quantity": 96,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 371.09,
+    "description": "High quality product.",
+    "quantity": 65,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Compact Accessory",
+    "price": 1302.46,
+    "description": "High quality product.",
+    "quantity": 32,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 517.12,
+    "description": "High quality product.",
+    "quantity": 59,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Luxury Gadget",
+    "price": 1925.83,
+    "description": "High quality product.",
+    "quantity": 12,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Item",
+    "price": 1360.0,
+    "description": "High quality product.",
+    "quantity": 33,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Pro Wearable",
+    "price": 1815.06,
+    "description": "High quality product.",
+    "quantity": 44,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Smart Furniture",
+    "price": 127.7,
+    "description": "High quality product.",
+    "quantity": 50,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Compact Furniture",
+    "price": 784.11,
+    "description": "High quality product.",
+    "quantity": 97,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Pro Gear",
+    "price": 421.36,
+    "description": "High quality product.",
+    "quantity": 37,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 434.43,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Pro Device",
+    "price": 1506.39,
+    "description": "High quality product.",
+    "quantity": 41,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Awesome Accessory",
+    "price": 93.44,
+    "description": "High quality product.",
+    "quantity": 2,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Smart Gear",
+    "price": 1579.27,
+    "description": "High quality product.",
+    "quantity": 75,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Compact Item",
+    "price": 404.7,
+    "description": "High quality product.",
+    "quantity": 20,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 1338.87,
+    "description": "High quality product.",
+    "quantity": 79,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Premium Item",
+    "price": 1758.2,
+    "description": "High quality product.",
+    "quantity": 93,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Premium Item",
+    "price": 55.33,
+    "description": "High quality product.",
+    "quantity": 97,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Smart Gear",
+    "price": 871.23,
+    "description": "High quality product.",
+    "quantity": 30,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Budget Item",
+    "price": 443.35,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Premium Device",
+    "price": 660.73,
+    "description": "High quality product.",
+    "quantity": 64,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Smart Wearable",
+    "price": 411.3,
+    "description": "High quality product.",
+    "quantity": 40,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Luxury Device",
+    "price": 272.21,
+    "description": "High quality product.",
+    "quantity": 73,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Eco Accessory",
+    "price": 912.9,
+    "description": "High quality product.",
+    "quantity": 21,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Compact Accessory",
+    "price": 691.66,
+    "description": "High quality product.",
+    "quantity": 76,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Compact Device",
+    "price": 1488.22,
+    "description": "High quality product.",
+    "quantity": 21,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Compact Device",
+    "price": 1829.85,
+    "description": "High quality product.",
+    "quantity": 4,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 909.08,
+    "description": "High quality product.",
+    "quantity": 18,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 462.35,
+    "description": "High quality product.",
+    "quantity": 3,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Smart Accessory",
+    "price": 461.22,
+    "description": "High quality product.",
+    "quantity": 10,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 1745.97,
+    "description": "High quality product.",
+    "quantity": 93,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Budget Gear",
+    "price": 1779.98,
+    "description": "High quality product.",
+    "quantity": 41,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Smart Accessory",
+    "price": 575.68,
+    "description": "High quality product.",
+    "quantity": 95,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 1938.94,
+    "description": "High quality product.",
+    "quantity": 14,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Compact Gear",
+    "price": 469.53,
+    "description": "High quality product.",
+    "quantity": 7,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Accessory",
+    "price": 1113.62,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Compact Wearable",
+    "price": 627.47,
+    "description": "High quality product.",
+    "quantity": 12,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Eco Gadget",
+    "price": 1515.37,
+    "description": "High quality product.",
+    "quantity": 83,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Compact Device",
+    "price": 326.06,
+    "description": "High quality product.",
+    "quantity": 72,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 915.53,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Budget Appliance",
+    "price": 1939.97,
+    "description": "High quality product.",
+    "quantity": 25,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Compact Device",
+    "price": 1542.3,
+    "description": "High quality product.",
+    "quantity": 37,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Premium Furniture",
+    "price": 1523.82,
+    "description": "High quality product.",
+    "quantity": 68,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Pro Device",
+    "price": 1118.07,
+    "description": "High quality product.",
+    "quantity": 52,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1673.77,
+    "description": "High quality product.",
+    "quantity": 39,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 1244.86,
+    "description": "High quality product.",
+    "quantity": 63,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Budget Gear",
+    "price": 815.21,
+    "description": "High quality product.",
+    "quantity": 100,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Awesome Furniture",
+    "price": 894.42,
+    "description": "High quality product.",
+    "quantity": 48,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Luxury Gear",
+    "price": 1678.24,
+    "description": "High quality product.",
+    "quantity": 54,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Premium Gear",
+    "price": 1651.66,
+    "description": "High quality product.",
+    "quantity": 89,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Pro Item",
+    "price": 1014.82,
+    "description": "High quality product.",
+    "quantity": 56,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Budget Device",
+    "price": 43.63,
+    "description": "High quality product.",
+    "quantity": 42,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Pro Appliance",
+    "price": 833.64,
+    "description": "High quality product.",
+    "quantity": 89,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Premium Gear",
+    "price": 918.37,
+    "description": "High quality product.",
+    "quantity": 58,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 160.66,
+    "description": "High quality product.",
+    "quantity": 84,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Compact Gadget",
+    "price": 946.56,
+    "description": "High quality product.",
+    "quantity": 76,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Pro Appliance",
+    "price": 460.45,
+    "description": "High quality product.",
+    "quantity": 71,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Eco Gear",
+    "price": 1864.7,
+    "description": "High quality product.",
+    "quantity": 10,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Awesome Item",
+    "price": 1846.56,
+    "description": "High quality product.",
+    "quantity": 87,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Smart Gear",
+    "price": 625.99,
+    "description": "High quality product.",
+    "quantity": 40,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Premium Device",
+    "price": 1559.37,
+    "description": "High quality product.",
+    "quantity": 95,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Appliance",
+    "price": 390.55,
+    "description": "High quality product.",
+    "quantity": 50,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Premium Gear",
+    "price": 23.01,
+    "description": "High quality product.",
+    "quantity": 41,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Budget Appliance",
+    "price": 1483.67,
+    "description": "High quality product.",
+    "quantity": 92,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Smart Device",
+    "price": 1420.69,
+    "description": "High quality product.",
+    "quantity": 99,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Eco Furniture",
+    "price": 790.04,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1571.7,
+    "description": "High quality product.",
+    "quantity": 96,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Item",
+    "price": 1487.39,
+    "description": "High quality product.",
+    "quantity": 66,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Compact Gear",
+    "price": 734.76,
+    "description": "High quality product.",
+    "quantity": 10,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 1603.82,
+    "description": "High quality product.",
+    "quantity": 37,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Luxury Furniture",
+    "price": 191.09,
+    "description": "High quality product.",
+    "quantity": 93,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Compact Item",
+    "price": 153.73,
+    "description": "High quality product.",
+    "quantity": 32,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Compact Appliance",
+    "price": 32.35,
+    "description": "High quality product.",
+    "quantity": 95,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Compact Appliance",
+    "price": 1531.91,
+    "description": "High quality product.",
+    "quantity": 4,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Premium Appliance",
+    "price": 126.14,
+    "description": "High quality product.",
+    "quantity": 31,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 1684.1,
+    "description": "High quality product.",
+    "quantity": 32,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Gear",
+    "price": 831.43,
+    "description": "High quality product.",
+    "quantity": 33,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Furniture",
+    "price": 1427.76,
+    "description": "High quality product.",
+    "quantity": 67,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Eco Gadget",
+    "price": 1406.48,
+    "description": "High quality product.",
+    "quantity": 92,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Smart Appliance",
+    "price": 1669.87,
+    "description": "High quality product.",
+    "quantity": 11,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Awesome Gear",
+    "price": 988.95,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 1798.2,
+    "description": "High quality product.",
+    "quantity": 47,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Pro Gadget",
+    "price": 97.7,
+    "description": "High quality product.",
+    "quantity": 64,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Eco Wearable",
+    "price": 362.42,
+    "description": "High quality product.",
+    "quantity": 27,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Compact Wearable",
+    "price": 336.26,
+    "description": "High quality product.",
+    "quantity": 73,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 1323.15,
+    "description": "High quality product.",
+    "quantity": 85,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 478.39,
+    "description": "High quality product.",
+    "quantity": 75,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Premium Appliance",
+    "price": 887.31,
+    "description": "High quality product.",
+    "quantity": 67,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Luxury Gear",
+    "price": 1698.63,
+    "description": "High quality product.",
+    "quantity": 47,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Smart Accessory",
+    "price": 1125.98,
+    "description": "High quality product.",
+    "quantity": 69,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Awesome Device",
+    "price": 1604.0,
+    "description": "High quality product.",
+    "quantity": 73,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Awesome Gear",
+    "price": 409.07,
+    "description": "High quality product.",
+    "quantity": 18,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 1116.99,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Awesome Appliance",
+    "price": 395.86,
+    "description": "High quality product.",
+    "quantity": 30,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Smart Furniture",
+    "price": 117.82,
+    "description": "High quality product.",
+    "quantity": 68,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Compact Furniture",
+    "price": 638.07,
+    "description": "High quality product.",
+    "quantity": 64,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Compact Device",
+    "price": 1675.7,
+    "description": "High quality product.",
+    "quantity": 85,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Pro Appliance",
+    "price": 1106.97,
+    "description": "High quality product.",
+    "quantity": 59,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Premium Device",
+    "price": 1384.65,
+    "description": "High quality product.",
+    "quantity": 56,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Device",
+    "price": 380.06,
+    "description": "High quality product.",
+    "quantity": 29,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Compact Gadget",
+    "price": 705.83,
+    "description": "High quality product.",
+    "quantity": 61,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Eco Furniture",
+    "price": 1874.14,
+    "description": "High quality product.",
+    "quantity": 99,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 1173.68,
+    "description": "High quality product.",
+    "quantity": 10,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Luxury Wearable",
+    "price": 196.42,
+    "description": "High quality product.",
+    "quantity": 49,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Eco Accessory",
+    "price": 232.93,
+    "description": "High quality product.",
+    "quantity": 81,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 209.11,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Luxury Device",
+    "price": 1257.51,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Compact Item",
+    "price": 1116.67,
+    "description": "High quality product.",
+    "quantity": 33,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Premium Gear",
+    "price": 1611.3,
+    "description": "High quality product.",
+    "quantity": 38,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Eco Gear",
+    "price": 932.07,
+    "description": "High quality product.",
+    "quantity": 9,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Pro Wearable",
+    "price": 455.24,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Pro Appliance",
+    "price": 1795.24,
+    "description": "High quality product.",
+    "quantity": 63,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 263.46,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Gadget",
+    "price": 1646.25,
+    "description": "High quality product.",
+    "quantity": 38,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Premium Device",
+    "price": 1382.87,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 1893.04,
+    "description": "High quality product.",
+    "quantity": 52,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 1649.57,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Smart Item",
+    "price": 1432.48,
+    "description": "High quality product.",
+    "quantity": 57,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Eco Item",
+    "price": 78.98,
+    "description": "High quality product.",
+    "quantity": 20,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Eco Item",
+    "price": 312.9,
+    "description": "High quality product.",
+    "quantity": 34,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Smart Furniture",
+    "price": 796.02,
+    "description": "High quality product.",
+    "quantity": 48,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 1177.75,
+    "description": "High quality product.",
+    "quantity": 11,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Eco Gadget",
+    "price": 530.08,
+    "description": "High quality product.",
+    "quantity": 96,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Awesome Gear",
+    "price": 497.71,
+    "description": "High quality product.",
+    "quantity": 28,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Accessory",
+    "price": 806.98,
+    "description": "High quality product.",
+    "quantity": 35,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Eco Device",
+    "price": 1399.74,
+    "description": "High quality product.",
+    "quantity": 43,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Premium Item",
+    "price": 1925.8,
+    "description": "High quality product.",
+    "quantity": 77,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Smart Device",
+    "price": 1143.57,
+    "description": "High quality product.",
+    "quantity": 14,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Luxury Accessory",
+    "price": 1926.32,
+    "description": "High quality product.",
+    "quantity": 66,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Pro Gadget",
+    "price": 1136.74,
+    "description": "High quality product.",
+    "quantity": 21,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Premium Gear",
+    "price": 1433.88,
+    "description": "High quality product.",
+    "quantity": 85,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Smart Furniture",
+    "price": 677.9,
+    "description": "High quality product.",
+    "quantity": 64,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Pro Item",
+    "price": 972.69,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 154.0,
+    "description": "High quality product.",
+    "quantity": 20,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Premium Device",
+    "price": 479.52,
+    "description": "High quality product.",
+    "quantity": 25,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 1976.41,
+    "description": "High quality product.",
+    "quantity": 84,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Budget Appliance",
+    "price": 410.88,
+    "description": "High quality product.",
+    "quantity": 13,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Luxury Accessory",
+    "price": 222.33,
+    "description": "High quality product.",
+    "quantity": 64,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 1028.96,
+    "description": "High quality product.",
+    "quantity": 81,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 1841.01,
+    "description": "High quality product.",
+    "quantity": 55,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Premium Appliance",
+    "price": 1501.95,
+    "description": "High quality product.",
+    "quantity": 2,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Premium Furniture",
+    "price": 875.72,
+    "description": "High quality product.",
+    "quantity": 26,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 1393.67,
+    "description": "High quality product.",
+    "quantity": 23,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 832.45,
+    "description": "High quality product.",
+    "quantity": 61,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 983.6,
+    "description": "High quality product.",
+    "quantity": 28,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Budget Item",
+    "price": 785.88,
+    "description": "High quality product.",
+    "quantity": 92,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 218.58,
+    "description": "High quality product.",
+    "quantity": 40,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 1638.38,
+    "description": "High quality product.",
+    "quantity": 85,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Luxury Accessory",
+    "price": 287.08,
+    "description": "High quality product.",
+    "quantity": 36,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 1551.59,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1898.75,
+    "description": "High quality product.",
+    "quantity": 53,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Premium Item",
+    "price": 1915.84,
+    "description": "High quality product.",
+    "quantity": 48,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Budget Appliance",
+    "price": 1814.39,
+    "description": "High quality product.",
+    "quantity": 30,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Item",
+    "price": 1944.74,
+    "description": "High quality product.",
+    "quantity": 4,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 262.81,
+    "description": "High quality product.",
+    "quantity": 28,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Smart Gear",
+    "price": 605.29,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 1598.29,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Smart Device",
+    "price": 64.42,
+    "description": "High quality product.",
+    "quantity": 7,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Eco Furniture",
+    "price": 283.69,
+    "description": "High quality product.",
+    "quantity": 55,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Budget Device",
+    "price": 1916.0,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 652.65,
+    "description": "High quality product.",
+    "quantity": 65,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Awesome Device",
+    "price": 339.34,
+    "description": "High quality product.",
+    "quantity": 28,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 869.09,
+    "description": "High quality product.",
+    "quantity": 87,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Luxury Gear",
+    "price": 462.04,
+    "description": "High quality product.",
+    "quantity": 67,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 1170.97,
+    "description": "High quality product.",
+    "quantity": 79,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Awesome Furniture",
+    "price": 1237.11,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Compact Appliance",
+    "price": 826.26,
+    "description": "High quality product.",
+    "quantity": 52,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 105.99,
+    "description": "High quality product.",
+    "quantity": 36,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Eco Accessory",
+    "price": 1235.03,
+    "description": "High quality product.",
+    "quantity": 57,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Luxury Device",
+    "price": 507.01,
+    "description": "High quality product.",
+    "quantity": 14,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Awesome Gadget",
+    "price": 1019.9,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 177.69,
+    "description": "High quality product.",
+    "quantity": 6,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Smart Wearable",
+    "price": 1616.8,
+    "description": "High quality product.",
+    "quantity": 39,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Premium Item",
+    "price": 83.5,
+    "description": "High quality product.",
+    "quantity": 55,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 196.66,
+    "description": "High quality product.",
+    "quantity": 84,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Compact Item",
+    "price": 505.05,
+    "description": "High quality product.",
+    "quantity": 39,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Awesome Gear",
+    "price": 320.67,
+    "description": "High quality product.",
+    "quantity": 83,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Pro Gear",
+    "price": 1707.83,
+    "description": "High quality product.",
+    "quantity": 96,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Compact Device",
+    "price": 1998.14,
+    "description": "High quality product.",
+    "quantity": 81,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Luxury Device",
+    "price": 945.62,
+    "description": "High quality product.",
+    "quantity": 22,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Smart Furniture",
+    "price": 243.04,
+    "description": "High quality product.",
+    "quantity": 8,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 1137.71,
+    "description": "High quality product.",
+    "quantity": 7,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Budget Gadget",
+    "price": 611.34,
+    "description": "High quality product.",
+    "quantity": 63,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Pro Wearable",
+    "price": 93.64,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 1079.72,
+    "description": "High quality product.",
+    "quantity": 63,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Budget Device",
+    "price": 1417.61,
+    "description": "High quality product.",
+    "quantity": 24,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Luxury Device",
+    "price": 1218.08,
+    "description": "High quality product.",
+    "quantity": 18,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 1512.89,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Compact Item",
+    "price": 1905.71,
+    "description": "High quality product.",
+    "quantity": 34,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Budget Device",
+    "price": 1980.74,
+    "description": "High quality product.",
+    "quantity": 58,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Eco Gadget",
+    "price": 1415.86,
+    "description": "High quality product.",
+    "quantity": 9,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Budget Gadget",
+    "price": 716.17,
+    "description": "High quality product.",
+    "quantity": 28,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 1519.93,
+    "description": "High quality product.",
+    "quantity": 63,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Luxury Device",
+    "price": 1336.18,
+    "description": "High quality product.",
+    "quantity": 82,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 57.39,
+    "description": "High quality product.",
+    "quantity": 9,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 1132.33,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Budget Gadget",
+    "price": 508.57,
+    "description": "High quality product.",
+    "quantity": 6,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Compact Furniture",
+    "price": 574.91,
+    "description": "High quality product.",
+    "quantity": 56,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Compact Gadget",
+    "price": 1046.25,
+    "description": "High quality product.",
+    "quantity": 36,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Awesome Device",
+    "price": 1504.01,
+    "description": "High quality product.",
+    "quantity": 35,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 1331.75,
+    "description": "High quality product.",
+    "quantity": 26,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Awesome Accessory",
+    "price": 11.86,
+    "description": "High quality product.",
+    "quantity": 50,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 151.72,
+    "description": "High quality product.",
+    "quantity": 40,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 1294.3,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Pro Gear",
+    "price": 657.8,
+    "description": "High quality product.",
+    "quantity": 11,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 1138.25,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 229.01,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Eco Device",
+    "price": 1142.52,
+    "description": "High quality product.",
+    "quantity": 16,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 804.21,
+    "description": "High quality product.",
+    "quantity": 44,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Pro Gear",
+    "price": 1635.72,
+    "description": "High quality product.",
+    "quantity": 79,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Compact Device",
+    "price": 1436.41,
+    "description": "High quality product.",
+    "quantity": 92,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Eco Gear",
+    "price": 300.1,
+    "description": "High quality product.",
+    "quantity": 57,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Eco Furniture",
+    "price": 612.47,
+    "description": "High quality product.",
+    "quantity": 57,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 1408.28,
+    "description": "High quality product.",
+    "quantity": 90,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Pro Gadget",
+    "price": 533.11,
+    "description": "High quality product.",
+    "quantity": 71,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Premium Appliance",
+    "price": 1153.01,
+    "description": "High quality product.",
+    "quantity": 13,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Smart Gear",
+    "price": 650.66,
+    "description": "High quality product.",
+    "quantity": 60,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 616.4,
+    "description": "High quality product.",
+    "quantity": 23,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Eco Item",
+    "price": 511.52,
+    "description": "High quality product.",
+    "quantity": 23,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Awesome Item",
+    "price": 1088.79,
+    "description": "High quality product.",
+    "quantity": 72,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Accessory",
+    "price": 1509.92,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Awesome Item",
+    "price": 293.38,
+    "description": "High quality product.",
+    "quantity": 57,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Pro Item",
+    "price": 1215.6,
+    "description": "High quality product.",
+    "quantity": 35,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Pro Gadget",
+    "price": 159.65,
+    "description": "High quality product.",
+    "quantity": 97,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 80.3,
+    "description": "High quality product.",
+    "quantity": 41,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Eco Furniture",
+    "price": 150.68,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Device",
+    "price": 1129.0,
+    "description": "High quality product.",
+    "quantity": 67,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Budget Gear",
+    "price": 1296.38,
+    "description": "High quality product.",
+    "quantity": 2,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Appliance",
+    "price": 506.41,
+    "description": "High quality product.",
+    "quantity": 29,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Eco Gear",
+    "price": 1494.32,
+    "description": "High quality product.",
+    "quantity": 85,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Item",
+    "price": 1562.71,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Smart Gear",
+    "price": 325.52,
+    "description": "High quality product.",
+    "quantity": 24,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Appliance",
+    "price": 930.93,
+    "description": "High quality product.",
+    "quantity": 25,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 1774.03,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 1056.37,
+    "description": "High quality product.",
+    "quantity": 34,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Luxury Furniture",
+    "price": 291.9,
+    "description": "High quality product.",
+    "quantity": 89,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Pro Device",
+    "price": 1312.88,
+    "description": "High quality product.",
+    "quantity": 42,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Awesome Device",
+    "price": 492.91,
+    "description": "High quality product.",
+    "quantity": 67,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Luxury Wearable",
+    "price": 588.65,
+    "description": "High quality product.",
+    "quantity": 35,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Luxury Gear",
+    "price": 629.49,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Compact Item",
+    "price": 552.81,
+    "description": "High quality product.",
+    "quantity": 24,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Luxury Accessory",
+    "price": 561.46,
+    "description": "High quality product.",
+    "quantity": 20,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 370.42,
+    "description": "High quality product.",
+    "quantity": 77,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 423.01,
+    "description": "High quality product.",
+    "quantity": 30,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 1035.98,
+    "description": "High quality product.",
+    "quantity": 22,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Eco Device",
+    "price": 1491.75,
+    "description": "High quality product.",
+    "quantity": 27,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Premium Gear",
+    "price": 836.86,
+    "description": "High quality product.",
+    "quantity": 15,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 14.11,
+    "description": "High quality product.",
+    "quantity": 84,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Eco Device",
+    "price": 1710.08,
+    "description": "High quality product.",
+    "quantity": 64,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 1237.55,
+    "description": "High quality product.",
+    "quantity": 8,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 434.33,
+    "description": "High quality product.",
+    "quantity": 80,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Compact Gadget",
+    "price": 25.54,
+    "description": "High quality product.",
+    "quantity": 46,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Item",
+    "price": 913.53,
+    "description": "High quality product.",
+    "quantity": 39,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Pro Item",
+    "price": 1652.41,
+    "description": "High quality product.",
+    "quantity": 10,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Pro Device",
+    "price": 637.95,
+    "description": "High quality product.",
+    "quantity": 33,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Compact Gear",
+    "price": 111.74,
+    "description": "High quality product.",
+    "quantity": 24,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Compact Gear",
+    "price": 876.29,
+    "description": "High quality product.",
+    "quantity": 59,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 1763.86,
+    "description": "High quality product.",
+    "quantity": 81,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Compact Item",
+    "price": 635.02,
+    "description": "High quality product.",
+    "quantity": 16,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Luxury Gear",
+    "price": 675.37,
+    "description": "High quality product.",
+    "quantity": 87,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Pro Gear",
+    "price": 1204.28,
+    "description": "High quality product.",
+    "quantity": 32,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Eco Accessory",
+    "price": 350.85,
+    "description": "High quality product.",
+    "quantity": 89,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Eco Gear",
+    "price": 566.55,
+    "description": "High quality product.",
+    "quantity": 84,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Awesome Appliance",
+    "price": 1882.46,
+    "description": "High quality product.",
+    "quantity": 17,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Pro Gear",
+    "price": 547.34,
+    "description": "High quality product.",
+    "quantity": 39,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Premium Gadget",
+    "price": 1122.98,
+    "description": "High quality product.",
+    "quantity": 31,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Compact Device",
+    "price": 255.61,
+    "description": "High quality product.",
+    "quantity": 39,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 1437.82,
+    "description": "High quality product.",
+    "quantity": 33,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Awesome Gear",
+    "price": 1314.3,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Smart Furniture",
+    "price": 1466.74,
+    "description": "High quality product.",
+    "quantity": 11,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1633.77,
+    "description": "High quality product.",
+    "quantity": 44,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Premium Item",
+    "price": 415.16,
+    "description": "High quality product.",
+    "quantity": 95,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 35.3,
+    "description": "High quality product.",
+    "quantity": 85,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Compact Gadget",
+    "price": 536.15,
+    "description": "High quality product.",
+    "quantity": 59,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Gadget",
+    "price": 844.96,
+    "description": "High quality product.",
+    "quantity": 82,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Awesome Accessory",
+    "price": 1469.79,
+    "description": "High quality product.",
+    "quantity": 92,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Eco Item",
+    "price": 1674.88,
+    "description": "High quality product.",
+    "quantity": 50,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Awesome Accessory",
+    "price": 317.02,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Device",
+    "price": 1503.53,
+    "description": "High quality product.",
+    "quantity": 10,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Budget Device",
+    "price": 583.83,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 170.28,
+    "description": "High quality product.",
+    "quantity": 41,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 895.77,
+    "description": "High quality product.",
+    "quantity": 62,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Luxury Gadget",
+    "price": 1757.27,
+    "description": "High quality product.",
+    "quantity": 58,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Compact Device",
+    "price": 1815.11,
+    "description": "High quality product.",
+    "quantity": 57,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Compact Appliance",
+    "price": 212.55,
+    "description": "High quality product.",
+    "quantity": 10,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Luxury Furniture",
+    "price": 1549.72,
+    "description": "High quality product.",
+    "quantity": 74,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Pro Appliance",
+    "price": 1607.29,
+    "description": "High quality product.",
+    "quantity": 29,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Eco Accessory",
+    "price": 551.66,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Budget Gadget",
+    "price": 288.86,
+    "description": "High quality product.",
+    "quantity": 46,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Awesome Device",
+    "price": 486.44,
+    "description": "High quality product.",
+    "quantity": 36,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Budget Gadget",
+    "price": 23.24,
+    "description": "High quality product.",
+    "quantity": 13,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Eco Gear",
+    "price": 1814.23,
+    "description": "High quality product.",
+    "quantity": 44,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 712.34,
+    "description": "High quality product.",
+    "quantity": 24,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Accessory",
+    "price": 31.09,
+    "description": "High quality product.",
+    "quantity": 71,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Compact Item",
+    "price": 89.01,
+    "description": "High quality product.",
+    "quantity": 54,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Compact Wearable",
+    "price": 1207.43,
+    "description": "High quality product.",
+    "quantity": 27,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Compact Item",
+    "price": 148.94,
+    "description": "High quality product.",
+    "quantity": 83,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 447.08,
+    "description": "High quality product.",
+    "quantity": 36,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 959.0,
+    "description": "High quality product.",
+    "quantity": 95,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 1301.13,
+    "description": "High quality product.",
+    "quantity": 59,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Device",
+    "price": 1435.99,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Compact Furniture",
+    "price": 1795.06,
+    "description": "High quality product.",
+    "quantity": 6,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Luxury Gadget",
+    "price": 1660.99,
+    "description": "High quality product.",
+    "quantity": 24,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1324.21,
+    "description": "High quality product.",
+    "quantity": 33,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 89.9,
+    "description": "High quality product.",
+    "quantity": 36,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Smart Appliance",
+    "price": 1476.26,
+    "description": "High quality product.",
+    "quantity": 6,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 445.3,
+    "description": "High quality product.",
+    "quantity": 27,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 1633.33,
+    "description": "High quality product.",
+    "quantity": 23,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Luxury Item",
+    "price": 1561.29,
+    "description": "High quality product.",
+    "quantity": 13,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Compact Gear",
+    "price": 848.77,
+    "description": "High quality product.",
+    "quantity": 80,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Smart Gear",
+    "price": 401.36,
+    "description": "High quality product.",
+    "quantity": 15,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Eco Gear",
+    "price": 1401.93,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 320.11,
+    "description": "High quality product.",
+    "quantity": 46,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 281.46,
+    "description": "High quality product.",
+    "quantity": 68,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Awesome Item",
+    "price": 1477.49,
+    "description": "High quality product.",
+    "quantity": 35,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 1606.41,
+    "description": "High quality product.",
+    "quantity": 43,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 799.94,
+    "description": "High quality product.",
+    "quantity": 32,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Awesome Furniture",
+    "price": 654.97,
+    "description": "High quality product.",
+    "quantity": 75,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Premium Gear",
+    "price": 585.77,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 273.21,
+    "description": "High quality product.",
+    "quantity": 38,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 918.05,
+    "description": "High quality product.",
+    "quantity": 84,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1767.42,
+    "description": "High quality product.",
+    "quantity": 51,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Awesome Accessory",
+    "price": 263.25,
+    "description": "High quality product.",
+    "quantity": 57,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Smart Appliance",
+    "price": 129.26,
+    "description": "High quality product.",
+    "quantity": 41,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Awesome Furniture",
+    "price": 1440.44,
+    "description": "High quality product.",
+    "quantity": 16,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Premium Wearable",
+    "price": 980.24,
+    "description": "High quality product.",
+    "quantity": 4,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 1357.36,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Luxury Gear",
+    "price": 178.33,
+    "description": "High quality product.",
+    "quantity": 11,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Pro Wearable",
+    "price": 1641.53,
+    "description": "High quality product.",
+    "quantity": 62,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 403.59,
+    "description": "High quality product.",
+    "quantity": 27,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Smart Item",
+    "price": 865.59,
+    "description": "High quality product.",
+    "quantity": 52,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Compact Accessory",
+    "price": 135.44,
+    "description": "High quality product.",
+    "quantity": 51,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 701.87,
+    "description": "High quality product.",
+    "quantity": 58,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Luxury Device",
+    "price": 688.56,
+    "description": "High quality product.",
+    "quantity": 2,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Smart Appliance",
+    "price": 1139.74,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Premium Gadget",
+    "price": 759.81,
+    "description": "High quality product.",
+    "quantity": 81,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 447.0,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 802.37,
+    "description": "High quality product.",
+    "quantity": 40,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 1359.82,
+    "description": "High quality product.",
+    "quantity": 10,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Awesome Device",
+    "price": 502.99,
+    "description": "High quality product.",
+    "quantity": 5,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 825.08,
+    "description": "High quality product.",
+    "quantity": 37,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Smart Device",
+    "price": 525.2,
+    "description": "High quality product.",
+    "quantity": 100,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Budget Appliance",
+    "price": 1137.13,
+    "description": "High quality product.",
+    "quantity": 52,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 979.47,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Smart Accessory",
+    "price": 1469.16,
+    "description": "High quality product.",
+    "quantity": 80,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Compact Gear",
+    "price": 266.1,
+    "description": "High quality product.",
+    "quantity": 14,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Smart Wearable",
+    "price": 1109.21,
+    "description": "High quality product.",
+    "quantity": 45,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Budget Gear",
+    "price": 1705.12,
+    "description": "High quality product.",
+    "quantity": 98,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Eco Gear",
+    "price": 1557.65,
+    "description": "High quality product.",
+    "quantity": 14,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Smart Gear",
+    "price": 1401.72,
+    "description": "High quality product.",
+    "quantity": 4,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Pro Appliance",
+    "price": 525.78,
+    "description": "High quality product.",
+    "quantity": 43,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Awesome Appliance",
+    "price": 635.98,
+    "description": "High quality product.",
+    "quantity": 74,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Premium Gear",
+    "price": 1734.64,
+    "description": "High quality product.",
+    "quantity": 54,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Gear",
+    "price": 370.03,
+    "description": "High quality product.",
+    "quantity": 51,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Eco Gadget",
+    "price": 1079.85,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Eco Device",
+    "price": 1746.66,
+    "description": "High quality product.",
+    "quantity": 95,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Premium Furniture",
+    "price": 1320.86,
+    "description": "High quality product.",
+    "quantity": 15,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Gear",
+    "price": 1033.87,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Premium Accessory",
+    "price": 1620.73,
+    "description": "High quality product.",
+    "quantity": 56,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Budget Wearable",
+    "price": 349.62,
+    "description": "High quality product.",
+    "quantity": 75,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 1951.87,
+    "description": "High quality product.",
+    "quantity": 76,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Smart Accessory",
+    "price": 962.28,
+    "description": "High quality product.",
+    "quantity": 79,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Luxury Device",
+    "price": 458.6,
+    "description": "High quality product.",
+    "quantity": 48,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Pro Device",
+    "price": 574.99,
+    "description": "High quality product.",
+    "quantity": 8,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Pro Device",
+    "price": 1293.59,
+    "description": "High quality product.",
+    "quantity": 75,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Eco Item",
+    "price": 993.03,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Premium Furniture",
+    "price": 1756.5,
+    "description": "High quality product.",
+    "quantity": 22,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Pro Furniture",
+    "price": 864.75,
+    "description": "High quality product.",
+    "quantity": 1,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Awesome Gear",
+    "price": 251.01,
+    "description": "High quality product.",
+    "quantity": 100,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Smart Device",
+    "price": 53.27,
+    "description": "High quality product.",
+    "quantity": 12,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Budget Gear",
+    "price": 1659.11,
+    "description": "High quality product.",
+    "quantity": 31,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Awesome Furniture",
+    "price": 1393.96,
+    "description": "High quality product.",
+    "quantity": 71,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Luxury Accessory",
+    "price": 806.41,
+    "description": "High quality product.",
+    "quantity": 26,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Awesome Accessory",
+    "price": 1811.49,
+    "description": "High quality product.",
+    "quantity": 60,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Eco Wearable",
+    "price": 829.23,
+    "description": "High quality product.",
+    "quantity": 5,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Smart Wearable",
+    "price": 906.59,
+    "description": "High quality product.",
+    "quantity": 74,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Premium Gadget",
+    "price": 1635.73,
+    "description": "High quality product.",
+    "quantity": 18,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Wearable",
+    "price": 1030.99,
+    "description": "High quality product.",
+    "quantity": 36,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 8
+  },
+  {
+    "name": "Budget Appliance",
+    "price": 1781.88,
+    "description": "High quality product.",
+    "quantity": 97,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Awesome Gadget",
+    "price": 1861.57,
+    "description": "High quality product.",
+    "quantity": 94,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Luxury Furniture",
+    "price": 292.44,
+    "description": "High quality product.",
+    "quantity": 89,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Premium Device",
+    "price": 570.13,
+    "description": "High quality product.",
+    "quantity": 28,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Smart Furniture",
+    "price": 1612.79,
+    "description": "High quality product.",
+    "quantity": 29,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 41.08,
+    "description": "High quality product.",
+    "quantity": 35,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Budget Device",
+    "price": 1104.55,
+    "description": "High quality product.",
+    "quantity": 71,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Compact Gear",
+    "price": 579.52,
+    "description": "High quality product.",
+    "quantity": 90,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Eco Gadget",
+    "price": 976.57,
+    "description": "High quality product.",
+    "quantity": 50,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Smart Furniture",
+    "price": 1512.47,
+    "description": "High quality product.",
+    "quantity": 89,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Compact Appliance",
+    "price": 998.2,
+    "description": "High quality product.",
+    "quantity": 86,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Awesome Gadget",
+    "price": 1260.38,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Pro Accessory",
+    "price": 980.27,
+    "description": "High quality product.",
+    "quantity": 39,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Awesome Device",
+    "price": 773.37,
+    "description": "High quality product.",
+    "quantity": 80,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Eco Item",
+    "price": 1982.64,
+    "description": "High quality product.",
+    "quantity": 20,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Awesome Item",
+    "price": 410.46,
+    "description": "High quality product.",
+    "quantity": 51,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Premium Item",
+    "price": 1751.99,
+    "description": "High quality product.",
+    "quantity": 69,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Premium Device",
+    "price": 1017.48,
+    "description": "High quality product.",
+    "quantity": 87,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Budget Gear",
+    "price": 1769.69,
+    "description": "High quality product.",
+    "quantity": 13,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Compact Device",
+    "price": 920.73,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 900.68,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Eco Appliance",
+    "price": 1256.46,
+    "description": "High quality product.",
+    "quantity": 33,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Awesome Gadget",
+    "price": 928.59,
+    "description": "High quality product.",
+    "quantity": 75,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Compact Wearable",
+    "price": 1620.19,
+    "description": "High quality product.",
+    "quantity": 51,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 550.31,
+    "description": "High quality product.",
+    "quantity": 60,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Budget Gear",
+    "price": 1168.84,
+    "description": "High quality product.",
+    "quantity": 45,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Pro Appliance",
+    "price": 1357.03,
+    "description": "High quality product.",
+    "quantity": 15,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Pro Gear",
+    "price": 1570.73,
+    "description": "High quality product.",
+    "quantity": 75,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Compact Item",
+    "price": 282.47,
+    "description": "High quality product.",
+    "quantity": 19,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Eco Item",
+    "price": 505.78,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Awesome Gear",
+    "price": 795.5,
+    "description": "High quality product.",
+    "quantity": 46,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Awesome Accessory",
+    "price": 1457.42,
+    "description": "High quality product.",
+    "quantity": 100,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Eco Item",
+    "price": 177.85,
+    "description": "High quality product.",
+    "quantity": 21,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Luxury Gear",
+    "price": 686.37,
+    "description": "High quality product.",
+    "quantity": 41,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Budget Item",
+    "price": 625.75,
+    "description": "High quality product.",
+    "quantity": 4,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 15
+  },
+  {
+    "name": "Compact Gear",
+    "price": 1929.76,
+    "description": "High quality product.",
+    "quantity": 5,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 9
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 1208.29,
+    "description": "High quality product.",
+    "quantity": 42,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Budget Item",
+    "price": 513.62,
+    "description": "High quality product.",
+    "quantity": 100,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 1
+  },
+  {
+    "name": "Pro Wearable",
+    "price": 108.19,
+    "description": "High quality product.",
+    "quantity": 37,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Budget Appliance",
+    "price": 1662.86,
+    "description": "High quality product.",
+    "quantity": 90,
+    "status": "out_of_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Smart Gear",
+    "price": 1175.95,
+    "description": "High quality product.",
+    "quantity": 99,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Budget Device",
+    "price": 1439.63,
+    "description": "High quality product.",
+    "quantity": 4,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 1208.91,
+    "description": "High quality product.",
+    "quantity": 71,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 11
+  },
+  {
+    "name": "Pro Appliance",
+    "price": 576.83,
+    "description": "High quality product.",
+    "quantity": 51,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Luxury Gadget",
+    "price": 317.7,
+    "description": "High quality product.",
+    "quantity": 85,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Pro Gear",
+    "price": 1045.91,
+    "description": "High quality product.",
+    "quantity": 73,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 2
+  },
+  {
+    "name": "Awesome Device",
+    "price": 1075.6,
+    "description": "High quality product.",
+    "quantity": 70,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Smart Gear",
+    "price": 287.35,
+    "description": "High quality product.",
+    "quantity": 31,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Smart Gear",
+    "price": 986.42,
+    "description": "High quality product.",
+    "quantity": 50,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 10
+  },
+  {
+    "name": "Compact Device",
+    "price": 1775.77,
+    "description": "High quality product.",
+    "quantity": 88,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 528.88,
+    "description": "High quality product.",
+    "quantity": 16,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Awesome Gadget",
+    "price": 543.6,
+    "description": "High quality product.",
+    "quantity": 4,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 14
+  },
+  {
+    "name": "Eco Wearable",
+    "price": 377.24,
+    "description": "High quality product.",
+    "quantity": 100,
+    "status": "in_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Awesome Item",
+    "price": 865.04,
+    "description": "High quality product.",
+    "quantity": 100,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Awesome Wearable",
+    "price": 324.73,
+    "description": "High quality product.",
+    "quantity": 78,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Eco Item",
+    "price": 534.69,
+    "description": "High quality product.",
+    "quantity": 69,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 13
+  },
+  {
+    "name": "Budget Device",
+    "price": 1414.44,
+    "description": "High quality product.",
+    "quantity": 65,
+    "status": "out_of_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Premium Device",
+    "price": 348.2,
+    "description": "High quality product.",
+    "quantity": 13,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 7
+  },
+  {
+    "name": "Budget Furniture",
+    "price": 910.22,
+    "description": "High quality product.",
+    "quantity": 6,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 3
+  },
+  {
+    "name": "Budget Accessory",
+    "price": 611.98,
+    "description": "High quality product.",
+    "quantity": 49,
+    "status": "in_stock",
+    "categoryId": 2,
+    "subcategoryId": 6
+  },
+  {
+    "name": "Awesome Gadget",
+    "price": 1095.55,
+    "description": "High quality product.",
+    "quantity": 52,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 5
+  },
+  {
+    "name": "Smart Gadget",
+    "price": 1232.77,
+    "description": "High quality product.",
+    "quantity": 26,
+    "status": "in_stock",
+    "categoryId": 3,
+    "subcategoryId": 12
+  },
+  {
+    "name": "Luxury Appliance",
+    "price": 557.04,
+    "description": "High quality product.",
+    "quantity": 53,
+    "status": "out_of_stock",
+    "categoryId": 1,
+    "subcategoryId": 4
+  }
+]
