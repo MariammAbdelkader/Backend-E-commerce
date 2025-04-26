@@ -158,8 +158,8 @@ const createProductServices = async (productData) => {
         name: Joi.string().min(3).max(100).required(),
         price: Joi.number().positive().required(),
         description: Joi.string().allow(null, ""),
-        category: Joi.string().min(3).max(50).required(), // category name, not ID
-        subCategory: Joi.string().min(3).max(50).required(),
+        categoryId: Joi.number().required(), // category name, not ID
+        subcategoryId: Joi.number().required(),
         quantity: Joi.number().integer().min(0).required(),
         status: Joi.string().valid("in_stock", "out_of_stock", "discontinued").default("in_stock"),
     });
@@ -172,15 +172,15 @@ const createProductServices = async (productData) => {
 
     try {
        
-        const category = await Category.findOne({ where: { name: value.category } });
+        const category = await Category.findOne({ where: { categoryId: value.categoryId } });
     
         if (!category) {
             throw new Error(`Category "${value.category}" not found.`);
         }
 
-        const subCategory = await Subcategory.findOne({ where: { name: value.subCategory } }) ;
+        const subCategory = await Subcategory.findOne({ where: { subcategoryId: value.subcategoryId , categoryId:category.categoryId} }) ;
         if (!subCategory) {
-            throw new Error(`Subcategory "${value.subCategory}" not found.`);
+            throw new Error(`Subcategory "${value.subcategoryId}" not found.`);
         }
 
         // categoryId can be null if category doesn't exist
