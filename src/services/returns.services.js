@@ -61,60 +61,60 @@ const getReturnsService = async (where) => {
 };
 
 const requestreturnService = async ({ orderId, productId, userId, ReturnReason, quantity }) => {
-    try{
-        // 1. Get the order with product for this user
-        const order = await Order.findOne({
-            where: { orderId, userId },
-            include: {
-            model: Cart,
-            as: "cart",
-            include: {
-                model: CartItem,
-                as: "cartItems",
-                where: { productId },
-            },
-            },
-        });
-
-        if (!order) throw new Error("Order or product not found for this user");
-
-        const cartItem = order.cart.cartItems[0];
-        if (!cartItem) throw new Error("Product not found in order");
-
-        // 2. Validate return quantity
-        if (!quantity || quantity <= 0) {
-            throw new Error("Return quantity must be greater than 0");
-        }
-
-        if (quantity > cartItem.quantity) {
-            throw new Error(`You can't return more than ${cartItem.quantity} items`);
-        }
-
-        // 3. Calculate refund amount
-        const refundAmount = parseFloat(cartItem.price) * quantity;
-
-        // 4. Create return record
-        const newReturn = await Return.create({
-            orderId,
-            productId,
-            userId,
-            ReturnReason,
-            quantity,
-            RefundAmount: refundAmount,
-            ReturnDate: new Date(),
-            Status: "Pending", // optional if default is already 'Pending'
-        });
-
-
-        const product = await Product.findByPk(productId);
-        if (!product) throw new Error("Product not found in inventory");
-
-        await product.update({ quantity: product.quantity + quantity });
-
-        return newReturn;
-    }catch(err){
-        throw new Error(err.message);
+    try {
+      const order = await Order.findOne({
+        where: { orderId, userId },
+        include: {
+          model: Cart,
+          as: "cart",
+          include: {
+            model: CartItem,
+            as: "cartItems",
+            where: { productId },
+          },
+        },
+      });
+  
+      if (!order) throw new Error("Order or product not found for this user");
+  
+      if (!order.cart || !order.cart.cartItems.length) {
+        throw new Error("Product not found in order cart");
+      }
+  
+      const cartItem = order.cart.cartItems[0];
+  
+      if (!quantity || quantity <= 0) {
+        throw new Error("Return quantity must be greater than 0");
+      }
+  
+      if (quantity > cartItem.quantity) {
+        throw new Error(`You can't return more than ${cartItem.quantity} items`);
+      }
+  
+      const product = await Product.findByPk(productId);
+      if (!product) throw new Error("Product not found in inventory");
+  
+      await product.update({ quantity: product.quantity + quantity });
+  
+      const refundAmount = parseFloat(cartItem.priceAtPurchase) * quantity;
+  
+      const newReturn = await Return.create({
+        orderId,
+        productId,
+        userId,
+        ReturnReason,
+        quantity,
+        RefundAmount: refundAmount,
+        ReturnDate: new Date(),
+        Status: "Pending",
+      });
+  
+      return newReturn;
+  
+    } catch (err) {
+      throw new Error(err.message);
     }
-};
+  };
+  
 
 module.exports = { getReturnsService,requestreturnService };

@@ -18,31 +18,30 @@ const getReturnsController=async(req,res)=>{
         });
     }
 }
-const requestReturnController= async(req,res)=>{
+const requestReturnController = async (req, res) => {
     const returnRequestSchema = Joi.object({
-        orderId: Joi.number().integer().required(),
-        productId: Joi.number().integer().required(),
-        userId: Joi.number().integer().required(),
-        ReturnReason: Joi.string().min(5).required(),
+      orderId: Joi.number().integer().required(),
+      productId: Joi.number().integer().required(),
+      quantity:Joi.number().integer().required(),
+      userId: Joi.number().integer().required(),
+      ReturnReason: Joi.string().min(5).required(),
     });
-    try{
-        const { error } = returnRequestSchema.validate(req.body);
-        if (error) {
-            return res.status(400).json({ error: error.details[0].message });
-        }
-                
-        
-        const result = await requestreturnService(req.body);
-        
-        res.status(201).json({ message: "Return requested successfully", result });
-
-
-    }catch(err){
-        res.status(500).json({ err: "Something went wrong" });
-        
+  
+    try {
+      const { error } = returnRequestSchema.validate(req.body);
+      if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+      }
+  
+      const result = await requestreturnService(req.body);
+      res.status(201).json({ message: "Return requested successfully", result });
+  
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Something went wrong", details: err.message });
     }
-
-}
+  };
+  
 
 
 module.exports = { requestReturnController ,getReturnsController};
