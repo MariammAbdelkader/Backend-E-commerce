@@ -132,8 +132,9 @@ const getSegmentationsServices = async ({userId,type}) => {
         });
         // Format the response
         const result = usersWithSegments.map(user => ({
-            ID: user.userId,
-            name: `${user.firstName} ${user.lastName}`,
+            userId: user.userId,
+            firstName: user.firstName,
+            firstName:user.firstName,
             phoneNumber: user.phoneNumber,
             address: user.address,
             gender: user.gender,
