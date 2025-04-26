@@ -24,6 +24,8 @@ Salesrouter.get('topreturned/products', SalesController.mostReturnedProducts);
 
 
 
+Salesrouter.post('/testCalculations', SalesController.test);
+
 
 
 module.exports = {Salesrouter};

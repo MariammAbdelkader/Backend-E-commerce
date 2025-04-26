@@ -1,6 +1,6 @@
 
 
-const MetricMiddleware=async(req,res)=>{
+const MetricMiddleware=async(req,res, next)=>{
     
     try{
 
@@ -13,7 +13,7 @@ const MetricMiddleware=async(req,res)=>{
         req.metric = metricName;  
        next();
     }catch(error){
-    throw new Error();
+    throw new Error("gggggggggggggggggggggggg");
     }
 
 }

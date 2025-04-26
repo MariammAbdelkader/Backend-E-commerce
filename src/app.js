@@ -6,7 +6,11 @@ const cookieParser = require("cookie-parser");
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger.js');
 const passport = require("passport");
+const analyticsJob=require('./job/analytics.job.js');
+const discountJob=require('./job/discount.job.js');
 
+
+const seedRoles = require("./scripts/seedRole.js");
 
 require("./config/passport");
 
@@ -34,7 +38,7 @@ const {facebookAuthRouter}=require('./routes/facebookAuth.routes.js');
 const {imageRouter} = require('./routes/image.routes.js');
 const { passwordRouter } = require('./routes/managePassword.routes.js');
 const { Salesrouter } = require('./routes/Metric.sales.routs.js');
-
+const {returnRouter}= require('./routes/return.routs.js')
 
 
 
@@ -70,7 +74,9 @@ async connectToDatabase() {
   try {
         await db.authenticate();     // Test the database connection 
         console.log('Connection to the database has been established successfully.');
-        await db.sync({alter:true});             // Synchronize models with the database
+        db.sync({ alter: true }).then(async () => {
+          await seedRoles();
+        });           
         console.log('Database synchronization complete.');
   } catch (error) {
         console.error('Unable to connect to the database:', error);
@@ -116,6 +122,8 @@ async connectToDatabase() {
     this.app.use("/api/reviews",reviewRouter);
     this.app.use("/api/image",imageRouter);
     this.app.use("/api/sales",Salesrouter);
+    this.app.use("/api/return",returnRouter);
+
 
 
 

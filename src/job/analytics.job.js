@@ -1,11 +1,11 @@
 const cron = require('node-cron');
-const {AnalyticsCalculations,SalesService} = require('./services/sales.service'); 
+const {AnalyticsCalculations} = require('../services/Metric.sales.services'); 
 const {MonthlyAnalytics}=require('../models/monthlyAnalytics.model')
 const {GrowthRate}=require('../models/growthRate.model')
 
 
 // Run every day at 00:05 AM
-cron.schedule('5 0 * * *', async () => {
+cron.schedule('* 5 * * *', async () => {
   const now = new Date();
   const month = now.getMonth() + 1; // getMonth is 0-based
   const year = now.getFullYear();
@@ -17,13 +17,13 @@ cron.schedule('5 0 * * *', async () => {
         month,
         year,
         Revenue:analytics.Revenue,
-        profit:analytics.profit ,
+        Profit:analytics.profit ,
         returnRate: analytics.returnRate,
         conversionRate: analytics.conversionRate,
         grossRate: analytics.grossRate,        
       });
 
-    console.log(`[Analytics Job] Done. Total Revenue: $${monthAnalytics.totalRevenue}`);
+    console.log(`[Analytics Job] Done. Total Revenue: $${monthAnalytics.Revenue}`);
     
   } catch (err) {
     console.error('[Analytics Job] Failed:', err);
