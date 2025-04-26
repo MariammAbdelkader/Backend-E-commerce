@@ -1,4 +1,5 @@
-const SalesService = require('../services/Metric.sales.services');
+const { response } = require('express');
+const {SalesService,AnalyticsCalculations} = require('../services/Metric.sales.services');
 
 class SalesController {
   static async getSumMetricAnalytics(req, res) {
@@ -16,12 +17,14 @@ class SalesController {
   }
   static async getMetricAnalytics(req,res){
     try{
-      const data={}
-      data.start= req.body.start;
-      data.end= req.body.end;
-      data.metric= req.metric;
+      const data = {
+        start: req.body.start,
+        end: req.body.end,
+        metric: req.metric
+      };
 
-      const response= SalesService.getMetricAnalytics(data);
+      const response= await SalesService.getMetricAnalytics(data);
+    
       res.status(200).json({response});
     }catch(error){
       res.status(500).json({ error: error.message });
@@ -66,6 +69,16 @@ class SalesController {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
+  }
+
+  static async test(req,res){
+    try{
+      const {month, year}= req.body
+      const response = await AnalyticsCalculations.calculateMonthlyAnalytics(month, year);
+      res.status(200).json({message:"tarsh y ghaly", response})
+      }catch(err){
+      res.status(500).json({error:err.message+ " ttttttttttttt"})
+      }
   }
 }
 
