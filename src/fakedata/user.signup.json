@@ -1,0 +1,137 @@
+[
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "password": "hashedPassword1",
+        "phone": "1234567890",
+        "address": "123 Main St, Springfield, IL",
+        "gender": "Male"
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "email": "jane.smith@example.com",
+        "password": "hashedPassword2",
+        "phone": "9876543210",
+        "address": "456 Elm St, Springfield, IL",
+        "gender": "Female"
+    },
+    {
+        "firstName": "Michael",
+        "lastName": "Johnson",
+        "email": "michael.johnson@example.com",
+        "password": "hashedPassword3",
+        "phone": "1112233445",
+        "address": "789 Oak St, Springfield, IL",
+        "gender": "Male"
+    },
+    {
+        "firstName": "Emily",
+        "lastName": "Brown",
+        "email": "emily.brown@example.com",
+        "password": "hashedPassword4",
+        "phone": "5558889999",
+        "address": "101 Pine St, Springfield, IL",
+        "gender": "Female"
+    },
+    {
+        "firstName": "William",
+        "lastName": "Davis",
+        "email": "william.davis@example.com",
+        "password": "hashedPassword5",
+        "phone": "3334445555",
+        "address": "202 Birch St, Springfield, IL",
+        "gender": "Male"
+    },
+    {
+        "firstName": "Olivia",
+        "lastName": "Miller",
+        "email": "olivia.miller@example.com",
+        "password": "hashedPassword6",
+        "phone": "4445556666",
+        "address": "303 Cedar St, Springfield, IL",
+        "gender": "Female"
+    },
+    {
+        "firstName": "James",
+        "lastName": "Wilson",
+        "email": "james.wilson@example.com",
+        "password": "hashedPassword7",
+        "phone": "7778889999",
+        "address": "404 Maple St, Springfield, IL",
+        "gender": "Male"
+    },
+    {
+        "firstName": "Sophia",
+        "lastName": "Moore",
+        "email": "sophia.moore@example.com",
+        "password": "hashedPassword8",
+        "phone": "5556667777",
+        "address": "505 Elmwood St, Springfield, IL",
+        "gender": "Female"
+    },
+    {
+        "firstName": "Benjamin",
+        "lastName": "Taylor",
+        "email": "benjamin.taylor@example.com",
+        "password": "hashedPassword9",
+        "phone": "8889990000",
+        "address": "606 Willow St, Springfield, IL",
+        "gender": "Male"
+    },
+    {
+        "firstName": "Isabella",
+        "lastName": "Anderson",
+        "email": "isabella.anderson@example.com",
+        "password": "hashedPassword10",
+        "phone": "4443332222",
+        "address": "707 Redwood St, Springfield, IL",
+        "gender": "Female"
+    },
+    {
+        "firstName": "Alexander",
+        "lastName": "Thomas",
+        "email": "alexander.thomas@example.com",
+        "password": "hashedPassword11",
+        "phone": "6667778888",
+        "address": "808 Spruce St, Springfield, IL",
+        "gender": "Male"
+    },
+    {
+        "firstName": "Charlotte",
+        "lastName": "Jackson",
+        "email": "charlotte.jackson@example.com",
+        "password": "hashedPassword12",
+        "phone": "9990001111",
+        "address": "909 Fir St, Springfield, IL",
+        "gender": "Female"
+    },
+    {
+        "firstName": "David",
+        "lastName": "White",
+        "email": "david.white@example.com",
+        "password": "hashedPassword13",
+        "phone": "2223334444",
+        "address": "1010 Hickory St, Springfield, IL",
+        "gender": "Male"
+    },
+    {
+        "firstName": "Ava",
+        "lastName": "Harris",
+        "email": "ava.harris@example.com",
+        "password": "hashedPassword14",
+        "phone": "5554443333",
+        "address": "1111 Chestnut St, Springfield, IL",
+        "gender": "Female"
+    },
+    {
+        "firstName": "Daniel",
+        "lastName": "Martin",
+        "email": "daniel.martin@example.com",
+        "password": "hashedPassword15",
+        "phone": "6665554444",
+        "address": "1212 Pinecone St, Springfield, IL",
+        "gender": "Male"
+    }
+]
