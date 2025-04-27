@@ -1,0 +1,62 @@
+[
+    {
+        "email": "john.doe@example.com",
+        "password": "hashedPassword1"
+    },
+    {
+        "email": "jane.smith@example.com",
+        "password": "hashedPassword2"
+    },
+    {
+        "email": "michael.johnson@example.com",
+        "password": "hashedPassword3"
+    },
+    {
+        "email": "emily.brown@example.com",
+        "password": "hashedPassword4"
+    },
+    {
+        "email": "william.davis@example.com",
+        "password": "hashedPassword5"
+    },
+    {
+        "email": "olivia.miller@example.com",
+        "password": "hashedPassword6"
+    },
+    {
+        "email": "james.wilson@example.com",
+        "password": "hashedPassword7"
+    },
+    {
+        "email": "sophia.moore@example.com",
+        "password": "hashedPassword8"
+    },
+    {
+        "email": "benjamin.taylor@example.com",
+        "password": "hashedPassword9"
+    },
+    {
+        "email": "isabella.anderson@example.com",
+        "password": "hashedPassword10"
+    },
+    {
+        "email": "alexander.thomas@example.com",
+        "password": "hashedPassword11"
+    },
+    {
+        "email": "charlotte.jackson@example.com",
+        "password": "hashedPassword12"
+    },
+    {
+        "email": "david.white@example.com",
+        "password": "hashedPassword13"
+    },
+    {
+        "email": "ava.harris@example.com",
+        "password": "hashedPassword14"
+    },
+    {
+        "email": "daniel.martin@example.com",
+        "password": "hashedPassword15"
+    }
+]
