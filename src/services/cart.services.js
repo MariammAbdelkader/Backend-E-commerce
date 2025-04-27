@@ -86,41 +86,45 @@ const createCartService = async (body, userId, cart = null) => {
 };
 
 const previewCartService = async (cart) => {
-    if (!cart) {
-        throw new Error("There's no active cart for you ");
+    try {
+        if (!cart) {
+            throw new Error("There's no active cart for you ");
+        }
+        const cartItems = await CartItem.findAll({
+            where: { cartId: cart.cartId },
+            include: {
+                model: Product, 
+                as: 'products', 
+                attributes: ['name', 'price', 'description'],
+                include: [
+                    {
+                        model: Category,
+                        attributes: ['name'],
+                    },
+                    {
+                        model: Subcategory,
+                        attributes: ['name'],
+                    }
+                ]
+            },
+        });
+    
+        const products = cartItems.map(item => ({
+            productId: item.productId,
+            name: item.products.name,
+            description: item.products.description,
+            category: item.products.Category?.name || "Uncategorized",
+            subCategory: item.products.Subcategory?.name || "None",
+            quantity: item.quantity, 
+            pricePerOneItem: item.priceAtPurchase, 
+        }));
+    
+        const totalPrice = cart.totalPrice.toFixed(3);
+    
+        return { products , totalPrice };
+    } catch (error) {
+        throw error;
     }
-    const cartItems = await CartItem.findAll({
-        where: { cartId: cart.cartId },
-        include: {
-            model: Product, 
-            as: 'products', 
-            attributes: ['name', 'price', 'description'],
-            include: [
-                {
-                    model: Category,
-                    attributes: ['name'],
-                },
-                {
-                    model: Subcategory,
-                    attributes: ['name'],
-                }
-            ]
-        },
-    });
-
-    const products = cartItems.map(item => ({
-        productId: item.productId,
-        name: item.products.name,
-        description: item.products.description,
-        category: item.products.Category?.name || "Uncategorized",
-        subCategory: item.products.Subcategory?.name || "None",
-        quantity: item.quantity, 
-        pricePerOneItem: item.priceAtPurchase, 
-    }));
-
-    const totalPrice = cart.totalPrice.toFixed(3);
-
-    return { products , totalPrice };
 };
 
 const deleteCartService = async (cart) => {
