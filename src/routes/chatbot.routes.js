@@ -3,7 +3,19 @@ const { AuthMiddleware,AuthConversationIdMiddleware } = require("../middlewares/
 const { Model } = require("sequelize");
 const chatbotRouter= express.Router();
 
-const {startConversation, sendMessage} =require('../controllers/chatbot.controller');
+const {startConversation, sendMessage,getProductsByCategory,getAllCatigoriesAsListController} =require('../controllers/chatbot.controller');
+
+
+// Requested by the frontend 
+chatbotRouter.post('/start-conversation',AuthMiddleware,startConversation);
+
+chatbotRouter.post('/sendmessage',AuthMiddleware ,AuthConversationIdMiddleware, sendMessage);
+
+
+// Requested by the chatbot 
+chatbotRouter.get('/products', getProductsByCategory);
+
+chatbotRouter.get('/get/categories', getAllCatigoriesAsListController);
 
 /**
  * @swagger
@@ -45,7 +57,7 @@ const {startConversation, sendMessage} =require('../controllers/chatbot.controll
  *         description: Internal server error.
  */
 
-chatbotRouter.post('/start-conversation',AuthMiddleware,startConversation)
+
 /**
  * @swagger
  * /chatbot/sendmessage:
@@ -97,7 +109,7 @@ chatbotRouter.post('/start-conversation',AuthMiddleware,startConversation)
  *         description: Internal server error.
  */
 
-chatbotRouter.post('/sendmessage',AuthMiddleware ,AuthConversationIdMiddleware, sendMessage)
+
 
 
 module.exports ={chatbotRouter}

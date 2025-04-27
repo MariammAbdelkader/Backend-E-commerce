@@ -2,6 +2,8 @@ const axios = require('axios');
 
 const { Conversation } = require("../models/conversation.model");
 const { User } = require("../models/user.models");
+const { Product } = require('../models/product.models');
+const { Category,Subcategory } = require('../models/category.models');
 const {db} =require('../database/index')
 
 const {viewOrderedProductServices}=require('./order.services'); 
@@ -60,4 +62,48 @@ const sendMessageservices = async (conversationId, message, userId) => {
   }
 };
 
-module.exports = {startConversationservices,sendMessageservices}
+
+
+
+// Service to get products by category name
+const getProductsByCategoryServices = async (categoryName) => {
+
+    const category = await Category.findOne({ where: { name: categoryName } });
+
+    if (!category) {
+        throw new Error('Category not found');
+    }
+
+    const products = await Product.findAll({
+      where:{categoryId:category.categoryId},
+      include: [
+        {
+          model: Category,
+          attributes: ['categoryId', 'name'], 
+        },
+        {
+          model: Subcategory,
+          attributes: ['subcategoryId', 'name'], 
+        }
+      ]
+    });
+
+    return products;
+};
+
+const getAllCategoriesAsListServices = async () => {
+  try {
+      const categories = await Category.findAll({
+          attributes: ['name'],
+      });
+
+      // Map to extract just the names
+      const categoryNames = categories.map(category => category.name);
+
+      return categoryNames;
+  } catch (err) {
+      throw err;
+  }
+}
+
+module.exports = {startConversationservices,sendMessageservices,getProductsByCategoryServices,getAllCategoriesAsListServices }
