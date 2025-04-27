@@ -3,13 +3,17 @@ const { AuthMiddleware,AuthConversationIdMiddleware } = require("../middlewares/
 const { Model } = require("sequelize");
 const chatbotRouter= express.Router();
 
-const {startConversation, sendMessage,getProductsByCategory,getAllCatigoriesAsListController} =require('../controllers/chatbot.controller');
+const {startConversation, sendMessage,getProductsByCategory,getAllCatigoriesAsListController,getConversationMessages,deleteConversation} =require('../controllers/chatbot.controller');
 
 
 // Requested by the frontend 
 chatbotRouter.post('/start-conversation',AuthMiddleware,startConversation);
 
 chatbotRouter.post('/sendmessage',AuthMiddleware ,AuthConversationIdMiddleware, sendMessage);
+
+chatbotRouter.get('/chat', AuthMiddleware, getConversationMessages);
+
+chatbotRouter.delete('/delete-conversation', AuthMiddleware, deleteConversation);
 
 
 // Requested by the chatbot 

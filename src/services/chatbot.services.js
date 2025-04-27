@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const { Conversation } = require("../models/conversation.model");
+const { Conversation, Message } = require("../models/conversation.model");
 const { User } = require("../models/user.models");
 const { Product } = require('../models/product.models');
 const { Category,Subcategory } = require('../models/category.models');
@@ -17,13 +17,18 @@ const startConversationservices = async (userId)=>{
           throw new Error("User not found");
       }
 
-      const newConversation = await Conversation.create({userId});
-      
-      return ( newConversation.conversationId );
+      const existingConversation = await Conversation.findOne({ where: { userId } });
 
-      } catch (error) {
-        throw error;
+      if (existingConversation) {
+        return existingConversation; 
       }
+      const newConversation = await Conversation.create({ userId });
+
+      return newConversation;
+
+    } catch (error) {
+      throw error;
+    }
 }
 
 
@@ -40,7 +45,13 @@ const sendMessageservices = async (conversationId, message, userId) => {
           thread_id: conversationId
       };
       console.log(AiData)
-      // Send request to AI FastAPI service
+
+      await Message.create({
+        conversationId,
+        senderType:'user',
+        messageContent:message
+      });
+
       const response = await axios.post(
         `${AI_API_URL}/process_input/`,
         AiData,
@@ -48,13 +59,27 @@ const sendMessageservices = async (conversationId, message, userId) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-    // console.log("AI Response:", response.data);  // Debugging
 
-      
+      // Get the AI response
+      let botReply = response.data.responses;
+
+      // If the bot reply is an array, join it into one string
+      if (Array.isArray(botReply)) {
+        botReply = botReply.join(' ');
+      }
+
+      // Save the bot's reply
+      await Message.create({
+        conversationId,
+        senderType: 'bot',
+        messageContent: botReply,
+      });
+
       return {
-          message: response.data.responses,  
-          conversationId
+        message: botReply,
+        conversationId,
       };
+      
 
   } catch (error) {
       console.error("Error communicating with AI service:", error.message);
@@ -67,7 +92,8 @@ const sendMessageservices = async (conversationId, message, userId) => {
 
 // Service to get products by category name
 const getProductsByCategoryServices = async (categoryName) => {
-
+  try {
+    
     const category = await Category.findOne({ where: { name: categoryName } });
 
     if (!category) {
@@ -89,6 +115,11 @@ const getProductsByCategoryServices = async (categoryName) => {
     });
 
     return products;
+  } catch (error) {
+    console.error("Error fetching products for AI request:", error.message);
+    throw new Error("Failed to fetch products for Ai request");
+    
+  }
 };
 
 const getAllCategoriesAsListServices = async () => {
@@ -106,4 +137,46 @@ const getAllCategoriesAsListServices = async () => {
   }
 }
 
-module.exports = {startConversationservices,sendMessageservices,getProductsByCategoryServices,getAllCategoriesAsListServices }
+// Service to get conversation messages for a user
+const getConversationMessagesService = async (userId) => {
+
+  try {
+    const conversation = await Conversation.findOne({
+      where: { userId },
+    });
+  
+    if (!conversation) {
+      throw new Error('Conversation not found'); 
+    }
+  
+    const messages = await Message.findAll({
+      where: { conversationId: conversation.conversationId },
+      order: [['createdAt', 'ASC']], // Optional: order messages by creation date
+    });
+  
+    return messages;
+  } catch (error) {
+    console.error("Error featching messages service:", error.message);
+    throw new Error(`Error featching messages service: ${error.message}`);
+  }
+};
+
+const deleteConversationService = async (userId) => {
+  try {
+    const conversation = await Conversation.findOne({
+      where: { userId },
+    });
+
+    if (!conversation) {
+      throw new Error('No active conversation found for this user');
+    }
+
+    await conversation.destroy();
+
+    return { message: 'Conversation deleted successfully' };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+module.exports = {startConversationservices,sendMessageservices,getProductsByCategoryServices,getAllCategoriesAsListServices, getConversationMessagesService,deleteConversationService}

@@ -1,14 +1,14 @@
 const { Conversation } = require('../models/conversation.model');
-const {startConversationservices,sendMessageservices,getProductsByCategoryServices,AllCategoriesAsListServices, getAllCategoriesAsListServices} =require('../services/chatbot.services')
+const {startConversationservices,sendMessageservices,getProductsByCategoryServices,getAllCategoriesAsListServices,getConversationMessagesService,deleteConversationService} =require('../services/chatbot.services')
 
 const startConversation =async (req,res)=>{
     try {
 
         const userId=req.userId
 
-        const newConversationId= await startConversationservices(userId);
+        const ConversationId= await startConversationservices(userId);
 
-        res.status(200).json({ conversationId: newConversationId } );
+        res.status(200).json({ conversationId: ConversationId.conversationId } );
         
         
     } catch (err) {
@@ -58,4 +58,23 @@ const getAllCatigoriesAsListController= async (req,res)=>{
 
 }
 
-module.exports={startConversation, sendMessage, getProductsByCategory ,getAllCatigoriesAsListController}
+const getConversationMessages = async (req, res, next) => {
+    try {
+      const messages = await getConversationMessagesService(req.userId);
+      res.status(200).json({ messages });
+    } catch (error) {
+        res.status(400).json({ error : error.message });
+    }
+  };
+
+const deleteConversation = async (req, res, next) => {
+    try {
+        const response = await deleteConversationService( req.userId );
+        res.status(200).json(response);
+
+    } catch (error) {
+        res.status(400).json({ error : err.message });
+    }
+};
+
+module.exports={startConversation, sendMessage, getProductsByCategory ,getAllCatigoriesAsListController,getConversationMessages,deleteConversation}

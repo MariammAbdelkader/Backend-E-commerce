@@ -28,8 +28,8 @@ const AuthMiddleware = (req, res, next) => {
 
 const AuthConversationIdMiddleware =async(req, res, next) =>{
   try {
-    const conversationId= req.body.conversationId
-    const userId=req.userId 
+    const conversationId= req.params.conversationId || req.body.conversationId      // params for getConverstaionMessages
+    const userId=req.userId                                                         // while body when using sendMessage
 
     const conversation = await Conversation.findOne({
       where: {
