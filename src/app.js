@@ -38,7 +38,9 @@ const {facebookAuthRouter}=require('./routes/facebookAuth.routes.js');
 const {imageRouter} = require('./routes/image.routes.js');
 const { passwordRouter } = require('./routes/managePassword.routes.js');
 const { Salesrouter } = require('./routes/Metric.sales.routs.js');
-const {returnRouter}= require('./routes/return.routs.js')
+const {returnRouter}= require('./routes/return.routs.js');
+
+const {AddDataRouter} =require('./fakedata/AddData.js')
 
 
 
@@ -124,7 +126,8 @@ async connectToDatabase() {
     this.app.use("/api/sales",Salesrouter);
     this.app.use("/api/return",returnRouter);
 
-
+    /////////////////////////
+    this.app.use("/addDummyData",AddDataRouter);
 
 
   }
