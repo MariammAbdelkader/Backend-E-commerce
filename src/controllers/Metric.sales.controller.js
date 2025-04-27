@@ -4,11 +4,12 @@ const {SalesService,AnalyticsCalculations} = require('../services/Metric.sales.s
 class SalesController {
   static async getSumMetricAnalytics(req, res) {
     try {
-      const data={}
-      data.year= req.body.year;
-      data.metric= req.metric;
-      if(req.body.quarter) data.quarter=req.body.quarter;
-
+      const data={
+      year: req.params.year,
+      metric: req.metric,
+      quarter: req.query? Number(req.query.quarter) : null,
+    } // Get the quarter from the query parameter, default to null if not provided
+    console.log("data",data)
       const total = await SalesService.getSumMetricAnalytics(data);
       res.status(200).json({ total });
     } catch (error) {
@@ -18,8 +19,7 @@ class SalesController {
   static async getMetricAnalytics(req,res){
     try{
       const data = {
-        start: req.body.start,
-        end: req.body.end,
+        year: req.params.year,
         metric: req.metric
       };
 

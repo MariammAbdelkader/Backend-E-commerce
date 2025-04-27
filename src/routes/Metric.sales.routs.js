@@ -4,14 +4,14 @@ const Salesrouter = express.Router();
 const {MetricMiddleware}=require('../middlewares/MetricSales.middleware')
 
 //because we send a body
-Salesrouter.post('/Revenue',MetricMiddleware,SalesController.getMetricAnalytics);
-Salesrouter.post('/Profit',MetricMiddleware, SalesController.getMetricAnalytics);
-Salesrouter.post('/returnRate',MetricMiddleware, SalesController.getMetricAnalytics);
-Salesrouter.post('/grossRate',MetricMiddleware, SalesController.getMetricAnalytics);
-Salesrouter.post('/conversionRate',MetricMiddleware, SalesController.getMetricAnalytics);
+Salesrouter.get('/Revenue/:year',MetricMiddleware,SalesController.getMetricAnalytics);
+Salesrouter.get('/Profit/:year',MetricMiddleware, SalesController.getMetricAnalytics);
+Salesrouter.get('/returnRate/:year',MetricMiddleware, SalesController.getMetricAnalytics);
+Salesrouter.get('/grossRate/:year',MetricMiddleware, SalesController.getMetricAnalytics);
+Salesrouter.get('/conversionRate/:year',MetricMiddleware, SalesController.getMetricAnalytics);
 
-Salesrouter.post('sum/Revenue',MetricMiddleware,SalesController.getSumMetricAnalytics);
-Salesrouter.post('sum/Profit',MetricMiddleware, SalesController.getSumMetricAnalytics);
+Salesrouter.get('/Revenue/sum/:year',MetricMiddleware,SalesController.getSumMetricAnalytics);
+Salesrouter.get('/Profit/sum/:year',MetricMiddleware, SalesController.getSumMetricAnalytics);
 
 
 Salesrouter.post('growthrate/Profit',MetricMiddleware,SalesController.getGrowthRates);
@@ -20,6 +20,7 @@ Salesrouter.post('growthrate/Revenue',MetricMiddleware, SalesController.getGrowt
 
 Salesrouter.get('topselling/products',SalesController.getTopSellingProducts);
 Salesrouter.get('topselling/categories', SalesController.getTopCategories);
+
 Salesrouter.get('topreturned/products', SalesController.mostReturnedProducts);
 
 
