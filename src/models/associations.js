@@ -130,6 +130,7 @@ DiscountOnCategories.belongsTo(DiscountLogs, { foreignKey: 'logId' });
 DiscountLogs.belongsTo(User, { foreignKey: 'adminId' });
 
 
+
 module.exports = {  Product, ProductImage,  User , Cart , CartItem ,
                     Order , Category , Subcategory, OrderDetail, Return,
                     CustomerActivity, CustomerSegment ,Review,

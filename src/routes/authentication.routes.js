@@ -5,7 +5,15 @@ const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
 const { signupSchema } = require("../validations/validation");
 
 
-const router = express.Router();
+const manualAuthRouter = express.Router();
+
+
+manualAuthRouter.post("/login", authenticationController.login);  
+
+manualAuthRouter.post("/signup",authenticationController.signUp);
+
+manualAuthRouter.post("/logout", authenticationController.logout);
+
 /**
  * @swagger
  * tags:
@@ -82,7 +90,7 @@ const router = express.Router();
  */
 
 
-router.post("/signup",authenticationController.signUp);
+
 
 /**
  * @swagger
@@ -147,12 +155,7 @@ router.post("/signup",authenticationController.signUp);
  *         description: Internal server error.
  */
 
-router.post("/login", authenticationController.login);  
 
 
 
-router.post("/logout", authenticationController.logout);
-
-
-
-module.exports={router};
+module.exports={manualAuthRouter};

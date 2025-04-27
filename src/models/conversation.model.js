@@ -11,6 +11,7 @@ const Conversation = db.define('Conversation', {
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    unique: true,
     references: {
       model: User, // Reference the User model
       key: 'userId', // The primary key in the User model
@@ -18,4 +19,44 @@ const Conversation = db.define('Conversation', {
 },
 });
 
-module.exports = { Conversation };
+// User model
+User.hasOne(Conversation, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Conversation.belongsTo(User, { foreignKey: 'userId' });
+
+const Message = db.define('Message', {
+  messageId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  conversationId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Conversation,
+      key: 'conversationId',
+    },
+    onDelete: 'CASCADE', 
+  },
+  senderType: {
+    type: DataTypes.ENUM('user', 'bot'),
+    allowNull: false,
+  },
+  messageContent: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+}, {
+  timestamps: true, 
+});
+
+Message.belongsTo(Conversation, {
+  foreignKey: 'conversationId',
+  onDelete: 'CASCADE',
+});
+Conversation.hasMany(Message, {
+  foreignKey: 'conversationId',
+  onDelete: 'CASCADE',
+});
+
+module.exports = { Conversation, Message};
