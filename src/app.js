@@ -20,14 +20,14 @@ const { db } =require("./database");
 const associations = require('./models/associations.js');
 require("./job/discount.job.js");
 const { ErrorMiddleware } = require('./middlewares/errors.middlewares.js');
-const { router } = require('./routes/authentication.routes.js');
+const { manualAuthRouter } = require('./routes/authentication.routes.js');
 const { csvRouter } = require('./routes/csv.routes.js');
 const { cartRouter } = require('./routes/cart.router.js');
 const {productRouter} =require('./routes/product.router');
 const {categoryRouter} =require('./routes/category.router');
 const {subcategoryRouter} =require('./routes/subcategory.routes');
 const { orderRouter } = require('./routes/order.routes.js');
-const {chatbotRouter}= require('./routes/chatbot.routs.js');
+const {chatbotRouter}= require('./routes/chatbot.routes.js');
 const{userProfileRouter}=require('./routes/userprofile.router.js');
 const {CustomerManagementRouter} =require('./routes/CustomerManagement.router.js');
 const {paymentRouter}=require('./routes/payment.router.js');
@@ -106,7 +106,7 @@ async connectToDatabase() {
   }
   
   initializeRoutes() {
-    this.app.use("/api", router);
+    this.app.use("/api/auth", manualAuthRouter);
     this.app.use("/api/auth",googleAuthRouter);
     this.app.use("/api/auth",facebookAuthRouter);
     this.app.use("/api/auth",passwordRouter);
