@@ -14,19 +14,17 @@ const startConversationservices = async (userId)=>{
     try {
       const user = await User.findByPk(userId);
       if (!user) {
-          throw new Error("User not found");
+        throw new Error("User not found");
       }
-
       const existingConversation = await Conversation.findOne({ where: { userId } });
-
       if (existingConversation) {
         return existingConversation; 
       }
       const newConversation = await Conversation.create({ userId });
-
       return newConversation;
 
     } catch (error) {
+      console.error("Error starting conversation  AI service:", error.message);
       throw error;
     }
 }
@@ -133,7 +131,8 @@ const getAllCategoriesAsListServices = async () => {
 
       return categoryNames;
   } catch (err) {
-      throw err;
+      console.error("Error featching categories service:", err.message);
+      throw new Error(`Error featching categories service: ${err.message}`);
   }
 }
 
@@ -175,7 +174,8 @@ const deleteConversationService = async (userId) => {
 
     return { message: 'Conversation deleted successfully' };
   } catch (error) {
-    throw new Error(error.message);
+    console.error(`Error deleting messages service: ${error.message}`);
+    throw new Error(`Error deleting messages service: ${error.message}`);
   }
 };
 
