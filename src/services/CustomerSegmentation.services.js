@@ -134,7 +134,7 @@ const getSegmentationsServices = async ({userId,type}) => {
         const result = usersWithSegments.map(user => ({
             userId: user.userId,
             firstName: user.firstName,
-            firstName:user.firstName,
+            lastName:user.lastName,
             phoneNumber: user.phoneNumber,
             address: user.address,
             gender: user.gender,
