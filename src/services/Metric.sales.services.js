@@ -430,11 +430,11 @@ static async calculateReturnInfo(month, year) {
         totalRevenue += item.quantity * item.priceAtPurchase;
       }
     }
-    return totalRevenue-totalRefundAmount;
+    return (totalRevenue-totalRefundAmount).toFixed(2);
 }
   static async calculateprofit(totalRevenue) {
     const costs= totalRevenue*0.4 
-    return totalRevenue-costs;
+    return (totalRevenue-costs).toFixed(2);
   }
 
 
@@ -479,11 +479,23 @@ static async calculateReturnInfo(month, year) {
   //  Master method
   static async calculateMonthlyAnalytics(month, year) {
     const orders = await this.getOrdersInPeriod(month, year);
-    const  {returnRate,totalRefundAmount}  = await this.calculateReturnInfo(month, year);
-    const Revenue = await this.calculateRevenue(orders,totalRefundAmount);
-    const profit =await this.calculateprofit(Revenue)
+    console.log('Orders:', orders);
+    const { returnRate, totalRefundAmount } = await this.calculateReturnInfo(month, year);
+    console.log('Return Info:', { returnRate, totalRefundAmount });
+    const Revenue = await this.calculateRevenue(orders, totalRefundAmount);
+    console.log('Revenue:', Revenue);
+    const profit = await this.calculateprofit(Revenue);
+    console.log('Profit:', profit);
     const conversionRate = await this.calculateConversionRate(orders.length);
+    console.log('Conversion Rate:', conversionRate);
     const grossRate = await this.calculateGrossRate(month, year, Revenue);
+    console.log('Gross Rate:', grossRate);
+  
+  this.saveTodataBase({ month,year,Revenue,
+      profit,
+      returnRate,
+      conversionRate,
+      grossRate})
 
     return {
       Revenue,
@@ -493,6 +505,21 @@ static async calculateReturnInfo(month, year) {
       grossRate,
     };
   }
+
+static async saveTodataBase(analytics){
+  
+  const monthAnalytics= await MonthlyAnalytics.upsert({
+    month: analytics.month,
+    year: analytics.year,
+    Revenue:analytics.Revenue,
+    Profit:analytics.profit ,
+    returnRate: analytics.returnRate,
+    conversionRate: analytics.conversionRate,
+    grossRate: analytics.grossRate,        
+  });
+
+}
+
 
   static async calculateGrowthRates({ year, metric } = {}) {
 
@@ -536,7 +563,7 @@ static async calculateReturnInfo(month, year) {
       halfYear,
       fullYear
     };
-  }  
+  } 
 }
 
 module.exports = {AnalyticsCalculations,SalesService};
