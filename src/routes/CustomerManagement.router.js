@@ -157,6 +157,6 @@ CustomerManagementRouter.get("/customer-info" , getSegmentationsController)
  *       500:
  *         description: Internal server error.
  */
-CustomerManagementRouter.get("/userhistory",getUserHistoryController)
+CustomerManagementRouter.get("/userhistory/:userId",getUserHistoryController)
 
 module.exports={CustomerManagementRouter}

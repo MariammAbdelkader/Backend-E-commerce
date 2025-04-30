@@ -36,12 +36,12 @@ const getOrdersService = async (where) => {
     return orders.map(order => {
         const cartItems = order.cart?.cartItems || [];
         const products = cartItems.map(item => ({
-            productId: item.products.productId,
-            name: item.products.name,
-            price: item.products.price,
-            description: item.products.description,
-            category: item.products.Category?.name || 'Uncategorized',
-            subCategory: item.products.Subcategory?.name || 'None',
+            productId: item.products?.productId,
+            name: item.products?.name,
+            price: item.products?.price,
+            description: item.products?.description,
+            category: item.products?.Category?.name || 'Uncategorized',
+            subCategory: item.products?.Subcategory?.name || 'None',
             quantity: item.quantity,
         }));
 
@@ -54,6 +54,7 @@ const getOrdersService = async (where) => {
         };
     });
 };
+
 
 
 //all products ordered by user

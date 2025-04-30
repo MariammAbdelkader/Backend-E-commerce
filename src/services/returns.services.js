@@ -19,12 +19,8 @@ const getReturnsService = async (where) => {
                 model: Order,
                 attributes: ['orderId', 'orderDate', 'totalAmount'],
             },
-            {
-                model: User,
-                attributes: ['userId', 'username', 'email'],
-            },
             ],
-            order: [['createdAt', 'DESC']], // Optional: newest first
+            order: [['createdAt', 'DESC']], 
         });
         
         return returns.map((ret) => ({
@@ -33,13 +29,6 @@ const getReturnsService = async (where) => {
             returnReason: ret.ReturnReason,
             status: ret.Status,
             refundAmount: ret.RefundAmount,
-            user: ret.User
-            ? {
-                userId: ret.User.userId,
-                username: ret.User.username,
-                email: ret.User.email,
-                }
-            : null,
             product: ret.Product
             ? {
                 productId: ret.Product.productId,
