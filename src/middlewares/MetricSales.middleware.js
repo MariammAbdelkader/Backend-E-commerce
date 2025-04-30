@@ -4,9 +4,11 @@ const MetricMiddleware=async(req,res, next)=>{
     
     try{
 
-        const pathSegments = req.path.split('/').filter(Boolean); 
-        const metricName = pathSegments[pathSegments.length - 1];  // get last segment
+        const path = req.path;  // example: /sum/Profit/2025
+        const parts = path.split('/'); // split by /
+        const metricName = parts[1]; // parts = ["", "sum", "Profit", "2025"]
 
+  console.log("Metric Name:", metricName);
         if (!metricName) {
             return res.status(400).json({ message: 'Invalid route format.' });
         }

@@ -27,7 +27,7 @@ class Helpers{
     );
   }
   
-  static async capitalizeFirstLette (string) {
+  static async capitalizeFirstLetter (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
@@ -167,15 +167,15 @@ class SalesService {
   
     const result = await MonthlyAnalytics.findOne({
        attributes : 
-        [Sequelize.fn('SUM', Sequelize.col(metric)), `total${Helpers.capitalizeFirstLetter(metric)}`],
+        [Sequelize.fn('SUM', Sequelize.col(metric))],
       where,
       raw: true,
     });
   
-    return result ? result[`total${Helpers.capitalizeFirstLetter(metric)}`] || 0 : 0;
+    return result.sum ? Number(result.sum.toFixed(2)) || 0 : 0;
 }
   
-static async getMetricAnalytics({ start, end, metric } = {}) {
+static async getMetricAnalytics({ year, metric } = {}) {
   const validMetrics = Object.keys(MonthlyAnalytics.getAttributes())
     .filter(attr => MonthlyAnalytics.getAttributes()[attr].type instanceof Sequelize.FLOAT);
 
@@ -183,30 +183,18 @@ static async getMetricAnalytics({ start, end, metric } = {}) {
     throw new Error(`Unsupported metric: ${metric}`);
   }
 
-  const attributes = ['year', 'month', metric];
-  const where = {};
+  const attributes = ['month', metric];
 
-  // Validate and prepare date ranges
-  if (start && end) {
-    const { startValue, endValue } = Helpers.validateStartEndPeriod(start, end);
-    const dateConditions = Helpers.buildDateRangeCondition(startValue, endValue);
+  // If year not provided, default to current year
+  const selectedYear = year || new Date().getFullYear();
 
-    if (!where[Sequelize.Op.and]) where[Sequelize.Op.and] = [];
-    where[Sequelize.Op.and].push(...dateConditions[Sequelize.Op.and]);
-
-  } else if (!start && !end) {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const startValue = currentYear * 100 + 1;
-    const endValue = currentYear * 100 + 12;
-
-    const dateConditions = this.buildDateRangeCondition(startValue, endValue);
-    if (!where[Sequelize.Op.and]) where[Sequelize.Op.and] = [];
-    where[Sequelize.Op.and].push(...dateConditions[Sequelize.Op.and]);
-
-  } else {
-    throw new Error(`Both start and end dates must be provided`);
-  }
+  // Build where condition: only that year's months 1-12
+  const where = {
+    year: selectedYear,
+    month: {
+      [Sequelize.Op.between]: [1, 12],
+    },
+  };
 
   const result = await MonthlyAnalytics.findAll({
     attributes,
@@ -215,12 +203,15 @@ static async getMetricAnalytics({ start, end, metric } = {}) {
     raw: true,
   });
 
-  const formattedresult = result.map(item => ({
+  // Format result: round metric values to 2 decimals
+  const formattedResult = result.map(item => ({
     ...item,
-    [metric]: parseFloat(item[metric]).toFixed(2)
+    [metric]: parseFloat(item[metric]).toFixed(2),
   }));
-  return formattedresult;
+
+  return formattedResult;
 }
+
 
 
   // Get Top Selling Products
@@ -439,11 +430,11 @@ static async calculateReturnInfo(month, year) {
         totalRevenue += item.quantity * item.priceAtPurchase;
       }
     }
-    return totalRevenue-totalRefundAmount;
+    return (totalRevenue-totalRefundAmount).toFixed(2);
 }
   static async calculateprofit(totalRevenue) {
     const costs= totalRevenue*0.4 
-    return totalRevenue-costs;
+    return (totalRevenue-costs).toFixed(2);
   }
 
 
@@ -488,11 +479,23 @@ static async calculateReturnInfo(month, year) {
   //  Master method
   static async calculateMonthlyAnalytics(month, year) {
     const orders = await this.getOrdersInPeriod(month, year);
-    const  {returnRate,totalRefundAmount}  = await this.calculateReturnInfo(month, year);
-    const Revenue = await this.calculateRevenue(orders,totalRefundAmount);
-    const profit =await this.calculateprofit(Revenue)
+    console.log('Orders:', orders);
+    const { returnRate, totalRefundAmount } = await this.calculateReturnInfo(month, year);
+    console.log('Return Info:', { returnRate, totalRefundAmount });
+    const Revenue = await this.calculateRevenue(orders, totalRefundAmount);
+    console.log('Revenue:', Revenue);
+    const profit = await this.calculateprofit(Revenue);
+    console.log('Profit:', profit);
     const conversionRate = await this.calculateConversionRate(orders.length);
+    console.log('Conversion Rate:', conversionRate);
     const grossRate = await this.calculateGrossRate(month, year, Revenue);
+    console.log('Gross Rate:', grossRate);
+  
+  this.saveTodataBase({ month,year,Revenue,
+      profit,
+      returnRate,
+      conversionRate,
+      grossRate})
 
     return {
       Revenue,
@@ -502,6 +505,21 @@ static async calculateReturnInfo(month, year) {
       grossRate,
     };
   }
+
+static async saveTodataBase(analytics){
+  
+  const monthAnalytics= await MonthlyAnalytics.upsert({
+    month: analytics.month,
+    year: analytics.year,
+    Revenue:analytics.Revenue,
+    Profit:analytics.profit ,
+    returnRate: analytics.returnRate,
+    conversionRate: analytics.conversionRate,
+    grossRate: analytics.grossRate,        
+  });
+
+}
+
 
   static async calculateGrowthRates({ year, metric } = {}) {
 
@@ -545,7 +563,7 @@ static async calculateReturnInfo(month, year) {
       halfYear,
       fullYear
     };
-  }  
+  } 
 }
 
 module.exports = {AnalyticsCalculations,SalesService};

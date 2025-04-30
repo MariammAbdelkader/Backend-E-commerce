@@ -5,12 +5,12 @@ const { getUserActivitiesServices } = require('../services/CustomerActivity.Serv
 
 const getUserHistoryController = async (req, res) => {
     try {
-        const { userId } = req.body;
+        const  userId  = req.params.userId;
         if (!userId) {
             return res.status(400).json({ error: "User ID is required" });
-        }x
+        }
 
-
+        
         const orderHistory = await getOrdersService({userId});
         const returns = await getReturnsService({userId});
         const activities = await getUserActivitiesServices(userId);
@@ -23,7 +23,7 @@ const getUserHistoryController = async (req, res) => {
         });
         
     } catch (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err.message });
     }
 };
 
