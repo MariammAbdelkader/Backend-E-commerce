@@ -69,6 +69,11 @@ const CartItem = db.define('CartItem', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
+    returnedQuantity: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+    },
 });
 
 // // Hook to set priceAtPurchase

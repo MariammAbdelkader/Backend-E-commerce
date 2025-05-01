@@ -36,8 +36,8 @@ class Helpers{
   }
 
   static isValidYear(year) {
-      return typeof year !== 'number'&& year > 1900 && year <= new Date().getFullYear(); // Valid year is between 1900 and the current year
-
+    year = Number(year); // Convert to number if it's a string
+      return  Number.isInteger(year)&& year > 1900 && year <= new Date().getFullYear(); // Valid year is between 1900 and the current year
   }
 
   static validateDate(month, year) {
@@ -108,23 +108,19 @@ class SalesService {
 
 
 
-  static async getGrowthRates({ year, metric } = {}) {
+  static async getGrowthRates( metric) {
 
-    // Validate input
-    if (!Helpers.isValidYear(year)) {
-      throw new Error('You must provide a valid year.');
-    }
+
     const validMetrics = ['Revenue', 'Profit'];
     if (!validMetrics.includes(metric)) {
       throw new Error(`unsupproted ${metric}`);
     }
 
-    const result = await GrowthRate.findOne({
+    const result = await GrowthRate.findAll({
       where: {
-        year,
         basedOn: metric
       },
-      attributes: ['quarterYear', 'halfYear', 'fullYear'],
+      attributes: ['year','quarterYear', 'halfYear', 'fullYear'],
       raw: true
     });
   
@@ -264,57 +260,37 @@ static async getMetricAnalytics({ year, metric } = {}) {
     
   }
   // Get Top Categories
-  static async getTopCategories() {
-    const topCategories = await CartItem.findAll({
-      attributes: [
-        [sequelize.col('Product.categoryId'), 'categoryId'],
-        [sequelize.fn('SUM', sequelize.literal('priceAtPurchase * quantity')), 'revenue']
-      ],
-      include: [
-        {
-          model: Product,
-          attributes: []
-        },
-        {
-          model: Cart,
-          include: [
-            {
-              model: Order,
-              where: { paymentStatus: 'paid' },
-              attributes: []
-            }
-          ],
-          attributes: []
+  static async getTopCategories({year, month}) {
+
+    if(!year){
+      year= new Date().getFullYear()
+    }
+    const orders=  await AnalyticsCalculations.getOrdersInPeriod(month, year);
+
+
+    const categoryRevenue = {};
+
+    orders.forEach(order => {
+      order.cart.cartItems.forEach(item => {
+        const product = item.products;
+        const category = product.Category.name;
+
+        const itemRevenue = item.priceAtPurchase * (item.quantity -item.returnedQuantity);
+      
+        if (!categoryRevenue[category]) {
+          categoryRevenue[category] = 0;
         }
-      ],
-      group: ['Product.categoryId'],
-      order: [[sequelize.literal('revenue'), 'DESC']],
-      limit: 5,
-      raw: true
+
+        categoryRevenue[category] += itemRevenue;
+      });
     });
 
-    // Validation: Check if results exist
-    if (!topCategories || topCategories.length === 0) {
-      throw new Error('No top-selling categories found.');
-    }
-
-    // Fetch category info for each top category
-    const finalResults = await Promise.all(
-      topCategories.map(async (item) => {
-        const category = await Category.findByPk(item.categoryId, { attributes: ['name'], raw: true });
-        if (!category) {
-          throw new Error(`Category info not found for categoryId: ${item.categoryId}`);
-        }
-    
-        return {
-          name: category.name,     
-          reason: Number(item.revenue)  
-        };
-      })
-    );
-
-    return finalResults;
-
+    // convert to array if you want
+    const result = Object.entries(categoryRevenue).map(([category, revenue]) => ({
+      category,
+      revenue: parseFloat(revenue.toFixed(2)) // round to 2 decimal places 
+    }));
+    return result
   }
 
     // Get Most Returned Products
@@ -353,8 +329,18 @@ static async getMetricAnalytics({ year, metric } = {}) {
 //this class is respossible for calculating the Monthly analtics for Model and return them for the Job to save in the database
 class AnalyticsCalculations {
   static async getOrdersInPeriod(month, year) {
-    const startDate = new Date(year, month - 1, 1); 
-    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    let startDate, endDate;
+
+    if (month) {
+      // If month is provided
+      startDate = new Date(year, month - 1, 1);
+      endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    } else {
+      // If month is not provided → full year
+      startDate = new Date(year, 0, 1); // Jan 1
+      endDate = new Date(year, 11, 31, 23, 59, 59, 999); // Dec 31
+    }
+  
     return await Order.findAll({
       where: {
         orderDate: { [Sequelize.Op.between]: [startDate, endDate] },
@@ -371,7 +357,13 @@ class AnalyticsCalculations {
               include: [
                 {
                   model: Product,
-                  as: 'products'
+                  as: 'products',
+                  include: [
+                    {
+                      model: Category,
+                      as: 'Category',
+                    }
+                  ]
                 }
               ]
             }
@@ -479,19 +471,13 @@ static async calculateReturnInfo(month, year) {
   //  Master method
   static async calculateMonthlyAnalytics(month, year) {
     const orders = await this.getOrdersInPeriod(month, year);
-    console.log('Orders:', orders);
     const { returnRate, totalRefundAmount } = await this.calculateReturnInfo(month, year);
-    console.log('Return Info:', { returnRate, totalRefundAmount });
     const Revenue = await this.calculateRevenue(orders, totalRefundAmount);
-    console.log('Revenue:', Revenue);
     const profit = await this.calculateprofit(Revenue);
-    console.log('Profit:', profit);
     const conversionRate = await this.calculateConversionRate(orders.length);
-    console.log('Conversion Rate:', conversionRate);
     const grossRate = await this.calculateGrossRate(month, year, Revenue);
-    console.log('Gross Rate:', grossRate);
   
-  this.saveTodataBase({ month,year,Revenue,
+    DBsave.MonthlyAnalytics({ month,year,Revenue,
       profit,
       returnRate,
       conversionRate,
@@ -506,26 +492,11 @@ static async calculateReturnInfo(month, year) {
     };
   }
 
-static async saveTodataBase(analytics){
-  
-  const monthAnalytics= await MonthlyAnalytics.upsert({
-    month: analytics.month,
-    year: analytics.year,
-    Revenue:analytics.Revenue,
-    Profit:analytics.profit ,
-    returnRate: analytics.returnRate,
-    conversionRate: analytics.conversionRate,
-    grossRate: analytics.grossRate,        
-  });
-
-}
-
-
-  static async calculateGrowthRates({ year, metric } = {}) {
-
+static async calculateGrowthRates({ year, metric } = {}) {
+ 
     // Validate input
     if (!Helpers.isValidYear(year)) {
-      throw new Error('You must provide a valid year.');
+      throw new Error('You must provide a valid year............................');
     }
   
     const validMetrics = ['Revenue', 'Profit'];
@@ -536,7 +507,7 @@ static async saveTodataBase(analytics){
     // Helper to safely calculate growth
     const calcGrowth = (newVal, oldVal) => {
       if (oldVal === 0) return null;
-      return ((newVal - oldVal) / oldVal) * 100;
+      return (((newVal - oldVal) / oldVal) * 100).toFixed(2);
     };
   
     // Fetch sums for each quarter in the same year
@@ -550,20 +521,57 @@ static async saveTodataBase(analytics){
     const h2 = q3 + q4;
   
     // Fetch total revenue for this year and last year
-    const currentYearTotal = await this.getSumMetricAnalytics({ year, metric });
-    const previousYearTotal = await this.getSumMetricAnalytics({ year: year - 1, metric });
+    const currentYearTotal = await SalesService.getSumMetricAnalytics({ year, metric });
+    const previousYearTotal = await SalesService.getSumMetricAnalytics({ year: year - 1, metric });
   
     // Calculate growth rates
     const quarterYear = calcGrowth(q2, q1);
     const halfYear = calcGrowth(h2, h1);
     const fullYear = calcGrowth(currentYearTotal, previousYearTotal);
   
+    DBsave.GrowthRate({ year, quarterYear, halfYear, fullYear,metric });
     return {
       quarterYear,
       halfYear,
       fullYear
     };
-  } 
+  
 }
 
+}
+
+class DBsave {
+  static async MonthlyAnalytics(analytics) {
+    try {
+        await MonthlyAnalytics.upsert({
+          month: analytics.month,
+          year: analytics.year,
+          Revenue:analytics.Revenue,
+          Profit:analytics.profit ,
+          returnRate: analytics.returnRate,
+          conversionRate: analytics.conversionRate,
+          grossRate: analytics.grossRate,        
+        });
+    } catch (error) {
+      console.error('Error saving to database:', error);
+      throw new Error('Failed to save analytics to database');
+    }
+  }
+  static async GrowthRate(growthRates) {
+    try {
+        await GrowthRate.upsert({
+          year: growthRates.year,
+          quarterYear: growthRates.quarterYear,
+          halfYear: growthRates.halfYear,
+          fullYear: growthRates.fullYear,
+          basedOn: growthRates.metric
+        });
+    } catch (error) {
+      console.error('Error saving to database:', error);
+      throw new Error('Failed to save growth rates to database');
+    }
+  }
+
+}
+  
 module.exports = {AnalyticsCalculations,SalesService};

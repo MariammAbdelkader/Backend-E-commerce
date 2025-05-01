@@ -22,8 +22,10 @@ const getOrdersService = async (where) => {
                                 as: 'products',
                                 attributes: ['productId', 'name', 'price', 'description'],
                                 include: [
-                                    { model: Category, attributes: ['name'] },
-                                    { model: Subcategory, attributes: ['name'] },
+                                    {
+                                      model: Category,
+                                      as: 'Category',
+                                    }
                                 ],
                             },
                         ],
