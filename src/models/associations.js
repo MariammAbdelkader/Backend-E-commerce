@@ -108,10 +108,10 @@ Role.hasMany(UserRole, { foreignKey: "roleId" });
 
 // Define the relationship
 Category.hasMany(Product, { foreignKey: 'categoryId', onDelete: 'CASCADE' });
-Product.belongsTo(Category, { foreignKey: 'categoryId' });
+Product.belongsTo(Category, { foreignKey: 'categoryId',as: 'Category' });
 
 Subcategory.hasMany(Product, { foreignKey: 'subcategoryId', onDelete: 'CASCADE' });
-Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' });
+Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' ,as: 'SubCategory' });
 
 
 User.hasMany(Review, { foreignKey: 'userId', onDelete: 'CASCADE' });

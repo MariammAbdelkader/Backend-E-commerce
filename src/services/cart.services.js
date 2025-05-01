@@ -90,6 +90,7 @@ const previewCartService = async (cart) => {
         if (!cart) {
             throw new Error("There's no active cart for you ");
         }
+        
         const cartItems = await CartItem.findAll({
             where: { cartId: cart.cartId },
             include: {
@@ -99,10 +100,12 @@ const previewCartService = async (cart) => {
                 include: [
                     {
                         model: Category,
+                        as: 'Category',
                         attributes: ['name'],
                     },
                     {
                         model: Subcategory,
+                        as: 'SubCategory',
                         attributes: ['name'],
                     }
                 ]

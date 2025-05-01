@@ -12,18 +12,8 @@ cron.schedule('* 5 * * *', async () => {
 
   try {
     console.log(`[Analytics Job] Running for ${month}/${year}`);
-    const analytics = await AnalyticsCalculations.calculateMonthlyAnalytics(month, year);
-    const monthAnalytics= await MonthlyAnalytics.upsert({
-        month,
-        year,
-        Revenue:analytics.Revenue,
-        Profit:analytics.profit ,
-        returnRate: analytics.returnRate,
-        conversionRate: analytics.conversionRate,
-        grossRate: analytics.grossRate,        
-      });
-
-    console.log(`[Analytics Job] Done. Total Revenue: $${monthAnalytics.Revenue}`);
+    await AnalyticsCalculations.calculateMonthlyAnalytics(month, year);
+    console.log(`[Analytics Job] Done.}`);
     
   } catch (err) {
     console.error('[Analytics Job] Failed:', err);
@@ -36,24 +26,9 @@ cron.schedule('0 0 1 1 *', async () => {
 
   try {
     console.log(`[Analytics growth] Running for ${year}`);
-    const growthRateProfitBased = await AnalyticsCalculations.calculateGrowthRates({year,metric:'Profit'});
-    const growthRateRevenueBased = await AnalyticsCalculations.calculateGrowthRates({year,metric:'Revenue'});
-        await GrowthRate.upsert({
-            year,
-            quarterYear:growthRateProfitBased.quarterYear,
-            halfYear:growthRateProfitBased.quarterYear,
-            fullYear:growthRateProfitBased.quarterYear,
-            basedOn:'Profit',
-          });
-
-          await GrowthRate.upsert({
-            year,
-            quarterYear:growthRateRevenueBased.quarterYear,
-            halfYear:growthRateRevenueBased.quarterYear,
-            fullYear:growthRateRevenueBased.quarterYear,
-            basedOn:'Revenue',
-          });
-
+    await AnalyticsCalculations.calculateGrowthRates({year,metric:'Profit'});
+    await AnalyticsCalculations.calculateGrowthRates({year,metric:'Revenue'});
+  
     console.log(`[Analytics growth] Done`);
     
   } catch (err) {

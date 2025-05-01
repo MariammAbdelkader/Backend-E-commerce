@@ -6,7 +6,7 @@ const MetricMiddleware=async(req,res, next)=>{
 
         const path = req.path;  // example: /sum/Profit/2025
         const parts = path.split('/'); // split by /
-        const metricName = parts[1]; // parts = ["", "sum", "Profit", "2025"]
+        const metricName = parts[1]; // parts = ["","Profit", "sum",  "2025"]
 
   console.log("Metric Name:", metricName);
         if (!metricName) {

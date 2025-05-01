@@ -34,11 +34,8 @@ class SalesController {
 
   static async getGrowthRates(req, res) {
     try {
-      const data={}
-      data.year= req.body.year;
-      data.metric= req.metric;
-        const growth = await SalesService.getGrowthRates(data);
-        res.status(200)({growth});
+        const growth = await SalesService.getGrowthRates( req.metric);
+        res.status(200).json({growth});
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -55,7 +52,9 @@ class SalesController {
   
   static async getTopCategories(req, res) {
     try {
-      const categories = await SalesService.getTopCategories();
+      const year = req.params.year;
+      const month= req.query.month || null; // Get the month from the query parameter, default to null if not provided 
+      const categories = await SalesService.getTopCategories({year,month});
       res.json({ categories });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -73,9 +72,19 @@ class SalesController {
 
   static async test(req,res){
     try{
-      const {month, year}= req.body
-      const response = await AnalyticsCalculations.calculateMonthlyAnalytics(month, year);
-      res.status(200).json({message:"tarsh y ghaly", response})
+      const year = req.params.year || null;
+      // let analytics=[]
+      
+      // for (let i=1; i<=12; i++){
+      //   console.log("month: ",i,"year: ",year)
+      //   const response = await AnalyticsCalculations.calculateMonthlyAnalytics(i, year);
+      //   analytics.push({month:i ,analytics:response})
+      // }
+      const ProfitGrowthRates = await AnalyticsCalculations.calculateGrowthRates({year:year,metric:'Profit'});
+      const RevenueGrowthRates = await AnalyticsCalculations.calculateGrowthRates({year:year,metric:'Revenue'});
+  
+      
+      res.status(200).json({ProfitGrowthRates,RevenueGrowthRates});
       }catch(err){
       res.status(500).json({error:err.message+ " ttttttttttttt"})
       }

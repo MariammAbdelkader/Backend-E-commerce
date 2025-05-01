@@ -98,6 +98,7 @@ const requestreturnService = async ({ orderId, productId, userId, ReturnReason, 
         Status: "Pending",
       });
   
+      await cartItem.update({returnQuantity: quantity });
       return newReturn;
   
     } catch (err) {
