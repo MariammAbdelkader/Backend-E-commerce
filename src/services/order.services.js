@@ -1,8 +1,9 @@
 const { Cart, CartItem } = require("../models/cart.models");
 const { Order } = require("../models/order.models");
 const { Product } = require("../models/product.models");
-const { Category, Subcategory } = require('../models/category.models')
-
+const { Category, Subcategory } = require('../models/category.models');
+const { use } = require("passport");
+emitter= require('../event/eventEmitter')
 
 const getOrdersService = async (where) => {
     const orders = await Order.findAll({
@@ -145,7 +146,23 @@ const addOrderService = async (userId, cart, shippingAddress, billingAddress) =>
         if(!cart){
             throw new error("There's no active cart for you!")
         }
-        console.log("cart::::",cart)
+        const __cart = await Cart.findByPk(cart.cartId, {
+            include: [
+              {
+                model: Product,
+                as: 'products',
+                through: {
+                  attributes: ['quantity']  // This brings CartItem.quantity
+                }
+              }
+            ]
+          });
+
+          const productIdsWithQuantities = __cart.products.map(product => ({
+            productId: product.productId,
+            quantity: product.CartItem.quantity
+          }));
+        
         const order = await Order.create({
             userId,
             cartId:cart.cartId,
@@ -155,6 +172,19 @@ const addOrderService = async (userId, cart, shippingAddress, billingAddress) =>
             paymentStatus: 'pending',  
             orderStatus: 'pending',   
         });
+
+        try{
+            productIdsWithQuantities.forEach(item => {
+                emitter.emit('userActivity', {
+                  userId,
+                  ActivityType: 'Purchase',
+                  productId: item.productId,
+                  description: `Purchased ${item.quantity}`,
+                });
+              });
+        }catch(error){
+            console.log("error in adding order ",error);
+        }
         
 
         console.log('Order created:', order.toJSON());  // Ensure correct logging
