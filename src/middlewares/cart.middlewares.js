@@ -1,5 +1,6 @@
 const { Cart } = require("../models/cart.models");
 const { cleanUpCart } = require("../utilities/cleanUpCart");
+const emitter = require('../event/eventEmitter');
 
 const validateCart = async (req, res, next) => {
     try {
@@ -13,8 +14,15 @@ const validateCart = async (req, res, next) => {
                 //cart.isExpired = true;
                 //await cart.save();
                 cleanUpCart(cart)
-             
-        
+                try{
+                    emitter.emit('userActivity', 
+                        {   
+                            userId, 
+                            ActivityType: 'Abandoned Checkout',
+                        });        
+                }catch(error){
+                    console.log("error in Abandoned Checkout",error);
+                }
             } else {
                 req.cart = cart; 
                 

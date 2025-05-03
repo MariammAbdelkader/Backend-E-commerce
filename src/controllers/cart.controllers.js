@@ -29,7 +29,8 @@ const previewCart = async (req , res) =>{
 const deleteCart = async (req , res) =>{
     try {
         const cart = req.cart
-        const response = await deleteCartService(cart)
+        const userId  = req.userId
+        const response = await deleteCartService(cart,userId)
         res.status(200).json({message : " your cart deleted succesfully",response });
         
     } catch (err) {
@@ -41,7 +42,8 @@ const updateCart = async (req , res) =>{
     try {
         const { productId , quantity } = req.body
         const cart = req.cart
-        const response = await updateCartService(cart , productId , quantity)
+        const userId  = req.userId
+        const response = await updateCartService(cart , productId ,userId, quantity)
         res.status(200).json({message : "Product at your cart updated succesfully",cart: response });
         
     } catch (err) {
