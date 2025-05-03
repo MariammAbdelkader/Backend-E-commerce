@@ -3,7 +3,7 @@ const { Product } = require("../models/product.models");
 const { Category, Subcategory} = require('../models/category.models');
 const { cleanUpCart } = require("../utilities/cleanUpCart");
 
-
+const emitter = require('../event/eventEmitter');
 const createCartService = async (body, userId, cart = null) => {
     try {
 
@@ -78,7 +78,19 @@ const createCartService = async (body, userId, cart = null) => {
         }
         await product.save();
 
+        try{
+            emitter.emit('userActivity', 
+                {   
+                    userId, 
+                    ActivityType:"Add to Cart",
+                    productId,
+                    description: `Added ${quantity} of ${product.name} to cart`,
+                });
+        console.log("emitter successfully triggered:");
 
+        }catch(error){
+            console.log("error in creating cart item",error);
+        }
         return cart;
     } catch (error) {
         throw error;
@@ -130,19 +142,32 @@ const previewCartService = async (cart) => {
     }
 };
 
-const deleteCartService = async (cart) => {
+const deleteCartService = async (cart,userId) => {
     try {
         if (!cart) {
             throw new Error('Cart not found');
         }
 
         await cleanUpCart(cart);
+
+        try{
+            emitter.emit('userActivity', 
+                {   
+                    userId, 
+                    ActivityType: 'Kill Cart',
+                });
+        console.log("emitter successfully deleted the cart:");
+
+        }catch(error){
+            console.log("error emitter deleting the cart",error);
+        }
+
     } catch (error) {
         throw error;
     }
 ;}
 
-const updateCartService = async (cart, productId, quantity) => {
+const updateCartService = async (cart, productId, userId,quantity) => {
     try {
         if (!cart) {
             throw new Error("There's no active cart for you");
@@ -185,6 +210,15 @@ const updateCartService = async (cart, productId, quantity) => {
         const cartItems = await CartItem.findAll({ where: { cartId: cart.cartId } });
         if (cartItems.length == 0) {
             await cart.destroy(); 
+            try{
+                emitter.emit('userActivity', 
+                    {   
+                        userId, 
+                        ActivityType:'Kill Cart',
+                    });        
+            }catch(error){
+                console.log("error in Abandoned Checkout",error);
+            }
             return "Your cart has been emptied and deleted";
         }
 
@@ -193,6 +227,18 @@ const updateCartService = async (cart, productId, quantity) => {
             0
         );
         await cart.save();
+
+        try{
+            emitter.emit('userActivity', 
+                {   
+                    userId, 
+                    ActivityType: 'Remove From Cart',
+                    productId,
+                    description: `Removed ${quantity} of ${product.name} from cart`,
+                });        
+        }catch(error){
+            console.log("error in Remove from cart",error);
+        }
 
         return previewCartService(cart);
     } catch (error) {
