@@ -3,7 +3,10 @@ const { Order } = require('../models/order.models');
 const { Product } = require('../models/product.models');
 const { User } = require('../models/user.models');
 
-const{CartItem,Cart}=require('../models/cart.models')
+const{CartItem,Cart}=require('../models/cart.models');
+const { ACTIVITY_TYPES } = require('../models/customerActivity.models');
+
+emitter = require('../event/eventEmitter');
 
 const getReturnsService = async (where) => {
     try{
@@ -76,8 +79,8 @@ const requestreturnService = async ({ orderId, productId, userId, ReturnReason, 
         throw new Error("Return quantity must be greater than 0");
       }
   
-      if (quantity > cartItem.quantity) {
-        throw new Error(`You can't return more than ${cartItem.quantity} items`);
+      if ((quantity+cartItem.returnQuantity )> cartItem.quantity) {
+        throw new Error(`You can't return more than ${cartItem.quantity-cartItem.returnQuantity} items`);
       }
   
       const product = await Product.findByPk(productId);
@@ -98,7 +101,20 @@ const requestreturnService = async ({ orderId, productId, userId, ReturnReason, 
         Status: "Pending",
       });
   
-      await cartItem.update({returnQuantity: quantity });
+      await cartItem.update({returnQuantity:cartItem.returnQuantity+quantity });
+
+      try {
+        emitter.emit("userActivity", {
+          userId,
+          ActivityType: "Return",
+          productId,
+          description: `Return for ${quantity} items of product ${productId} with reason: ${ReturnReason}`,
+        });
+        console.log("successfully return log saved: ");
+
+      }catch (err) {
+        console.log("Error in return event emission:", err.message);
+      } 
       return newReturn;
   
     } catch (err) {
