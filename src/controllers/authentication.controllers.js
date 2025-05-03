@@ -1,8 +1,6 @@
 const passport = require("passport");
 const { signUpService, loginService ,logoutService} = require("../services/authentication.services");
-
-
-
+const jwt = require("jsonwebtoken");
 // TO DO : use the error middlewares
 
 const signUp =async (req,res)=>{
@@ -28,19 +26,17 @@ const login =async (req , res) => {
 
 }
 
-const logout = (req, res) => {
+const logout = async (req, res) => {
     if (!req.cookies.jwt) {
         return res.status(200).json({ message: "No active session" }); // Already logged out
     }
 
-    res.clearCookie("jwt", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "development",
-        sameSite: "Strict",
-    });
+    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+    const userId = decoded.userId; // Set userId in request object 
 
-    res.status(200).json({ message: "Logged out successfully" });
-};
+    const result = await logoutService(userId,res);
+    res.status(200).json({ message:result.message });
+}
 
 
 
