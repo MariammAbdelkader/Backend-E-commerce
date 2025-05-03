@@ -5,7 +5,8 @@ const{CustomerSegment}=require('../models/customerSegmentation.models')
 const { UserRole } = require("../models/userRole.models");
 const {Role} = require("../models/role.models");
 const createHash = require("../utilities/createHash");
-
+const { ACTIVITY_TYPES } = require("../models/customerActivity.models");
+emitter= require('../event/eventEmitter')
 
 const createToken = (userId, role) => {
     const jwtToken = jwt.sign(
@@ -78,6 +79,14 @@ const loginService = async (email , password) => {
 
             if (checkPassword) {
                 const token = createToken(user.userId, userRole);
+                try{
+                    emitter.emit("userActivity", {
+                        userId: user.userId,
+                        ActivityType: "Login",
+                    });
+                    }catch(err){
+                        console.log("Error in Login event emission:", err.message);    
+                    };
 
                 return {token  ,message : "logged in succesfully",data : user.dataValues };
             } else {
@@ -93,13 +102,22 @@ const loginService = async (email , password) => {
 
 
 }
-const logoutService = (res) => {
+const logoutService = (userId,res) => {
+
     res.clearCookie("jwt", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "development",  // working over HTTP only (not secured)
+        secure: process.env.NODE_ENV === "development",
         sameSite: "Strict",
     });
 
+    try{
+        emitter.emit("userActivity", {
+            userId,
+            ActivityType: "Logout",
+        });
+        }catch(err){
+            console.log("Error in logout event emission:", err.message);    
+        };
     return { message: "Logged out successfully" };
 };
 
