@@ -1,4 +1,4 @@
-const { CustomerActivity,ACTIVITY_TYPES } = require('../models/customerActivity.models');
+const { CustomerNormalActivity,CustomerProductActivity,ACTIVITY_TYPES } = require('../models/customerActivity.models');
 
 
 const getUserActivitiesServices = async (userId, activityType = null) => {
@@ -17,11 +17,18 @@ const getUserActivitiesServices = async (userId, activityType = null) => {
             whereClause.ActivityType = activityType;
         }
 
-        const activities = await CustomerActivity.findAll({
+        const Normalactivities = await CustomerNormalActivity.findAll({
             where: whereClause,
-            attributes: ['ActivityType', 'Description', 'productId', 'ActivityDate'],
             order: [['ActivityDate', 'DESC']],
+            raw: true
         });
+        const Productactivities = await CustomerProductActivity.findAll({
+            where: whereClause,
+            order: [['ActivityDate', 'DESC']],
+            raw: true
+        });
+
+        const activities = [...Normalactivities, ...Productactivities];
 
         return activities;
     } catch (err) {

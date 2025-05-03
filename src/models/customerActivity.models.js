@@ -5,48 +5,67 @@ const {User} =require('./user.models');
 const {Product} =require('./product.models')
 
 const ACTIVITY_TYPES = new Set([
-    'Login', 'Logout', 'View Product', 'Add to Cart', 'Remove From Cart',
-    'Kill Cart', 'Purchase', 'Return', 'Review', 'Search',
-    'Apply Coupon', 'Wishlist Add', 'Wishlist Remove', 'Compare Products',
-    'Abandoned Checkout', 'Chat with Support', 'Click on Recommendation',
-    'Rate Product', 'Share Product', 'Referral Sent',
-    'Subscription Start', 'Subscription Cancel'
-]);
+    'Login', 'Logout','Kill Cart','Abandoned Checkout','Search']);
+
 
 const PRODUCT_RELATED_ACTIVITIES = new Set([
-    'View Product', 'Add to Cart', 'Remove From Cart', 'Purchase',
-    'Return', 'Review', 'Search', 'Rate Product', 'Share Product'
+    'View Product', 'Add to Cart', 'Remove From Cart',
+    'Return', 'Add Review','Update Review','Purchase','Delete Review'
     ]);
     
 
-const CustomerActivity = db.define('CustomersActivity', {
+const CustomerProductActivity = db.define('CustomerProductActivity', {
     ActivityID: { 
         type: DataTypes.INTEGER, 
         autoIncrement: true, 
         primaryKey: true
     },
+    ActivityType: { 
+        type: DataTypes.ENUM(...Array.from(PRODUCT_RELATED_ACTIVITIES)), // 👈 Converted from Set to array
+        allowNull: false 
+    },
     userId: { 
         type: DataTypes.INTEGER, 
         allowNull: false, 
         references: { model: User, key: 'userId' } 
+    }, 
+    productId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: Product, key: 'productId' }
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    ActivityDate: { 
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW 
+    },  
+}, { timestamps: true });
+
+const CustomerNormalActivity = db.define('CustomerNormalActivity', {
+    ActivityID: { 
+        type: DataTypes.INTEGER, 
+        autoIncrement: true, 
+        primaryKey: true
     },
     ActivityType: { 
         type: DataTypes.ENUM(...Array.from(ACTIVITY_TYPES)), // 👈 Converted from Set to array
         allowNull: false 
     },
+    userId: { 
+        type: DataTypes.INTEGER, 
+        allowNull: false, 
+        references: { model: User, key: 'userId' } 
+    }, 
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
     ActivityDate: { 
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW 
-    },
-    productId: { 
-        type: DataTypes.INTEGER,
-        allowNull: true, 
-        references: { model: Product, key: 'productId' } 
-    },
-    Description: {
-        type: DataTypes.STRING, 
-        allowNull: true 
-    }
+    },  
 }, { timestamps: true });
-
-module.exports = { CustomerActivity, ACTIVITY_TYPES, PRODUCT_RELATED_ACTIVITIES };
+module.exports = { CustomerProductActivity, ACTIVITY_TYPES, PRODUCT_RELATED_ACTIVITIES,CustomerNormalActivity };

@@ -1,27 +1,38 @@
 
-const {CustomerActivity, ACTIVITY_TYPES, PRODUCT_RELATED_ACTIVITIES,}=require('../models/customerActivity.models')
+const {CustomerNormalActivity,CustomerProductActivity, ACTIVITY_TYPES, PRODUCT_RELATED_ACTIVITIES,}=require('../models/customerActivity.models')
 
-
-const logActivity = async ({ userId, type, productId, Description }) => {
+const logActivity = async ({ userId, ActivityType , productId=null,description }) => {
   // Basic required validations
-    if (!userId) throw new Error("Missing user ID.");
-    if (!ACTIVITY_TYPES.has(type)) throw new Error(`Invalid activity type: ${type}`);
-    if (PRODUCT_RELATED_ACTIVITIES.has(type) && !productId)
-        throw new Error(`Activity "${type}" requires a productId.`);
+    if (!userId) 
+      throw new Error("Missing user ID.");
+
+    if(!PRODUCT_RELATED_ACTIVITIES.has(ActivityType) && !ACTIVITY_TYPES.has(ActivityType))
+      throw new Error(`Invalid activity type: ${ActivityType}`);
+    
+    if (PRODUCT_RELATED_ACTIVITIES.has(ActivityType) && !productId)
+      throw new Error(`Activity "${ActivityType}" requires a productId.`);
+
 
   // Prepare activity data
     const data = {
         userId,
-        type,
+        ActivityType,
         ...(productId && { productId }),
-        ...(Description && { Description }),
+        ...(description && { description }),
     };
 
   // Save activity
-    const newActivity=await CustomerActivity.create(data);
-    if (!newActivity){
-        throw new Error("something went wrong while logging activity");
-    }
+  let newActivity
+  if(productId && PRODUCT_RELATED_ACTIVITIES.has(ActivityType)){
+    newActivity= await CustomerProductActivity.create(data);
+  }
+  else if(ACTIVITY_TYPES.has(ActivityType)){
+    newActivity= await CustomerNormalActivity.create(data);
+  }
+ 
+  if(!newActivity) 
+    throw new Error("Failed to log activity.");
+  
     return newActivity;
 };
 
