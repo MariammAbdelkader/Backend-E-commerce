@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger.js');
 const passport = require("passport");
+require('./event/eventHandlers/CustomerActivityEventHandler.js');
 // const analyticsJob=require('./job/analytics.job.js');
 // const discountJob=require('./job/discount.job.js');
 
