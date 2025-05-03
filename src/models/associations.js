@@ -3,7 +3,7 @@ const { Category, Subcategory } = require('./category.models');
 const {  User, UserImage } = require('./user.models');
 const { Cart, CartItem } = require('./cart.models');
 const { Order } = require('./order.models');
-const {CustomerActivity} = require('./customerActivity.models');
+const {CustomerProductActivity,CustomerNormalActivity} = require('./customerActivity.models');
 const {CustomerSegment} = require('./customerSegmentation.models');
 const {OrderDetail} = require('./orderDetails.models');
 const{ Return }= require('./returns.models')
@@ -86,9 +86,25 @@ Return.belongsTo(Product, { foreignKey: 'productId' });
 User.hasMany(Return, { foreignKey: 'userId' });
 Return.belongsTo(User, { foreignKey: 'userId' });
 
-// One Customer has Many Activities
-User.hasMany(CustomerActivity, { foreignKey: 'userId', as: 'activities' });
-CustomerActivity.belongsTo(User, { foreignKey: 'userId', as: 'user', targetKey: 'userId' });
+
+User.hasMany(CustomerNormalActivity, { foreignKey: 'userId', as: 'usernormalActivities' });
+CustomerNormalActivity.belongsTo(User, { foreignKey: 'userId', as: 'user', targetKey: 'userId',onDelete: 'SET NULL',
+    onUpdate: 'CASCADE' });
+
+User.hasMany(CustomerProductActivity, { foreignKey: 'userId', as: 'userProductActivities' });
+CustomerProductActivity.belongsTo(User, { foreignKey: 'userId', as: 'user', targetKey: 'userId',onDelete: 'SET NULL',
+    onUpdate: 'CASCADE' });
+
+Product.hasMany(CustomerProductActivity, {
+    foreignKey: 'productId',
+    as: 'productActivities',
+  });
+CustomerProductActivity.belongsTo(Product, {
+    foreignKey: 'productId',
+    as: 'product',
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE'
+  });
 
 
 // One Customer has One Segment
@@ -133,6 +149,6 @@ DiscountLogs.belongsTo(User, { foreignKey: 'adminId' });
 
 module.exports = {  Product, ProductImage,  User , Cart , CartItem ,
                     Order , Category , Subcategory, OrderDetail, Return,
-                    CustomerActivity, CustomerSegment ,Review,
+                    CustomerProductActivity,CustomerNormalActivity, CustomerSegment ,Review,
                     DiscountOnProducts,DiscountOnCategories,
                     DiscountLogs,MonthlyAnalytics,GrowthRate};
