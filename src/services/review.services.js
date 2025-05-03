@@ -2,6 +2,7 @@ const { Review } = require("../models/review.models");
 const { Product } = require("../models/product.models");
 const { updateProductRating } = require("../utilities/reviewUpdating");
 const { UserRole } = require("../models/userRole.models");
+emitter  = require("../event/eventEmitter");
 
 const addReviewService = async (userId, productId, rating, comment) => {
     const product = await Product.findByPk(productId);
@@ -21,10 +22,21 @@ const addReviewService = async (userId, productId, rating, comment) => {
         comment 
     });
     await updateProductRating(productId);
+
+    try{
+        emitter.emit("userActivity", {
+            userId,
+            ActivityType: "Add Review",
+            productId,
+            description: `Added review, comment: ${review.comment},  rating: ${review.rating}`,
+        });
+    }catch(err){
+        console.log("Error in Add Review event emission:", err.message);    
+    };
     return review;
 };
 
-const editReviewService = async (userId, reviewId, rating, comment) => {
+const editReviewService = async (userId, reviewId, rating, productId,comment) => {
     if (!reviewId) 
         throw new Error("Review ID is required" );
 
@@ -36,6 +48,17 @@ const editReviewService = async (userId, reviewId, rating, comment) => {
         throw new Error("Review not found or unauthorized" );
 
     await review.update({ rating, comment });
+
+    try{
+        emitter.emit("userActivity", {
+            userId,
+            ActivityType: "Update Review",
+            productId:review.productId,
+            description: `Updated review, New comment: ${review.comment}, New rating: ${review.rating}`,
+        });
+    }catch(err){
+        console.log("Error in edit Review event emission:", err.message);    
+    };
     return review
 };
 
@@ -47,7 +70,21 @@ const deleteReviewService = async (userId, reviewId) => {
         throw new Error("Review not found");
 
     const productId = review.productId;
+
+    try{
+        emitter.emit("userActivity", {
+            userId,
+            ActivityType: "Delete Review",
+            productId,
+            description: `Deleted review, comment:${review.comment}, rating:${review.rating}`,
+        });
+    }catch(err){
+        console.log("Error in delete Review event emission:", err.message);    
+    };
+    
     await review.destroy();
+
+   
     await updateProductRating(productId);
 };
 
