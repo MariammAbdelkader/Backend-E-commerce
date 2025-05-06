@@ -2,6 +2,10 @@ const { DataTypes } = require('sequelize');
 const {db} = require('../database');
 const {User} =require('./user.models');
 
+const SegmentTypes = new Set([
+    'VIP', 'Loyal Customer','New Customer','"Frequent Returner','Occasional Buyer',
+    'Cart Abandoner','Inactive','Highly Active','Impulse Buyer']);
+
 const CustomerSegment = db.define('CustomersSegment', {
     SegmentID: { 
         type: DataTypes.INTEGER, 
@@ -11,20 +15,10 @@ const CustomerSegment = db.define('CustomersSegment', {
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        unique: true,
         references: { model: User, key: 'userId' } },
     SegmentType: { 
-        type: DataTypes.ENUM(
-            "VIP", // High spenders, frequent buyers
-            "Loyal Customer", // Regular buyers with moderate spending
-            "New Customer", // Just registered, first purchase pending
-            "Discount Seeker", // Only buys with discounts/coupons
-            "Frequent Returner", // High return rate, refund seeker
-            "Occasional Buyer", // Purchases infrequently
-            "Cart Abandoner", // Adds to cart but doesn’t buy
-            "Inactive", // No activity for a long time
-            "Highly Active", // Engages a lot but doesn’t always buy
-            "Impulse Buyer" // Buys randomly, no clear pattern
-            ), 
+        type: DataTypes.ENUM(...Array.from(SegmentTypes)), // 👈 Converted from Set to array
         defaultValue: 'New Customer',
         allowNull: false 
     },
