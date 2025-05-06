@@ -4,7 +4,8 @@ const segmentAllUsersController = async (req, res) => {
     try {
         await segmentAllUsersServices(); // Wait for function to complete
 
-        const updatedSegmentations = await getSegmentationsServices(); 
+        const{type} = req.body;
+        const updatedSegmentations = await getSegmentationsServices(type); // Wait for function result
         res.status(200).json(updatedSegmentations);
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -12,9 +13,10 @@ const segmentAllUsersController = async (req, res) => {
 };
 
 const getSegmentationsController = async (req, res) => {
-    try {
+    try { 
+        const {type} = req.body;
         
-        const data = await getSegmentationsServices(req.filter); // Wait for function result
+        const data = await getSegmentationsServices( type); // Wait for function result
         res.status(200).json({segmenteedUsers:data});
     } catch (err) {
         res.status(400).json({ error: err.message });

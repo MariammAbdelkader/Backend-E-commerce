@@ -107,9 +107,10 @@ CustomerProductActivity.belongsTo(Product, {
   });
 
 
-// One Customer has One Segment
-User.hasOne(CustomerSegment, { foreignKey: 'userId' });
-CustomerSegment.belongsTo(User, { foreignKey: 'userId' });
+User.hasOne(CustomerSegment, { foreignKey: 'userId', as: 'segment' });
+CustomerSegment.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+  
+  
 
 
 // Define Many-to-Many Relationship
