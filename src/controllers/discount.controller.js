@@ -50,20 +50,17 @@ const  getDiscountsController = async (req, res)=> {
 
 const updateDiscountController = async (req, res) => {
     try {
-        console.log(req.params);
-
         const { id } = req.params;
         const updateData = req.body;
-        //const adminId = req.user.id; 
         const type = req.path.includes("product") ? "product" : "category";
 
+        const adminId = req.user?.id || 1;
         console.log("Updating discount - Type:", type, "ID:", id);
 
-        
-        const result = await updateDiscountService(type, id, updateData, adminId=1);
-
-        res.json({ message:result.message});
+        const result = await updateDiscountService(type, id, updateData, adminId);
+        res.json({ message: result.message });
     } catch (error) {
+        console.error("Failed to update discount:", error.message);
         res.status(500).json({ message: error.message });
     }
 };
