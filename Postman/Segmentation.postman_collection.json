@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "51ecd582-adeb-404e-94d0-4cd40063fb8b",
+		"name": "Segmentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40085660"
+	},
+	"item": [
+		{
+			"name": "Update The segmentations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/customermanagement/update-users-seg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"customermanagement",
+						"update-users-seg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All user segmented",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
