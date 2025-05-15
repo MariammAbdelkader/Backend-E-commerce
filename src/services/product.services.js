@@ -21,7 +21,7 @@ const getProductServices = async (productId)=>{
     const product = await Product.findByPk(productId, {
         include: [
             { model: Category, as: 'Category', attributes: ['name'] }, 
-            { model: Subcategory, as: 'Subcategory', attributes: ['name'] } 
+            { model: Subcategory, as: 'SubCategory', attributes: ['name'] } 
         ]
     });
     if (!product) {
@@ -84,7 +84,7 @@ const getProductsService=async (filters) => {
             where: filterConditions,
             include: [
                 { model: Category, as: 'Category', attributes: ['name'] },
-                { model: Subcategory, as: 'Subcategory', attributes: ['name'] }
+                { model: Subcategory, as: 'SubCategory', attributes: ['name'] }
             ]
         });
 
