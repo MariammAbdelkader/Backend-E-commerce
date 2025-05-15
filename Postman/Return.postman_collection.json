@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "be6a43dd-672b-440b-8c3a-6b94206d8f5e",
+		"name": "Return",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40085660"
+	},
+	"item": [
+		{
+			"name": "return a product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderId\":16,\r\n    \"productId\":13,\r\n    \"quantity\":3,\r\n    \"userId\":1,\r\n    \"ReturnReason\": \"testing the History\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/return/request",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"return",
+						"request"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

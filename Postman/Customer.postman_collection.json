@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "47c25878-d8cc-4126-8c67-0db0ee85f82e",
+		"name": "Customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40085660"
+	},
+	"item": [
+		{
+			"name": "customer-info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/customermanagement/customer-info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"customermanagement",
+						"customer-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer History",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/customermanagement/userhistory/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"customermanagement",
+						"userhistory",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
