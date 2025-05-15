@@ -1,7 +1,6 @@
 const { Product } = require("../models/product.models")
 const{Category}= require("../models/category.models");
 const { DiscountOnCategories,DiscountOnProducts,DiscountLogs } = require("../models/discounts.model");
-const {DiscountPriceUpdater}= require('../utilities/ProductUtilities')
 const { Op } = require("sequelize");
 
 const discountProductServices = async (productId, percentage, startDate, endDate, adminId) => {
@@ -31,15 +30,9 @@ const discountProductServices = async (productId, percentage, startDate, endDate
         throw new Error("Invalid date format");
     }
 
-    if (start < now) {
-        throw new Error("Start date cannot be in the past");
-    }
     if (end <= start) {
         throw new Error("End date must be after start date");
     }
-
-    // Update product discount price using the reusable function
-    await DiscountPriceUpdater.addProductDiscount(product, percentage);
 
     // Log the discount creation
     const discountLog = await DiscountLogs.create({
@@ -97,15 +90,6 @@ const discountCategoryServices = async (categoryId, percentage, startDate, endDa
         throw new Error("A discount already exists for this category.");
     }
 
-    // Get all products in the category
-    const products = await Product.findAll({ where: { categoryId } });
-
-    if (products.length === 0) {
-        throw new Error("No products found in this category");
-    }
-
-    // Apply discount to all products in the category
-    await Promise.all(products.map(product => DiscountPriceUpdater.addProductDiscount(product, percentage)));
 
     // Log the discount creation
     const discountLog = await DiscountLogs.create({
@@ -153,7 +137,7 @@ const getDiscountsService = async (status) => {
     // Fetch Product Discounts with product details
     const productDiscounts = await DiscountOnProducts.findAll({
         where: whereCondition,
-        include: [{ model: Product, attributes: ["name", "description", "price", "disCountPrice"] }],
+        include: [{ model: Product, attributes: ["name", "description", "price"] }],
         attributes: [
             "discountId",
             ["startDate", "begin"],  // First column is date
@@ -194,54 +178,45 @@ const getDiscountsService = async (status) => {
         throw new Error(error.message);
     }
 }
-
 const updateDiscountService = async (type, id, updateData, adminId = 1) => {
-    try {
-        let model = type === "product" ? DiscountOnProducts : DiscountOnCategories;
-        let discount = await model.findByPk(id);
-        if (!discount) {
-            throw new Error("Discount not found.");
-        }
+  try {
 
-        // Check if any value is actually changing
-        const isSameData = Object.keys(updateData).every(key => discount[key] === updateData[key]);
-        if (isSameData) {
-            throw new Error("No updates made.");
-        }
-
-         // Check if percentage is updated
-         const percentageUpdated = updateData.percentage !== undefined && updateData.percentage !== discount.percentage;
-         const oldPercentage = discount.percentage;
-         const newPercentage = updateData.percentage;
-        // Update discount
-        await discount.update(updateData);
-
-        // Log the update
-        await DiscountLogs.create({
-            adminId,
-            time: new Date(),
-            process: "Update"
-        });
-
-        // If percentage is updated, update the discount price of products
-        if (percentageUpdated) {
-            if (type === "product") {
-                // Update single product discount price
-                const product = await Product.findByPk(discount.productId);
-                if (product) {
-                    await DiscountPriceUpdater.updateProductDiscount(product, oldPercentage, newPercentage);
-                }
-            } else if (type === "category") {
-                // Update all products in the category
-                const products = await Product.findAll({ where: { categoryId: discount.categoryId } });
-                await Promise.all(products.map(product =>  DiscountPriceUpdater.updateCategoryDiscount(product, oldPercentage, newPercentage)));
-            }
-        }
-
-        return { message: "Discount updated successfully." };
-    } catch (error) {
-        throw new Error(error.message);
+  
+    let model = type === "product" ? DiscountOnProducts : DiscountOnCategories;
+    let discount = await model.findByPk(id);
+    if (!discount) {
+      throw new Error("Discount not found.");
     }
+
+    // ✅ Parse and validate updateData
+    const { errors, parsedData } = parseAndValidateUpdateData(updateData);
+    if (Object.keys(errors).length > 0) {
+      throw new Error(Object.values(errors).join(" | "));
+    }
+
+    // ✅ Check if any value actually changed
+    const isSameData = Object.keys(parsedData).every(
+      (key) => discount[key]?.toString() === parsedData[key]?.toString()
+    );
+    if (isSameData) {
+      throw new Error("No updates made.");
+    }
+
+    // ✅ Apply the update
+    await discount.update(parsedData);
+
+    // ✅ Log the update
+    await DiscountLogs.create({
+      adminId,
+      time: new Date(),
+      process: "Update"
+    });
+
+    return { message: "Discount updated successfully." };
+
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 
@@ -261,21 +236,7 @@ const terminateDiscountService = async (type, id, adminId = 1) => {
 
         // Expire the discount
         await discount.update({ status: "expired" });
-
-        // Get affected products
-        // Get affected products
-        let products;
-        if (type === "product") {
-            products = await Product.findAll({ where: { productId: discount.productId } });
-            await Promise.all(products.map(product => 
-                DiscountPriceUpdater.removeProductDiscount(product, discount.percentage)
-            ));
-        } else {
-            products = await Product.findAll({ where: { categoryId: discount.categoryId } });
-            await Promise.all(products.map(product => 
-                DiscountPriceUpdater.removeCategoryDiscount(product, discount.percentage)
-            ));
-        }
+    
 
         // Log the termination
         await DiscountLogs.create({
@@ -290,6 +251,40 @@ const terminateDiscountService = async (type, id, adminId = 1) => {
         throw new Error(error.message);
     }
 };
+
+function parseAndValidateUpdateData(updateData) {
+  const errors = {};
+  const parsedData = {};
+
+  if ('percentage' in updateData) {
+    const percentage = parseFloat(updateData.percentage);
+    if (isNaN(percentage) || percentage < 0 || percentage > 100) {
+      errors.percentage = "percentage must be a number between 0 and 100.";
+    } else {
+      parsedData.percentage = percentage;
+    }
+  }
+
+  if ('startDate' in updateData) {
+    const startDate = new Date(updateData.startDate);
+    if (isNaN(startDate.getTime())) {
+      errors.startDate = "startDate must be a valid date string.";
+    } else {
+      parsedData.startDate = startDate;
+    }
+  }
+
+  if ('endDate' in updateData) {
+    const endDate = new Date(updateData.endDate);
+    if (isNaN(endDate.getTime())) {
+      errors.endDate = "endDate must be a valid date string.";
+    } else {
+      parsedData.endDate = endDate;
+    }
+  }
+
+  return { errors, parsedData };
+}
 
 module.exports={discountProductServices,
                 discountCategoryServices,   

@@ -1,18 +1,22 @@
-const { DiscountOnProducts, DiscountOnCategories } = require("../models/discounts.model.js");
+const {DiscountOnProducts,DiscountOnCategories}=require("../models/discounts.model.js")
 const {Product, ProductImage} = require ("../models/product.models.js");
 const {Category, Subcategory} = require ("../models/category.models.js");
+const { Op } =require ("sequelize");
+
 
 
 const getThePercentage = async (productId, categoryId) => {
+      const now = new Date();
+
     // Fetch active product discount
     const productDiscount = await DiscountOnProducts.findOne({
-        where: { productId, status: "valid" },
+        where: { productId:productId, status: "valid" ,startDate: { [Op.lte]: now }},
         attributes: ['percentage']
     });
 
     // Fetch active category discount
     const categoryDiscount = await DiscountOnCategories.findOne({
-        where: { categoryId, status: "valid" },
+        where: { categoryId:categoryId, status: "valid",startDate: { [Op.lte]: now } },
         attributes: ['percentage']
     });
 
@@ -46,38 +50,42 @@ const processFilters = async (filters) => {
 
 
 
-class DiscountPriceUpdater {
-    static async addProductDiscount(product, percentage) {let discountPrice = product.disCountPrice != null
-        ? product.disCountPrice * (1 - percentage / 100)
-        : product.price * (1 - percentage / 100);
+const DiscountPriceClaculator = async ({ product }) => {
+  try {
+    const now = new Date();
 
-    // Fix floating-point precision issue
-    discountPrice = Math.round(discountPrice * 100) / 100;
+    
+    const categoryDiscount = await DiscountOnCategories.findOne({
+      where: {
+        categoryId: product.categoryId,
+        status: "valid",
+        startDate: { [Op.lte]: now },
+      },
+    });
 
-    await product.update({ disCountPrice: Math.abs(discountPrice - product.price) < 0.01 ? null : discountPrice });
-}
 
-    static async updateProductDiscount(product, oldPercentage, newPercentage) {
-        let discountPrice = product.disCountPrice / (1 - oldPercentage / 100);
-        discountPrice *= (1 - newPercentage / 100);
-        await product.update({ disCountPrice: discountPrice === product.price ? null : discountPrice });
-    }
+    const productDiscount = await DiscountOnProducts.findOne({
+      where: {
+        productId: product.productId,
+        status: "valid",
+        startDate: { [Op.lte]: now },
+      },
+    });
 
-    static async updateCategoryDiscount(product, oldPercentage, newPercentage) {
-        let discountPrice = product.disCountPrice / (1 - oldPercentage / 100);
-        discountPrice *= (1 - newPercentage / 100);
-        await product.update({ disCountPrice: discountPrice === product.price ? null : discountPrice });
-    }
+    const categoryDiscountPercentage = categoryDiscount ? categoryDiscount.percentage : 0;
+    const productDiscountPercentage = productDiscount ? productDiscount.percentage : 0;
 
-    static async removeProductDiscount(product, percentage) {
-        let discountPrice = product.disCountPrice / (1 - percentage / 100);
-        await product.update({ disCountPrice: discountPrice === product.price ? null : discountPrice });
-    }
+    const totalDiscountPercentage = categoryDiscountPercentage + productDiscountPercentage;
 
-    static async removeCategoryDiscount(product, percentage) {
-        let discountPrice = product.disCountPrice / (1 - percentage / 100);
-        await product.update({ disCountPrice: discountPrice === product.price ? null : discountPrice });
-    }
-}
+    const discountPrice = product.price * (1 - totalDiscountPercentage / 100);
 
-module.exports={getThePercentage,processFilters,DiscountPriceUpdater}
+    return totalDiscountPercentage === 0 ? null : discountPrice;
+
+  } catch (error) {
+    console.error("Calculating Discount Price Error:", error.message);
+    throw error;
+  }
+};
+
+
+module.exports={getThePercentage,processFilters,DiscountPriceClaculator}
