@@ -16,10 +16,6 @@ const Product = db.define('Product', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    disCountPrice:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
     description: {
         type: DataTypes.TEXT,
         allowNull: true,

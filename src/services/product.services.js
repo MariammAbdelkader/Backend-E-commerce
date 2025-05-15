@@ -7,9 +7,10 @@ const { DiscountOnProducts, DiscountOnCategories } = require("../models/discount
 const {getProductRatingService}=require('../services/review.services')
 const { Op } = require('sequelize');
 
-const {getThePercentage}= require('../utilities/ProductUtilities.js')
+const {getThePercentage,DiscountPriceClaculator}= require('../utilities/ProductUtilities.js')
 
 const getProductServices = async (productId)=>{
+
 
     if(!productId){
         throw new Error('Product ID are required');
@@ -40,7 +41,7 @@ const getProductServices = async (productId)=>{
 
 
     const rate=await getProductRatingService(productId)
-
+    const DiscountPrice=await DiscountPriceClaculator({product});
     const returnedProduct={
         productId:product.productId,
         name:product.name,
@@ -48,7 +49,7 @@ const getProductServices = async (productId)=>{
         category: product.Category ? product.Category.name : null,
         subcategory: product.Subcategory ? product.Subcategory.name : null,
         price:product.price,
-        discountprice:product.disCountPrice?product.disCountPrice.toFixed(2):null,
+        discountprice:DiscountPrice?DiscountPrice:null,
         status:product.status,
         rate:rate,
         productDiscountPercentage,
