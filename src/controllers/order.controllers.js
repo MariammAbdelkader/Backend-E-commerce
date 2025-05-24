@@ -34,8 +34,8 @@ const addOrder = async (req,res)=>{
 
 const getOrdersController = async (req, res) => {
     try {
-        const where= req.filters 
-        const orders = await getOrdersService(where);
+        const {where,ordering}= req.filters;
+        const orders = await getOrdersService({where,ordering});
 
         return res.status(200).json({
             status: 'success',
