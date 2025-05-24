@@ -2,6 +2,7 @@ const express = require("express");
 const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
 const { createCart , previewCart , deleteCart, updateCart } = require('../controllers/cart.controllers');
 const { validateCart } = require("../middlewares/cart.middlewares");
+const {isCustomer,isAdmin} =require('../middlewares/authentication.middlewares')
 
 
 const cartRouter = express.Router();
@@ -9,16 +10,16 @@ const cartRouter = express.Router();
 
 
 
-cartRouter.post("/add",AuthMiddleware,validateCart,createCart)
+cartRouter.post("/add",isCustomer,validateCart,createCart)
 
 
-cartRouter.get("/preview",AuthMiddleware,validateCart,previewCart)
+cartRouter.get("/preview",isCustomer,validateCart,previewCart)
 
 
-cartRouter.delete("/delete",AuthMiddleware,validateCart,deleteCart)
+cartRouter.delete("/delete",isCustomer,validateCart,deleteCart)
 
 
-cartRouter.patch("/update",AuthMiddleware,validateCart,updateCart)
+cartRouter.patch("/update",isCustomer,validateCart,updateCart)
 
 
 module.exports={cartRouter}

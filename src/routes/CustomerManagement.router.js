@@ -7,7 +7,7 @@ const {getUserHistoryController}=require('../controllers/userHistory.controller'
 const CustomerManagementRouter = express.Router();
 
 //Segmentation-> same as users-info but it calls API first
-CustomerManagementRouter.get("/update-users-seg" , segmentAllUsersController)
+CustomerManagementRouter.get("/update-users-seg" , isAdmin,segmentAllUsersController)
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ CustomerManagementRouter.get("/update-users-seg" , segmentAllUsersController)
  */
 
 
-CustomerManagementRouter.get("/customer-info" , getSegmentationsController)
+CustomerManagementRouter.get("/customer-info" ,isAdmin, getSegmentationsController)
 
 
 
@@ -157,6 +157,6 @@ CustomerManagementRouter.get("/customer-info" , getSegmentationsController)
  *       500:
  *         description: Internal server error.
  */
-CustomerManagementRouter.get("/userhistory/:userId",getUserHistoryController)
+CustomerManagementRouter.get("/userhistory/:userId",isAdmin,getUserHistoryController)
 
 module.exports={CustomerManagementRouter}

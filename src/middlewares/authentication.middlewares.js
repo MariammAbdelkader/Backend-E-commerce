@@ -79,10 +79,14 @@ const authorizeRole = (requiredRole) => (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
     
-    if (!decoded ||!decoded.roles || !decoded.roles.includes(requiredRole)) {
+    if (!decoded ||!decoded.role || !decoded.role.includes(requiredRole)) {
+
       throw new UnauthorizedError("Unauthorized User");
     }
+
+      req.userId = decoded.userId;
 
     next();
   } catch (error) {
@@ -96,7 +100,10 @@ const isAdmin = authorizeRole("Admin");
 // Middleware for ShopOwner
 const isShopOwner = authorizeRole("ShopOwner");
 
+const isCustomer= authorizeRole("Customer");
 
 
 
-module.exports = { AuthMiddleware, AuthConversationIdMiddleware,isAdmin, isShopOwner,AuthOrderMiddleware  };
+
+
+module.exports = { AuthMiddleware, AuthConversationIdMiddleware,isAdmin,isCustomer, isShopOwner,AuthOrderMiddleware  };

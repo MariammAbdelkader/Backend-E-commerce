@@ -4,6 +4,7 @@ const { viewOrderedProductController, addOrder,getOrdersController } = require("
 const { validateCart } = require('../middlewares/cart.middlewares')
 const {filterOrderMiddleware}=require('../middlewares/order.middleware')
 const { getProductController } = require('../controllers/product.controller')
+const {isCustomer,isAdmin} =require('../middlewares/authentication.middlewares')
 
 const orderRouter = express.Router();
 /**
@@ -19,9 +20,9 @@ const orderRouter = express.Router();
 
 orderRouter.get('/orderd-products',AuthMiddleware,viewOrderedProductController);
 
-orderRouter.post('/',AuthMiddleware,validateCart,addOrder);
+orderRouter.post('/',isCustomer,AuthMiddleware,validateCart,addOrder);
 
-orderRouter.post('/all',filterOrderMiddleware,getOrdersController)
+orderRouter.post('/all',isAdmin,filterOrderMiddleware,getOrdersController)
 /**
  * @swagger
  * /order:

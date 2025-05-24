@@ -1,7 +1,6 @@
 const express = require("express");
-const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
+const { isAdmin,isCustomer } = require("../middlewares/authentication.middlewares");
 const {filterMiddleware} =require("../middlewares/product.middlewares");
-const { isAdmin } = require("../utilities/isAdmin");
 const { getProductController,
         deleteProductController,
         createProductController,
@@ -15,19 +14,19 @@ const { Model } = require("sequelize");
 
 const productRouter= express.Router()
 
-productRouter.get('/:productId', getProductController);
+productRouter.get('/:productId', isCustomer,getProductController);
 
-productRouter.post('',filterMiddleware, getProductsController);
+productRouter.post('',isCustomer,filterMiddleware, getProductsController);
 
-productRouter.delete('/:productId',deleteProductController);
+productRouter.delete('/:productId',isAdmin,deleteProductController);
 
-productRouter.post('/create', createProductController);
+productRouter.post('/create', isAdmin,createProductController);
 
-productRouter.patch('/:productId', updateProductController);
+productRouter.patch('/:productId', isAdmin,updateProductController);
 
-productRouter.get('/get/categories',getAllCatigoriesController);
+productRouter.get('/get/categories',isAdmin,getAllCatigoriesController);
 
-productRouter.get('/get/subcategories',getAllSubCatigoriesController);
+productRouter.get('/get/subcategories',isAdmin,getAllSubCatigoriesController);
 
 
 /**
