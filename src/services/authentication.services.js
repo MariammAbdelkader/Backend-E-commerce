@@ -58,7 +58,6 @@ const signUpService = async (data) => {
 
 const loginService = async (email , password) => {
     try {
-        console.log(email+"  "+password)
         
         const user = await User.findOne({
             where: { email },
@@ -88,7 +87,7 @@ const loginService = async (email , password) => {
                         console.log("Error in Login event emission:", err.message);    
                     };
 
-                return {token  ,message : "logged in succesfully",data : user.dataValues };
+                return {token  ,message : "logged in succesfully",data : user.dataValues,role:userRole };
             } else {
                 throw { message : "incorrect email/password" };
             }
