@@ -71,7 +71,7 @@ const AuthOrderMiddleware=async (req, res, next)=>{
 
 }
 // Middleware to check if the user has a specific role
-const authorizeRole = (requiredRole) => (req, res, next) => {
+const authorizeRole = (...allowedRoles) => (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (!token) {
@@ -80,13 +80,12 @@ const authorizeRole = (requiredRole) => (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    
-    if (!decoded ||!decoded.role || !decoded.role.includes(requiredRole)) {
-
+    if (!decoded || !decoded.role || !allowedRoles.some(role => decoded.role.includes(role))) {
       throw new UnauthorizedError("Unauthorized User");
     }
 
-      req.userId = decoded.userId;
+    req.userId = decoded.userId;
+    req.userRole = decoded.role;
 
     next();
   } catch (error) {
@@ -94,14 +93,11 @@ const authorizeRole = (requiredRole) => (req, res, next) => {
   }
 };
 
+
 // Middleware for Admin
-const isAdmin = authorizeRole("Admin");
-
-// Middleware for ShopOwner
+const isCustomer = authorizeRole("Customer", "Admin", "ShopOwner");
+const isAdmin = authorizeRole("Admin","ShopOwner");
 const isShopOwner = authorizeRole("ShopOwner");
-
-const isCustomer= authorizeRole("Customer");
-
 
 
 
