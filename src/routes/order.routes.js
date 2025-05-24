@@ -20,7 +20,7 @@ const orderRouter = express.Router();
 
 orderRouter.get('/orderd-products',AuthMiddleware,viewOrderedProductController);
 
-orderRouter.post('/',isCustomer,AuthMiddleware,validateCart,addOrder);
+orderRouter.post('/',isCustomer,validateCart,addOrder);
 
 orderRouter.post('/all',isAdmin,filterOrderMiddleware,getOrdersController)
 /**

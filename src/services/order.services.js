@@ -2,13 +2,17 @@ const { Cart, CartItem } = require("../models/cart.models");
 const { Order } = require("../models/order.models");
 const { Product } = require("../models/product.models");
 const { Category, Subcategory } = require('../models/category.models');
+const { User } = require('../models/user.models');
+
 const { use } = require("passport");
 emitter= require('../event/eventEmitter')
 
-const getOrdersService = async (where) => {
+const getOrdersService = async ({where,ordering}) => {
+    
+    
     const orders = await Order.findAll({
         where,
-        attributes: ['orderId', 'orderDate', 'totalAmount', 'paymentStatus'],
+        attributes: ['orderId','orderDate', 'totalAmount', 'paymentStatus'],
         include: [
             {
                 model: Cart,
@@ -32,8 +36,13 @@ const getOrdersService = async (where) => {
                         ],
                     },
                 ],
+
             },
+            {
+            model: User,
+            }
         ],
+        order: [[ordering, 'DESC']]
     });
 
     return orders.map(order => {
@@ -50,9 +59,11 @@ const getOrdersService = async (where) => {
 
         return {
             orderId: order.orderId,
+            userId:order.userId,
             orderDate: order.orderDate,
             totalAmount: order.totalAmount,
             paymentStatus: order.paymentStatus,
+            customer:order.User,
             products,
         };
     });
