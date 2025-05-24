@@ -1,8 +1,8 @@
 const express = require("express");
 const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
-const { isAdmin } = require("../utilities/isAdmin");
 const { upload } = require("../middlewares/csv.middlewares");
 const { uploadCsv } = require("../controllers/csv.controllers");
+const {isCustomer,isAdmin} =require('../middlewares/authentication.middlewares')
 
 const csvRouter = express.Router();
 /**
@@ -67,6 +67,6 @@ const csvRouter = express.Router();
  *         description: Internal server error.
  */
 
-csvRouter.post("/csv",upload.single("file"),uploadCsv)
+csvRouter.post("/csv",isAdmin,upload.single("file"),uploadCsv)
 
 module.exports={csvRouter}

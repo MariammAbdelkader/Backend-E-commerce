@@ -1,5 +1,5 @@
 const express = require("express");
-const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
+const { isCustomer } = require("../middlewares/authentication.middlewares");
 const { userProfileController } = require("../controllers/userprofile.controller");
 
 
@@ -86,6 +86,6 @@ const userProfileRouter = express.Router();
  *       scheme: bearer
  *       bearerFormat: JWT
  */
-userProfileRouter.get('/',AuthMiddleware,userProfileController);
+userProfileRouter.get('/',isCustomer,userProfileController);
 //TODO update data
 module.exports={userProfileRouter}

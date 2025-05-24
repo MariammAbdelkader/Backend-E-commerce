@@ -7,15 +7,16 @@ const {
     uploadProductImageController, deleteProductImageController, replaceProductImageController, getAllProductImageController,
     uploadUserImageController   , deleteUserImageController,    replaceUserImageController,    getUserImageController
 } = require('../controllers/image.controller');
+const {isCustomer,isAdmin} =require('../middlewares/authentication.middlewares')
 
 
 imageRouter.get('/:productId',getAllProductImageController)
 
-imageRouter.post('/upload/:productId', upload.single('image'), uploadProductImageController);
+imageRouter.post('/upload/:productId', isAdmin,upload.single('image'), uploadProductImageController);
 
-imageRouter.delete('/delete/:imageId', deleteProductImageController);
+imageRouter.delete('/delete/:imageId',isAdmin, deleteProductImageController);
 
-imageRouter.put('/replace/:imageId',upload.single('image'), replaceProductImageController);
+imageRouter.put('/replace/:imageId',isAdmin,upload.single('image'), replaceProductImageController);
 
 //<==============================================================================>//
 
