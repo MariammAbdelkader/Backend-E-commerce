@@ -4,6 +4,7 @@ const { Otp } = require('../models/otp.models');
 const { User } = require('../models/user.models');
 const createHash = require("../utilities/createHash");
 
+const bcrypt = require("bcrypt");
 
 
 
@@ -48,10 +49,13 @@ const verifyPasswordResetService = async (email, otp, newPassword) => {
 };
 
 
-const requestPasswordChangeService = async (userId, newPassword) => {
+const requestPasswordChangeService = async (userId,currentPassword, newPassword) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error("User not found");
-  
+
+  const isMatch = await bcrypt.compare(currentPassword, user.password);
+  if (!isMatch) throw new Error("Current password is incorrect");
+
     const otpCode = generateOTP();
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
   

@@ -101,7 +101,7 @@ const loginService = async (email , password) => {
 
 
 }
-const logoutService = (userId,res) => {
+const logoutService =async (userId,res) => {
 
     res.clearCookie("jwt", {
         httpOnly: true,

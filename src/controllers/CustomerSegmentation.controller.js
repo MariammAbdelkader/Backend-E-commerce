@@ -15,6 +15,7 @@ const segmentAllUsersController = async (req, res) => {
 const getSegmentationsController = async (req, res) => {
     try { 
         const {type} = req.body;
+        console.log("Type:", type); // Log the type to check if it's being received correctly
         
         const data = await getSegmentationsServices( type); // Wait for function result
         res.status(200).json({segmenteedUsers:data});

@@ -5,6 +5,7 @@ const {Return} = require('../models/returns.models')
 const{CustomerSegment}=require('../models/customerSegmentation.models')
 
 const { Sequelize } = require('sequelize');
+const { use } = require('passport')
 
 
 const getUserSegmentationData = async (userId) => {
@@ -95,7 +96,7 @@ const segmentAllUsersServices = async () => {
 };
 
 
-const getSegmentationsServices = async (type) => {
+const getSegmentationsServices = async (type={}) => {
     try {
         
         const segmentWhereClause = {};
@@ -104,30 +105,29 @@ const getSegmentationsServices = async (type) => {
             segmentWhereClause.SegmentType = type;
         }
 
-        const usersWithSegments = await User.findAll({
-            attributes: ['userId', 'firstName', 'lastName', 'phoneNumber', 'address', 'Gender'],
-            include: [{
-                model: CustomerSegment,
-                as: 'segment',
-                attributes: ['SegmentType'],
-                required:false,
-                where: Object.keys(segmentWhereClause).length ? segmentWhereClause : undefined // only apply `where` if needed
-            }]
-        });
-        // Format the response
-        const result = usersWithSegments.map(user => ({
-            userId: user.userId,
-            firstName: user.firstName,
-            lastName:user.lastName,
-            phoneNumber: user.phoneNumber,
-            address: user.address,
-            gender: user.Gender,
-            segmentation: user.segment?.SegmentType || 'N/A'
-        }));
+       const SegmentationUsers = await CustomerSegment.findAll({
+          where: segmentWhereClause,
+          attributes: ['SegmentType'],
+          include: [
+            {
+              model: User,
+              as: 'user',
+              attributes: { exclude: ['password'] },
+              required: true, 
+            },
+          ],
+      });
 
-      // return await CustomerSegment.findAll()
+            const result = SegmentationUsers.map((item) => {
+              const userData = item.user?.toJSON() || {}; 
+              return {
+                ...userData,
+                segmentation: item.SegmentType, 
+                };
+            });
 
         return result;
+
     } catch (error) {
         console.error('Error fetching user segmentations:', error);
         throw error;

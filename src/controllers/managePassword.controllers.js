@@ -22,8 +22,8 @@ const verifyPasswordResetController = async (req, res) => {
 
 const requestPasswordChangeController = async (req, res) => {
   try {
-    const { newPassword } = req.body;
-    await requestPasswordChangeService(req.userId, newPassword);
+    const { currentPassword,newPassword } = req.body;
+    await requestPasswordChangeService(req.userId,currentPassword ,newPassword);
     res.status(200).json({ message: "OTP sent to your email" });
   } catch (err) {
     res.status(400).json({ error: err.message });
