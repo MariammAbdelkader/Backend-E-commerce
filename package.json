@@ -32,7 +32,8 @@
     "swagger-ui-express": "^5.0.1"
   },
   "scripts": {
-    "dev": "nodemon ./src/server.js"
+    "dev": "nodemon ./src/server.js",
+    "upgrade":"node ./src/scripts/upgrade.js"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
