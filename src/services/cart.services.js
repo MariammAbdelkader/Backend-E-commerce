@@ -76,7 +76,7 @@ const createCartService = async (body, userId, cart = null) => {
         cart.totalPrice = totalPrice.toFixed(3);
         await cart.save();
 
-         const totalQuantitgy = cartItems.reduce(
+         const totalQuantity = cartItems.reduce(
             (sum, item) => sum + item.quantity,0);
 
         product.quantity =product.quantity - quantity;
@@ -99,7 +99,7 @@ const createCartService = async (body, userId, cart = null) => {
             console.log("error in creating cart item",error);
         }
 
-        return{...cart.toJSON(),totalQuantitgy: totalQuantitgy};
+        return{...cart.toJSON(),totalQuantity: totalQuantity};
     } catch (error) {
         throw error;
     }
@@ -143,11 +143,11 @@ const previewCartService = async (cart) => {
         }));
     
         const totalPrice = cart.totalPrice.toFixed(3);
-        const totalQuantitgy = cartItems.reduce(
+        const totalQuantity = cartItems.reduce(
             (sum, item) => sum + item.quantity, 0
         );
 
-        const returnedcart={products,totalPrice,totalQuantitgy};
+        const returnedcart={products,totalPrice,totalQuantity};
         return returnedcart;
     } catch (error) {
         throw error;
