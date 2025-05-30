@@ -19,7 +19,7 @@ const previewCart = async (req , res) =>{
         const userId  = req.userId
         const cart = req.cart
         const response = await previewCartService(cart)
-        res.status(200).json({message : "Here is your current cart preview", cart: response.products , totalPrice: response.totalPrice });
+        res.status(200).json({message : "Here is your current cart preview", cart: response});
         
     } catch (err) {
         res.status(400).json({ error : err.message });
