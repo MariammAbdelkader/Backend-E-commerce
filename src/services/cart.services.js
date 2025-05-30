@@ -137,7 +137,7 @@ const previewCartService = async (cart) => {
             name: item.products.name,
             description: item.products.description,
             category: item.products.Category?.name || "Uncategorized",
-            subCategory: item.products.Subcategory?.name || "None",
+            subCategory: item.products.SubCategory?item.products.SubCategory.name : "None",
             quantity: item.quantity, 
             pricePerOneItem: item.priceAtPurchase, 
         }));
