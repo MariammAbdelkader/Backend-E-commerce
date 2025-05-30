@@ -1,13 +1,13 @@
 const express = require("express");
 const { AuthMiddleware } = require("../middlewares/authentication.middlewares");
-const { isAdmin } = require("../utilities/isAdmin");
+const { isAdmin } = require("../middlewares/authentication.middlewares");
 const { upload } = require("../middlewares/csv.middlewares");
 const { segmentAllUsersController,getSegmentationsController } = require("../controllers/CustomerSegmentation.controller");
 const {getUserHistoryController}=require('../controllers/userHistory.controller')
 const CustomerManagementRouter = express.Router();
 
 //Segmentation-> same as users-info but it calls API first
-CustomerManagementRouter.get("/update-users-seg" , isAdmin,segmentAllUsersController)
+CustomerManagementRouter.post("/update-users-seg" , isAdmin,segmentAllUsersController)
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ CustomerManagementRouter.get("/update-users-seg" , isAdmin,segmentAllUsersContro
  */
 
 
-CustomerManagementRouter.get("/customer-info" ,isAdmin, getSegmentationsController)
+CustomerManagementRouter.post("/customer-info" ,isAdmin, getSegmentationsController)
 
 
 

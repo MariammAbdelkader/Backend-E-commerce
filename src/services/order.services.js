@@ -9,7 +9,7 @@ emitter= require('../event/eventEmitter')
 
 const getOrdersService = async ({where,ordering}) => {
     
-    
+    if(!ordering)ordering= 'orderDate'; // Default ordering by orderDate if not specified
     const orders = await Order.findAll({
         where,
         attributes: ['orderId','orderDate', 'totalAmount', 'paymentStatus'],
@@ -25,7 +25,7 @@ const getOrdersService = async ({where,ordering}) => {
                             {
                                 model: Product,
                                 as: 'products',
-                                attributes: ['productId', 'name', 'price', 'description'],
+                                attributes: ['productId', 'name', 'description'],
                                 include: [
                                     {
                                       model: Category,
@@ -40,6 +40,8 @@ const getOrdersService = async ({where,ordering}) => {
             },
             {
             model: User,
+            attributes: ['userId', 'firstName', 'lastName', 'email', 'phoneNumber','address','avatar'],
+
             }
         ],
         order: [[ordering, 'DESC']]
@@ -50,7 +52,7 @@ const getOrdersService = async ({where,ordering}) => {
         const products = cartItems.map(item => ({
             productId: item.products?.productId,
             name: item.products?.name,
-            price: item.products?.price,
+            price: item.priceAtPurchase,
             description: item.products?.description,
             category: item.products?.Category?.name || 'Uncategorized',
             subCategory: item.products?.Subcategory?.name || 'None',
@@ -89,7 +91,7 @@ const viewOrderedProductServices = async (userId) => {
                                 {
                                     model: Product,
                                     as: 'products',
-                                    attributes: ['productId', 'name', 'price', 'description'],
+                                    attributes: ['productId', 'name', 'description'],
                                     include: [
                                         {
                                             model: Category,
@@ -119,7 +121,7 @@ const viewOrderedProductServices = async (userId) => {
                     userHistory.push({
                         productId: item.products.productId,
                         name: item.products.name,
-                        price: item.products.price,
+                        price: item.priceAtPurchase,
                         description: item.products.description,
                         category: item.products.Category?.name || "Uncategorized",
                         subCategory: item.products.Subcategory?.name || "None",

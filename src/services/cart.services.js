@@ -2,6 +2,7 @@ const { Cart, CartItem } = require("../models/cart.models");
 const { Product } = require("../models/product.models");
 const { Category, Subcategory} = require('../models/category.models');
 const { cleanUpCart } = require("../utilities/cleanUpCart");
+const {DiscountPriceClaculator}= require('../utilities/ProductUtilities.js')
 
 const emitter = require('../event/eventEmitter');
 const createCartService = async (body, userId, cart = null) => {
@@ -20,6 +21,9 @@ const createCartService = async (body, userId, cart = null) => {
         if (!product) {
             throw new Error('Product not found');
         }
+        
+        const DiscointPrice= DiscountPriceClaculator({product});
+
         if(product.quantity==0){
             throw new Error("this product is out of stock");
         }
@@ -45,7 +49,7 @@ const createCartService = async (body, userId, cart = null) => {
                     cartId: cart.cartId,
                     productId,
                     quantity,
-                    priceAtPurchase: product.price,
+                    priceAtPurchase: DiscointPrice ? DiscointPrice : product.price,
                 });
             }
         } else {
@@ -59,7 +63,7 @@ const createCartService = async (body, userId, cart = null) => {
                 cartId: cart.cartId,
                 productId,
                 quantity,
-                priceAtPurchase: product.price,
+                priceAtPurchase: DiscointPrice ? DiscointPrice : product.price,
             });
         }
         const cartItems = await CartItem.findAll({
@@ -108,7 +112,7 @@ const previewCartService = async (cart) => {
             include: {
                 model: Product, 
                 as: 'products', 
-                attributes: ['name', 'price', 'description'],
+                attributes: ['name', 'description'],
                 include: [
                     {
                         model: Category,

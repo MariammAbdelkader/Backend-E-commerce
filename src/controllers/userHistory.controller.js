@@ -11,7 +11,7 @@ const getUserHistoryController = async (req, res) => {
         }
 
         
-        const orderHistory = await getOrdersService({userId});
+        const orderHistory = await getOrdersService({where:{userId}});
         const returns = await getReturnsService({userId});
         const activities = await getUserActivitiesServices(userId);
         ///what happend if the user has no histoy?

@@ -1,18 +1,16 @@
 const { User } =require('../models/user.models');
 
-const userProfileServices =async(userId)=>{
+const userProfileServices = async (userId) => {
+  const user = await User.findByPk(userId, {
+    attributes: { exclude: ["password"] }, 
+  });
 
-    const user= await User.findByPk(userId);
+  if (!user) {
+    throw new Error("User not found");
+  }
 
-    const userData={
-        firstname: user.firstName,
-        lastname: user.lastName,
-        email: user.email,
-        phone:user.phoneNumber,
-        address:user.address
-    }
-    
-    return userData
-}
+  return user;
+};
+
 
 module.exports = {userProfileServices};
