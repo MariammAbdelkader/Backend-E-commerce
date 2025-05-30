@@ -22,7 +22,7 @@ const createCartService = async (body, userId, cart = null) => {
             throw new Error('Product not found');
         }
         
-        const DiscointPrice= DiscountPriceClaculator({product});
+        const DiscountPrice= await DiscountPriceClaculator({product});
 
         if(product.quantity==0){
             throw new Error("this product is out of stock");
@@ -44,12 +44,13 @@ const createCartService = async (body, userId, cart = null) => {
             if (existingCartItem) {
                 existingCartItem.quantity += parseInt(quantity);
                 await existingCartItem.save();
+
             } else {
                 await CartItem.create({
                     cartId: cart.cartId,
                     productId,
                     quantity,
-                    priceAtPurchase: DiscointPrice ? DiscointPrice : product.price,
+                    priceAtPurchase: DiscountPrice ? DiscountPrice : product.price,
                 });
             }
         } else {
@@ -63,7 +64,7 @@ const createCartService = async (body, userId, cart = null) => {
                 cartId: cart.cartId,
                 productId,
                 quantity,
-                priceAtPurchase: DiscointPrice ? DiscointPrice : product.price,
+                priceAtPurchase: DiscountPrice ? DiscountPrice : product.price,
             });
         }
         const cartItems = await CartItem.findAll({
@@ -75,6 +76,8 @@ const createCartService = async (body, userId, cart = null) => {
         cart.totalPrice = totalPrice.toFixed(3);
         await cart.save();
 
+         const totalQuantitgy = cartItems.reduce(
+            (sum, item) => sum + item.quantity,0);
 
         product.quantity =product.quantity - quantity;
         if(product.quantity == 0){
@@ -95,7 +98,8 @@ const createCartService = async (body, userId, cart = null) => {
         }catch(error){
             console.log("error in creating cart item",error);
         }
-        return cart;
+
+        return{...cart.toJSON(),totalQuantitgy: totalQuantitgy};
     } catch (error) {
         throw error;
     }
@@ -139,8 +143,12 @@ const previewCartService = async (cart) => {
         }));
     
         const totalPrice = cart.totalPrice.toFixed(3);
-    
-        return { products , totalPrice };
+        const totalQuantitgy = cartItems.reduce(
+            (sum, item) => sum + item.quantity, 0
+        );
+
+        const returnedcart={products,totalPrice,totalQuantitgy};
+        return returnedcart;
     } catch (error) {
         throw error;
     }
