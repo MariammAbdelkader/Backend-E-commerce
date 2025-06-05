@@ -17,10 +17,10 @@ const viewOrderedProductController = async (req,res)=>{
 
 const addOrder = async (req,res)=>{
     try {
-        const { shippingAddress, billingAddress} = req.body;
+        const { shippingAddress,phoneNumber} = req.body;
         const userId = req.userId;
         const cart = req.cart
-        const response = await addOrderService(userId,cart, shippingAddress, billingAddress);
+        const response = await addOrderService(userId,cart, shippingAddress,phoneNumber);
         res.status(200).json({ 
             status: 'success',
             message : "your order placed well, Please proceed",

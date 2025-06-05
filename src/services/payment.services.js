@@ -5,7 +5,10 @@ const {Product}=require('../models/product.models')
 const {Order}=require('../models/order.models')
 const {User}=require('../models/user.models')
 const axios = require('axios'); 
-
+const {PAYMOB_FRAMEID_1,PAYMOB_FRAMEID_2,PAYMOB_API_KEY,
+        PAYMOB_INTEGRATION_ID_1,PAYMOB_INTEGRATION_ID_2,
+        URL_GET_AUTH_TOKEN,URL_REG_ORDER_ID,URL_GET_PAYMENT_KEY
+    }= require('../config/index.js');
 
 const ConfirmOrderServices = async (userId, cart, shippingAddress, billingAddress)=>{
     try{
@@ -57,21 +60,22 @@ const paymobServices= async (orderId)=>{
             return null;
         }
 
-        const amount = order.totalAmount;
-        
+        const amount_in_cents =parseInt(order.totalAmount* 100); // Convert to cents`
+
         // Step 1: Get an authentication token from Paymob
-        const authResponse = await axios.post('https://accept.paymob.com/api/auth/tokens', {
-            api_key: 'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRBeU16TXdOU3dpYm1GdFpTSTZJakUzTXprM05EY3pNakV1TURFek5qVTFJbjAuc0JXY1FZRlpWZHp5YVZrZzN6b3otRWhkMENsSVA3TjBZaENxeFdOSDkyUXRzdmlfX1hseFR1bHBHU0c2NlpwXzBfM0lwa2pHVTVjR3JuOUJqSndSS1E==',
+        const authResponse = await axios.post(`${URL_GET_AUTH_TOKEN}`, {
+            api_key:PAYMOB_API_KEY,
         });
+      
 
         const token = authResponse.data.token;
         console.log("Auth Response:", authResponse.data);
 
         // Step 2: Register an order in Paymob
-        const orderResponse = await axios.post('https://accept.paymob.com/api/ecommerce/orders', {
+        const orderResponse = await axios.post(`${URL_REG_ORDER_ID}`, {
             auth_token: token,
             delivery_needed: false,
-            amount_cents: amount * 100,
+            amount_cents: amount_in_cents,
             currency: 'EGP',
             merchant_order_id: orderId,
         });
@@ -80,9 +84,9 @@ const paymobServices= async (orderId)=>{
         console.log("Order Response:", orderResponse.data);
 
         // Step 3: Get a payment key
-        const paymentKeyResponse = await axios.post('https://accept.paymob.com/api/acceptance/payment_keys', {
+        const paymentKeyResponse = await axios.post(`${URL_GET_PAYMENT_KEY}`, {
             auth_token: token,
-            amount_cents: amount * 100,
+            amount_cents: amount_in_cents,
             currency: 'EGP',
             order_id: paymobOrderId,
             billing_data: {
@@ -98,11 +102,11 @@ const paymobServices= async (orderId)=>{
                 floor: "1",
                 postal_code: "12345",
             },
-            integration_id: 4951884, 
+            integration_id: PAYMOB_INTEGRATION_ID_1, 
         });
 
         const paymentKey = paymentKeyResponse.data.token;
-        const frameId = process.env.PAYMOB_FRAME_ID || 900014;
+        const frameId =PAYMOB_FRAMEID_1 
 
         console.log("Payment Key Response:", paymentKeyResponse.data);
 

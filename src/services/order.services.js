@@ -154,7 +154,7 @@ const viewOrderedProductServices = async (userId) => {
 
 //TO DO : check payment and update the order and update the inventory
 
-const addOrderService = async (userId, cart, shippingAddress, billingAddress) => {
+const addOrderService = async (userId, cart, shippingAddress,phoneNumber) => {
     try {
         if(!cart){
             throw new error("There's no active cart for you!")
@@ -181,7 +181,7 @@ const addOrderService = async (userId, cart, shippingAddress, billingAddress) =>
             cartId:cart.cartId,
             totalAmount:cart.totalPrice,
             shippingAddress,
-            billingAddress,
+            phoneNumber,
             paymentStatus: 'pending',  
             orderStatus: 'pending',   
         });

@@ -46,6 +46,10 @@ const Order = db.define('Order', {
         allowNull: false,
         defaultValue: 'pending',
     },
+    phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     totalAmount: {
         type: DataTypes.FLOAT,
         allowNull: true,

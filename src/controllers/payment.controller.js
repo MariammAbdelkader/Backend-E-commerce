@@ -31,7 +31,7 @@ const paymobController = async (req, res) => {
             return res.status(400).json({ message: 'Failed to generate payment URL' });
         }
 
-        res.json({ paymentUrl });
+        res.status(200).json({ paymentUrl });
 
     } catch (error) {
         console.error(error);
@@ -39,4 +39,14 @@ const paymobController = async (req, res) => {
     }
 };
 
-module.exports = { ConfirmOrderController, paymobController };
+const transactionInfoController = async (req, res) => {
+    try {
+        const data=req.body;
+        console.log("Transaction Info Data:", data);
+
+    } catch (error) {
+        
+    }
+};
+
+module.exports = { ConfirmOrderController, paymobController ,transactionInfoController};
