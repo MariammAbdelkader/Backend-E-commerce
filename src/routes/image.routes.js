@@ -10,7 +10,7 @@ const {
 const {isCustomer,isAdmin} =require('../middlewares/authentication.middlewares')
 
 
-imageRouter.get('/:productId',getAllProductImageController)
+imageRouter.get('/:productId',isCustomer,getAllProductImageController)
 
 imageRouter.post('/upload/:productId', isAdmin,upload.single('image'), uploadProductImageController);
 
@@ -20,13 +20,13 @@ imageRouter.put('/replace/:imageId',isAdmin,upload.single('image'), replaceProdu
 
 //<==============================================================================>//
 
-imageRouter.get('/', AuthMiddleware,getUserImageController)
+imageRouter.get('/', isCustomer,getUserImageController)
 
-imageRouter.post('/upload', AuthMiddleware,userUpload.single('image'), uploadUserImageController);
+imageRouter.post('/upload', isCustomer,userUpload.single('image'), uploadUserImageController);
 
-imageRouter.delete('/delete', AuthMiddleware, deleteUserImageController);
+imageRouter.delete('/delete', isCustomer, deleteUserImageController);
 
-imageRouter.put('/replace', AuthMiddleware,userUpload.single('image'), replaceUserImageController);
+imageRouter.put('/replace', isCustomer,userUpload.single('image'), replaceUserImageController);
 
 
 module.exports = {imageRouter};
