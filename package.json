@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@faker-js/faker": "^9.8.0",
     "axios": "^1.8.2",
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.3",
@@ -12,6 +13,7 @@
     "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
+    "faker": "^6.6.6",
     "fast-csv": "^5.0.2",
     "helmet": "^7.1.0",
     "joi": "^17.13.0",
@@ -33,7 +35,7 @@
   },
   "scripts": {
     "dev": "nodemon ./src/server.js",
-    "upgrade":"node ./src/scripts/upgrade.js"
+    "upgrade": "node ./src/scripts/upgrade.js"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
