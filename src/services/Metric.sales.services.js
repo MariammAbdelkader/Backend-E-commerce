@@ -90,6 +90,53 @@ class Helpers{
 //this class for endPoints needed that query form the database
 class SalesService {
 
+ static async getMonthelyAnalytics(month) {
+  try {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = parseInt(month); // assuming month is like "6" or "06"
+    const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+    const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+
+    // Get current month analytics
+    const currentData = await MonthlyAnalytics.findOne({
+      where: { month: currentMonth, year: currentYear },
+    });
+
+    // Get previous month analytics
+    const previousData = await MonthlyAnalytics.findOne({
+      where: { month: previousMonth, year: previousYear },
+    });
+
+    if (!currentData || !previousData) {
+      throw new Error("Missing data for comparison");
+    }
+
+       const comparePercentage = (current, previous) => {
+      if (previous === 0) return current === 0 ? 0 : 100;
+      return ((current - previous) / previous) * 100;
+    };
+
+
+   
+    const safeToFixed = (val) => {
+      const num = Number(val);
+      return isNaN(num) ? "0.00" : num.toFixed(2);
+    };
+
+    // Add percentage changes as properties on Sequelize instance
+    currentData.setDataValue('profitChange', safeToFixed(comparePercentage(currentData.Profit, previousData.Profit)));
+    currentData.setDataValue('revenueChange', safeToFixed(comparePercentage(currentData.Revenue, previousData.Revenue)));
+    currentData.setDataValue('conversionRateChange', safeToFixed(comparePercentage(currentData.conversionRate, previousData.conversionRate)));
+    currentData.setDataValue('returnRateChange', safeToFixed(comparePercentage(currentData.returnRate, previousData.returnRate)));
+
+    return  currentData 
+
+  } catch (error) {
+    console.error('Error fetching monthly analytics:', error);
+    throw new Error('Failed to fetch monthly analytics comparison');
+  }
+}
+
   // Get Top Reasons for Returns
   static async getTopReturnReasons() {
     try {
@@ -215,7 +262,7 @@ static async getMetricAnalytics({ year, metric } = {}) {
     const topProducts = await CartItem.findAll({
       attributes: [
         'productId',
-        [sequelize.fn('SUM', sequelize.literal('priceAtPurchase * quantity')), 'revenue']
+        [Sequelize.fn('SUM', Sequelize.literal('priceAtPurchase * quantity')), 'revenue']
       ],
       include: [
         {
@@ -375,14 +422,28 @@ class AnalyticsCalculations {
 
 
 static async calculateReturnInfo(month, year) {
-  const startDate = new Date(year, month - 1, 1);
-  const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+  let startDate, endDate;
 
+    if (month) {
+      // If month is provided
+      startDate = new Date(year, month - 1, 1);
+      endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    } else {
+      // If month is not provided → full year
+      startDate = new Date(year, 0, 1); // Jan 1
+      endDate = new Date(year, 11, 31, 23, 59, 59, 999); // Dec 31
+    }
+  
   const result = await Return.findOne({
     attributes: [
       [Sequelize.fn('SUM', Sequelize.col('quantity')), 'totalQuantity'],
       [Sequelize.fn('SUM', Sequelize.col('RefundAmount')), 'totalRefundAmount']
     ],
+     where: {
+      createdAt: {
+        [Sequelize.Op.between]: [startDate, endDate]
+      }
+    },
     raw: true
   });
 
@@ -390,7 +451,12 @@ static async calculateReturnInfo(month, year) {
   const totalRefundAmount = parseFloat(result.totalRefundAmount) || 0;
   const completedCartIds = await Cart.findAll({
     attributes: ['cartId'],
-    where: { isCompleted: true },
+    where: { isCompleted: true,
+       createdAt: {
+        [Sequelize.Op.between]: [startDate, endDate]
+      }
+     },
+    
     raw: true
   });
   
@@ -400,6 +466,9 @@ static async calculateReturnInfo(month, year) {
     where: {
       cartId: {
         [Op.in]: cartIds
+      },
+       createdAt: {
+        [Sequelize.Op.between]: [startDate, endDate]
       }
     }
   });
@@ -431,6 +500,7 @@ static async calculateReturnInfo(month, year) {
 
 
   static async calculateConversionRate(ordersCount) {
+  
     const userCount = await User.count({
       include: [
         {
@@ -474,6 +544,8 @@ static async calculateReturnInfo(month, year) {
     const { returnRate, totalRefundAmount } = await this.calculateReturnInfo(month, year);
     const Revenue = await this.calculateRevenue(orders, totalRefundAmount);
     const profit = await this.calculateprofit(Revenue);
+    console.log("for Month: ",month,"  the order leng: ",orders.length)
+  
     const conversionRate = await this.calculateConversionRate(orders.length);
     const grossRate = await this.calculateGrossRate(month, year, Revenue);
   

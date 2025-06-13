@@ -1,7 +1,18 @@
 const { response } = require('express');
 const {SalesService,AnalyticsCalculations} = require('../services/Metric.sales.services');
+const { MonthlyAnalytics } = require('../models/monthlyAnalytics.model');
 
 class SalesController {
+  static async getMonthelyAnalytics(req,res){
+    try{
+      const month=req.params.month
+      const response=await  SalesService.getMonthelyAnalytics(month);
+       res.status(200).json({ monthlyAnalytics:response });
+
+    }catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
   static async getSumMetricAnalytics(req, res) {
     try {
       const data={
@@ -73,13 +84,13 @@ class SalesController {
   static async test(req,res){
     try{
       const year = req.params.year || null;
-      // let analytics=[]
+      let analytics=[]
       
-      // for (let i=1; i<=12; i++){
-      //   console.log("month: ",i,"year: ",year)
-      //   const response = await AnalyticsCalculations.calculateMonthlyAnalytics(i, year);
-      //   analytics.push({month:i ,analytics:response})
-      // }
+      for (let i=1; i<=12; i++){
+        console.log("month: ",i,"year: ",year)
+        const response = await AnalyticsCalculations.calculateMonthlyAnalytics(i, year);
+        analytics.push({month:i ,analytics:response})
+      }
       const ProfitGrowthRates = await AnalyticsCalculations.calculateGrowthRates({year:year,metric:'Profit'});
       const RevenueGrowthRates = await AnalyticsCalculations.calculateGrowthRates({year:year,metric:'Revenue'});
   

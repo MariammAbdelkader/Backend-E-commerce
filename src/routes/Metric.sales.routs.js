@@ -19,13 +19,12 @@ Salesrouter.get('/Profit/sum/:year',isAdmin,MetricMiddleware, SalesController.ge
 
 
 
-
-
 Salesrouter.get('/topselling/products',isAdmin,SalesController.getTopSellingProducts);
 Salesrouter.get('/topselling/categories/:year',isAdmin, SalesController.getTopCategories);
 
 Salesrouter.get('/topreturned/products',isAdmin, SalesController.mostReturnedProducts);
 
+Salesrouter.get('/monthly/:month',isAdmin, SalesController.getMonthelyAnalytics);
 
 
 Salesrouter.get('/testCalculations/:year', isAdmin,SalesController.test);
