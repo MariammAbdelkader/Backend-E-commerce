@@ -1,7 +1,7 @@
 const passport = require("passport");
 
 
-const facebookAuthController = passport.authenticate("facebook", { scope: ["email"] });
+const facebookAuthController = passport.authenticate("facebook", { scope: ["profile", "email"] });
 
 const facebookAuthCallbackController = (req, res, next) => {
     passport.authenticate("facebook", { session: false }, (err, user) => {
