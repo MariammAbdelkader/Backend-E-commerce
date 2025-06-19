@@ -103,10 +103,12 @@ const getProductsByCategoryServices = async (categoryName) => {
       include: [
         {
           model: Category,
+          as: 'Category',
           attributes: ['categoryId', 'name'], 
         },
         {
           model: Subcategory,
+          as:'SubCategory',
           attributes: ['subcategoryId', 'name'], 
         }
       ]
