@@ -122,5 +122,40 @@ const requestreturnService = async ({ orderId, productId, userId, ReturnReason, 
     }
   };
   
+  const getOrderHistoryServices=async (userId)=>{
+       const orders = await Order.findAll({
+        where:{userId:userId},
+        attributes: ['orderId'],
+        include: [
+            {
+                model: Cart,
+                as: 'cart',
+                include: [
+                    {
+                        model: CartItem,
+                        as: 'cartItems',
+                        include: [
+                            {
+                                model: Product,
+                                as: 'products',
+                                attributes: ['productId', 'name'],
+                            },
+                        ],
+                    },
+                ],
 
-module.exports = { getReturnsService,requestreturnService };
+            },
+        ],
+    });
+const result = orders.map(order => ({
+    orderId: order.orderId,
+    products: order.cart?.cartItems.map(item => ({
+      productId: item.products.productId,
+      name: item.products.name
+    })) || []
+  }));
+
+  return result;
+  }
+
+module.exports = { getReturnsService,requestreturnService,getOrderHistoryServices };
