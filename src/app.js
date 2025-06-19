@@ -34,14 +34,16 @@ const {CustomerManagementRouter} =require('./routes/CustomerManagement.router.js
 const {paymentRouter}=require('./routes/payment.router.js');
 const {DiscountRouter}=require('./routes/discount.routes.js');
 const {reviewRouter}=require('./routes/review.routes.js');
-const {googleAuthRouter}=require('./routes/googleAuth.routes.js');
-const {facebookAuthRouter}=require('./routes/facebookAuth.routes.js');
+// const {googleAuthRouter}=require('./routes/googleAuth.routes.js');
+// const {facebookAuthRouter}=require('./routes/facebookAuth.routes.js');
+const {oAuthRouter} = require('./routes/oAuth.routes.js');
 const {imageRouter} = require('./routes/image.routes.js');
 const { passwordRouter } = require('./routes/managePassword.routes.js');
 const { Salesrouter } = require('./routes/Metric.sales.routs.js');
 const {returnRouter}= require('./routes/return.routs.js');
 
 const {AddDataRouter} =require('./fakedata/AddData.js')
+
 
 
 
@@ -108,8 +110,7 @@ async connectToDatabase() {
   
   initializeRoutes() {
     this.app.use("/api/auth", manualAuthRouter);
-    this.app.use("/api/auth",googleAuthRouter);
-    this.app.use("/api/auth",facebookAuthRouter);
+    this.app.use("/api/auth",oAuthRouter);
     this.app.use("/api/auth",passwordRouter);
     this.app.use("/api/upload",csvRouter);
     this.app.use("/api/cart",cartRouter);

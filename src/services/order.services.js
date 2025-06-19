@@ -95,10 +95,12 @@ const viewOrderedProductServices = async (userId) => {
                                     include: [
                                         {
                                             model: Category,
+                                            as: 'Category',
                                             attributes: ['name'],
                                         },
                                         {
                                             model: Subcategory,
+                                            as:'SubCategory',
                                             attributes: ['name'],
                                         },
                                     ],
