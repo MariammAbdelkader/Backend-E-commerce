@@ -106,7 +106,7 @@ const getProductRatingService = async (productId) => {
         throw new Error("Product not found");
 
     const ratings = product.Reviews.map((review) => review.rating);
-    if (ratings.length === 0) return 0;
+    if (ratings.length === 0) return null;
 
     const averageRating = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
     return parseFloat(averageRating.toFixed(2));

@@ -55,14 +55,11 @@ const deleteProductController=async (req , res) => {
 const createProductController= async (req, res) =>{
 
     try {
-        
-            const product= req.body
-            const newProduct = await createProductServices(product)
-            res.status(200).json({success:true , message : "Product Created successfully", newProduct });
-
-        
+        const product= req.body
+        const newProduct = await createProductServices(product)
+        res.status(200).json({success:true , message : "Product Created successfully", newProduct });
     } catch (err) {
-        res.status(400).json({ error : err.message });
+        res.status(400).json({ message : err.message });
      }
 
 }

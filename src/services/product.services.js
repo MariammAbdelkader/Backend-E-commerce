@@ -14,6 +14,7 @@ const {
   getThePercentage,
   DiscountPriceClaculator,
 } = require("../utilities/ProductUtilities.js");
+const { Review } = require("../models/review.models.js");
 
 const getProductServices = async (productId) => {
   if (!productId) {
@@ -27,6 +28,7 @@ const getProductServices = async (productId) => {
     include: [
       { model: Category, as: "Category", attributes: ["name"] },
       { model: Subcategory, as: "SubCategory", attributes: ["name"] },
+      {model:Review , attributes:["rating","comment"]}
     ],
   });
   if (!product) {
@@ -54,6 +56,8 @@ const getProductServices = async (productId) => {
     discountprice: DiscountPrice ? DiscountPrice : null,
     status: product.status,
     rate: rate,
+    review:product.Reviews,
+    reviewCount:product.Reviews.length,
     productDiscountPercentage,
     categoryDiscountPercentage,
     images: ProductImages,
@@ -153,13 +157,15 @@ const deleteProductServices = async (productId) => {
 };
 
 const createProductServices = async (productData) => {
-  console.log(productData);
+
+
+     console.log(productData);
   // Define validation schema
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required(),
     price: Joi.number().positive().required(),
     description: Joi.string().allow(null, ""),
-    categoryId: Joi.number().required(), // category name, not ID
+    categoryId: Joi.number().required(),
     subcategoryId: Joi.number().required(),
     quantity: Joi.number().integer().min(0).required(),
     status: Joi.string()
@@ -167,13 +173,12 @@ const createProductServices = async (productData) => {
       .default("in_stock"),
   });
 
-  // Validate the product data
-  const { error, value } = schema.validate(productData);
+     const { error, value } = schema.validate(productData);
   if (error) {
     throw new Error(`Validation error: ${error.details[0].message}`);
+    
   }
 
-  try {
     const category = await Category.findOne({
       where: { categoryId: value.categoryId },
     });
@@ -200,9 +205,7 @@ const createProductServices = async (productData) => {
       where: { name: value.name, description: value.description },
     });
     if (existingProduct) {
-      return {
-        message: `Product with name "${value.name}" already exists. Consider updating the quantity.`,
-      };
+      throw new Error(`Product with name "${value.name}" already exists. Consider updating the quantity.`);
     }
 
     const product = await Product.create({
@@ -216,9 +219,7 @@ const createProductServices = async (productData) => {
     });
     console.log("PRODUCT CREATED:", product);
     return product;
-  } catch (err) {
-    throw new Error(`Database error: ${err.message}`);
-  }
+  
 };
 
 const updateProductServices = async (productId, updateData) => {
