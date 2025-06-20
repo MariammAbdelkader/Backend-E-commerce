@@ -14,6 +14,7 @@ const {
   getThePercentage,
   DiscountPriceClaculator,
 } = require("../utilities/ProductUtilities.js");
+const { Review } = require("../models/review.models.js");
 
 const getProductServices = async (productId) => {
   if (!productId) {
@@ -27,6 +28,7 @@ const getProductServices = async (productId) => {
     include: [
       { model: Category, as: "Category", attributes: ["name"] },
       { model: Subcategory, as: "SubCategory", attributes: ["name"] },
+      {model:Review , attributes:["rating","comment"]}
     ],
   });
   if (!product) {
@@ -54,6 +56,8 @@ const getProductServices = async (productId) => {
     discountprice: DiscountPrice ? DiscountPrice : null,
     status: product.status,
     rate: rate,
+    review:product.Reviews,
+    reviewCount:product.Reviews.length,
     productDiscountPercentage,
     categoryDiscountPercentage,
     images: ProductImages,
