@@ -1,4 +1,5 @@
 const { CustomerNormalActivity,CustomerProductActivity,ACTIVITY_TYPES } = require('../models/customerActivity.models');
+const { Product } = require('../models/product.models');
 
 
 const getUserActivitiesServices = async (userId, activityType = null) => {
@@ -24,8 +25,10 @@ const getUserActivitiesServices = async (userId, activityType = null) => {
         });
         const Productactivities = await CustomerProductActivity.findAll({
             where: whereClause,
+            include:[
+               { model:Product, as: 'product',attributes: [ 'name']}
+            ],
             order: [['ActivityDate', 'DESC']],
-            raw: true
         });
 
         const activities = [...Normalactivities, ...Productactivities];
