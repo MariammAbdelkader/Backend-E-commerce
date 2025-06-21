@@ -150,6 +150,7 @@ const deleteProductServices = async (productId) => {
 
   const checkProduct = await Product.findByPk(productId);
   if (checkProduct) {
+    console.log("prorduct ",productId,"does not deleted ")
     throw new Error("Product deletion failed");
   }
 
