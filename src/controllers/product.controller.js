@@ -44,7 +44,7 @@ const deleteProductController=async (req , res) => {
         
         const response =await deleteProductServices(productId)
         
-        res.status(200).json({message : response.message});
+        res.status(200).json({success:true, message : response.message});
         
     } catch (err) {
         res.status(400).json({ message : err.message });
