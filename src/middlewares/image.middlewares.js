@@ -6,7 +6,7 @@ require('dotenv').config();
 const productStorage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    const shopDomain = process.env.SHOP_DOMAIN || 'default_shop';
+    const shopDomain = req.hostname || 'default_shop';
     const folder = `shops/${shopDomain}/products`;
 
     return {
@@ -23,7 +23,7 @@ const productStorage = new CloudinaryStorage({
 const userStorage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    const shopDomain = process.env.SHOP_DOMAIN || 'default_shop';
+    const shopDomain = req.hostname || 'default_shop';
     const folder = `shops/${shopDomain}/users`;
 
     return {

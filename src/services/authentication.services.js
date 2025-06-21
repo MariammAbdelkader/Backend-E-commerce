@@ -124,4 +124,4 @@ const logoutService =async (userId,res) => {
 
 
 
-module.exports={signUpService,loginService,logoutService  }
+module.exports={signUpService,loginService,logoutService  ,createToken}
