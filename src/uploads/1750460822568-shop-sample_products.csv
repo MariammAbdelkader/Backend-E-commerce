@@ -1,0 +1,6 @@
+name,price,description,quantity,status,categoryId,subcategoryId
+Red T-Shirt,19.99,Comfortable cotton t-shirt,100,in_stock,1,
+Blue Jeans,49.99,Slim fit jeans for everyday wear,60,in_stock,1,
+Sneakers,89.99,Stylish and durable running shoes,40,in_stock,1,
+Leather Belt,29.99,Genuine leather belt,80,in_stock,1,
+Black Hat,15.99,Classic black baseball cap,120,in_stock,1,

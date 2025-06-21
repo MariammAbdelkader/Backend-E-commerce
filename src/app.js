@@ -112,9 +112,9 @@ async connectToDatabase() {
     this.app.use("/api/auth", manualAuthRouter);
     this.app.use("/api/auth",oAuthRouter);
     this.app.use("/api/auth",passwordRouter);
-    this.app.use("/api/upload",csvRouter);
     this.app.use("/api/cart",cartRouter);
     this.app.use("/api/product",productRouter);
+    this.app.use("/api/product/upload",csvRouter);
     this.app.use("/api/category",categoryRouter);
     this.app.use("/api/subcategory",subcategoryRouter);
     this.app.use("/api/order",orderRouter);
