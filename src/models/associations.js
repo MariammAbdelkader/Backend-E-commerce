@@ -137,9 +137,12 @@ Review.belongsTo(User, { foreignKey: 'userId' });
 Product.hasMany(Review, { foreignKey: 'productId', onDelete: 'CASCADE' });
 Review.belongsTo(Product, { foreignKey: 'productId' });
 
-
+Product.hasMany(DiscountOnProducts, { foreignKey: 'productId', onDelete: 'CASCADE' });
 DiscountOnProducts.belongsTo(Product, { foreignKey: 'productId' });
 DiscountOnProducts.belongsTo(DiscountLogs, { foreignKey: 'logId' });
+
+
+Category.hasMany(DiscountOnCategories, { foreignKey: 'categoryId', onDelete: 'CASCADE' });
 
 DiscountOnCategories.belongsTo(Category, { foreignKey: 'categoryId' });
 DiscountOnCategories.belongsTo(DiscountLogs, { foreignKey: 'logId' });
