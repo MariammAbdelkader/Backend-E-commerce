@@ -21,7 +21,7 @@ const login =async (req , res) => {
         res.status(200).cookie('jwt' , loginResponse.token , {httpOnly:false  ,  maxAge : 24 * 60 * 60 * 1000}).json({message : "Logged in Succesfully" , data:loginResponse.data,role:loginResponse.role});
         
     } catch (err) {
-        res.status(400).json({ error : err.message });
+        res.status(400).json({ message : err.message });
      }
 
 }

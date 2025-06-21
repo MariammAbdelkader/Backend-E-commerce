@@ -89,7 +89,7 @@ const loginService = async (email , password) => {
 
                 return {token  ,message : "logged in succesfully",data : user.dataValues,role:userRole };
             } else {
-                throw { message : "incorrect email/password" };
+                throw  new Error("incorrect email/password");
             }
         }
         else{
